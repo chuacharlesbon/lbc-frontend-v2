@@ -1,24 +1,43 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
+import { Login } from './pages/Auth/Login';
+import { ForgotPassword } from './pages/Auth/ForgotPassword';
+import { BookNow } from './pages/Dashboard/BookNow';
+import { Reports } from './pages/Dashboard/Reports';
+import { Payments } from './pages/Dashboard/Payments';
+import { DashboardHome } from './pages/Dashboard/Home';
+import { UserProfile } from './pages/Profile/UserProfile';
+import { Error } from './pages/Window/Error';
+import { NoAuth } from './pages/Window/NoAuth';
+import { Loading } from './pages/Window/Loading';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="">
+      <BrowserRouter>
+        <Routes>
+
+          {/* Authentication Pages */}
+          <Route element={<Login />} path="/" />
+          <Route element={<ForgotPassword />} path="/forgot-password" />
+
+          {/* Main Pages */}
+          <Route element={<DashboardHome />} path="/home" />
+          <Route element={<BookNow />} path="/book-now" />
+          <Route element={<Reports />} path="/reports" />
+          <Route element={<Payments />} path="/payments" />
+
+          {/* Profile */}
+          <Route element={<UserProfile />} path="/profile" />
+
+          {/* Window States */}
+          <Route element={<Error />} path="*" />
+          <Route element={<Loading />} path="/load" />
+          <Route element={<NoAuth />} path="/no-auth" />
+
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
