@@ -14,7 +14,7 @@ import { Loading } from './pages/Window/Loading';
 
 function App() {
   return (
-    <div className="">
+    <div className="h-full w-full">
       <BrowserRouter>
         <Routes>
 
@@ -23,7 +23,7 @@ function App() {
           <Route element={<ForgotPassword />} path="/forgot-password" />
 
           {/* Main Pages */}
-          <Route element={<DashboardHome />} path="/home" />
+          <Route element={<DashboardHome />} path="/dashboard-home" />
           <Route element={<BookNow />} path="/book-now" />
           <Route element={<Reports />} path="/reports" />
           <Route element={<Payments />} path="/payments" />
