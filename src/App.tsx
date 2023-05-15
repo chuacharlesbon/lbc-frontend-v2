@@ -6,15 +6,18 @@ import { ForgotPassword } from './pages/Auth/ForgotPassword';
 import { BookNow } from './pages/Dashboard/BookNow';
 import { Reports } from './pages/Dashboard/Reports';
 import { Payments } from './pages/Dashboard/Payments';
-import { DashboardHome } from './pages/Dashboard/Home';
+import { DashboardHome } from './pages/Dashboard/DashboardHome';
 import { UserProfile } from './pages/Profile/UserProfile';
 import { Error } from './pages/Window/Error';
 import { NoAuth } from './pages/Window/NoAuth';
 import { Loading } from './pages/Window/Loading';
+import { Text } from './core/Text';
+import { FlexRow } from './core/Containers';
+import { BsFillChatRightDotsFill } from 'react-icons/bs';
 
 function App() {
   return (
-    <div className="h-full w-full">
+    <div className="h-full w-full relative">
       <BrowserRouter>
         <Routes>
 
@@ -38,6 +41,17 @@ function App() {
 
         </Routes>
       </BrowserRouter>
+
+      <FlexRow className='absolute items-center justify-end w-full z-10 bottom-0'>
+        <div className=' h-12 w-36 bg-white mr-20 rounded-tr-xl rounded-tl-xl'>
+          <FlexRow className='items-center justify-center h-full w-full bg-grey-200 rounded-tr-xl rounded-tl-xl'>
+              <BsFillChatRightDotsFill className='text-red-400 mr-2'/>
+              <Text className='text-red-400 font-semibold'>
+                Chat with us!
+              </Text>
+          </FlexRow>
+        </div>
+      </FlexRow>
     </div>
   );
 }
