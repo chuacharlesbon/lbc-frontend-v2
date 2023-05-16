@@ -14,6 +14,7 @@ import { Loading } from './pages/Window/Loading';
 import { Text } from './core/Text';
 import { FlexRow } from './core/Containers';
 import { BsFillChatRightDotsFill } from 'react-icons/bs';
+import { DashboardDeliveryTableData } from './pages/Dashboard/DashboardHome/DeliveryReports';
 
 function App() {
   return (
@@ -30,6 +31,9 @@ function App() {
           <Route element={<BookNow />} path="/book-now" />
           <Route element={<Reports />} path="/reports" />
           <Route element={<Payments />} path="/payments" />
+
+          {/* Sub Pages */}
+          <Route element={<DashboardDeliveryTableData />} path="/dashboard-home/delivery-table-data" />
 
           {/* Profile */}
           <Route element={<UserProfile />} path="/profile" />

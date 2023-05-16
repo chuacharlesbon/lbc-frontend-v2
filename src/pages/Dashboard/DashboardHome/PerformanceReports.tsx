@@ -3,6 +3,7 @@ import { Div, FlexRow, Spacer, TextDivider } from '../../../core/Containers';
 import { Text } from '../../../core/Text';
 import { tempPerformanceDataRow } from '../../../constants/TempData';
 import { PerformanceDataRow } from '../../../components/Tables/PerformanceDataRow';
+import { Link } from 'react-router-dom';
 
 export const PerformanceReports: FC<any> = () => {
 
@@ -57,9 +58,11 @@ export const PerformanceReports: FC<any> = () => {
                 className='bg-grey-400'
                 textType="end"
                 textElement={
-                    <Text className='text-red-100 text-xs font-bold'>
-                        View all
-                    </Text>
+                    <Link to="/dashboard-home/delivery-table-data">
+                        <Text className='text-red-100 text-xs font-bold'>
+                            View all
+                        </Text>
+                    </Link>
                 }
             />
 
