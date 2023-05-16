@@ -14,7 +14,7 @@ interface DataProps {
     clientAddressTo: string;
 }
 
-export const PerformanceDataRow: FC<DataProps> = ({
+export const RecentBookingSummary: FC<DataProps> = ({
 	deliveryId,
     deliverySize,
     logisticsType,
@@ -26,39 +26,23 @@ export const PerformanceDataRow: FC<DataProps> = ({
     clientAddressTo,
 }) => (
 <>
-	<FlexRow className='items-center justify-between w-full'>
-        <Div className='w-1/4 px-2'>
+	<FlexRow className='items-start justify-between w-full'>
+        <Div className='w-1/2 px-2'>
             <Text className='text-red-100 text-xs font-semibold'>
                 {deliveryId}
             </Text>
-            <Text className='text-secondary-200 text-xs'>
-                {deliverySize}
+            <Text className='text-secondary-100 text-xs'>
+                Booked By {clientNameFrom}
             </Text>
             <Text className='text-secondary-200 text-xs'>
-                {deliveryDate}
-            </Text>
-        </Div>
-        <Div className='w-1/4 px-2'>
-            <Text className='text-secondary-100 text-xs font-semibold'>
-                {clientNameFrom}
-            </Text>
-            <Text className='text-secondary-200 text-xs'>
-                {clientAddressFrom}
-            </Text>
-        </Div>
-        <Div className='w-1/4 px-2'>
-            <Text className='text-secondary-100 text-xs font-semibold'>
                 {clientNameTo}
             </Text>
-            <Text className='text-secondary-200 text-xs'>
-                {clientAddressTo}
-            </Text>
         </Div>
-        <Div className='w-1/4 px-2'>
-            <Text className='text-yellow-100 text-xs font-semibold'>
+        <Div className='w-1/2 px-2'>
+            <Text className='text-yellow-100 text-xs text-right font-semibold'>
                 {logisticsType.toUpperCase()}
             </Text>
-            <Text className='text-yellow-100 text-xs'>
+            <Text className='text-yellow-100 text-xs text-right'>
                 {transactionDate}
             </Text>
         </Div>

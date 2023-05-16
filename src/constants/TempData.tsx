@@ -45,6 +45,24 @@ export const tempPerformanceDataRow = [
     },
 ];
 
+export const tempRemittanceDataRow = [
+    {
+        referenceId: "BDO Ref 1001",
+        depositedDate: "09 Mar 2023",
+        amount: 9000
+    },
+    {
+        referenceId: "BDO Ref 1001",
+        depositedDate: "09 Mar 2023",
+        amount: 9000
+    },
+    {
+        referenceId: "BDO Ref 1001",
+        depositedDate: "09 Mar 2023",
+        amount: 9000
+    },
+];
+
 export const tempBarGraphData = [
     {
         "country": "Jan 2023",

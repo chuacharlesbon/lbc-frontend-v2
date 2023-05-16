@@ -1,12 +1,20 @@
 import React, { FC, Fragment } from 'react';
 import { Menu, Transition } from '@headlessui/react';
 import { Link } from 'react-router-dom';
-import { Div } from '../Containers';
+import { Div, Spacer } from '../Containers';
 import { Text } from '../Text';
 import { FaFilter, FaChevronDown, FaCaretRight } from 'react-icons/fa';
 import { AnalyticsDeliveryDrawers } from '../../constants/Dropdowns';
 
 export const AnalyticsDropdown: FC<any> = () => {
+
+  const deliveryStatus = [
+    'default-delivery-status'
+  ];
+
+  const remittanceStatus = [
+    'default-remittance'
+  ];
 
   return(
   <Div className={`w-64 text-right`}>
@@ -34,7 +42,7 @@ export const AnalyticsDropdown: FC<any> = () => {
         leaveTo="transform opacity-0 scale-95"
       >
           <Menu.Items
-            className={`absolute right-0 mt-1 origin-top-right font-poppins
+            className={`absolute right-0 mt-1 origin-top-right font-poppins border border-grey-400
             bg-white divide-y w-64 divide-secondary-300 
             rounded-md shadow-lg`}
           >
@@ -44,15 +52,31 @@ export const AnalyticsDropdown: FC<any> = () => {
                   <Menu.Item key={link.name}>
                     {({ active }) => (
                       <Link
-                        className={`${
-                          active ? 'bg-grey-400 text-secondary-100' : 'text-secondary-200'
-                        }  group flex flex-row rounded-md items-center justify-between w-full px-4 py-3 text-base`}
+                        className={`hover:bg-grey-400 hover:text-secondary-100 text-secondary-200
+                          group flex flex-row rounded-md items-center justify-between w-full px-4 py-3 text-base parentToolTip`}
                         to={link.url}
                       >
                         <Text>
                             {link.name}
                         </Text>
-                        <FaCaretRight className={`${active ? 'bg-grey-400 text-secondary-100' : 'text-secondary-200'}`}/>
+                        <FaCaretRight className={`hover:text-secondary-100 text-secondary-200`}/>
+                        <Div className='childTooltip left-full w-64 bg-white border border-grey-400'>
+                        {link.filter.map((childLink: any) => (
+                          <Menu.Item key={childLink.name}>
+                            {({ active }) => (
+                              <Div
+                                className={`hover:bg-grey-400 hover:text-secondary-100 text-secondary-200
+                                  group flex flex-row rounded-md items-center justify-start w-full px-4 py-3 text-base`}
+                              >
+                                <Spacer className={`${link.name === 'Delivery Status' ? `${deliveryStatus.includes(childLink.url) ? 'bg-red-400' : 'bg-grey-200'}` : `${remittanceStatus.includes(childLink.url) ? 'bg-red-400' : 'bg-grey-200'}`} mr-4 w-4 h-4 rounded`} />
+                                <Text>
+                                    {childLink.name}
+                                </Text>
+                              </Div>
+                            )}
+                          </Menu.Item>
+                        ))}
+                        </Div>
                       </Link>
                     )}
                   </Menu.Item>

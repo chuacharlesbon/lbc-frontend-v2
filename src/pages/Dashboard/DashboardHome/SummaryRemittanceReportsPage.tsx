@@ -8,7 +8,7 @@ import { DeliveryDataRow } from '../../../components/Tables/DeliveryDataRow';
 import { tempPerformanceDataRow, tempDispostionData } from '../../../constants/TempData';
 import { Pagination } from '../../../components/Tables/Pagination';
 
-export const DashboardDeliveryTableData: FC<any> = () => {
+export const SummaryRemittanceReportsPage: FC<any> = () => {
 
     const [currentPage, setCurrentPage] = React.useState(1);
     const [articlesPerPage] = React.useState(5);
@@ -35,29 +35,63 @@ export const DashboardDeliveryTableData: FC<any> = () => {
                     <FlexRow className='justify-between w-full'>
                         <Div className='shadow-lg rounded-lg border border-grey-400 p-5 w-3/5 h-48'>
                             <Text className='text-secondary-100 text-xs font-bold'>
-                                For Disposition as of MM DD YY
+                                Summary Remittance History as of
                             </Text>
+                            <FlexRow className='justify-between items-center m-5 py-4 px-10'>
+                                <Div>
+                                    <Text className='text-green-100 text-xl text-center font-bold'>
+                                        95%
+                                    </Text>
+                                    <Text className='text-secondary-100 text-xs text-center'>
+                                        YTD Delivery Performance
+                                    </Text>
+                                </Div>
+                                <Div>
+                                    <Text className='text-green-100 text-xl text-center font-bold'>
+                                        95%
+                                    </Text>
+                                    <Text className='text-secondary-100 text-xs text-center'>
+                                        MTD Delivery Performance
+                                    </Text>
+                                </Div>
+                                <Div>
+                                    <Text className='text-green-100 text-xl text-center font-bold'>
+                                        95%
+                                    </Text>
+                                    <Text className='text-secondary-100 text-xs text-center'>
+                                        YTD Delivery % with SLA
+                                    </Text>
+                                </Div>
+                                <Div>
+                                    <Text className='text-green-100 text-xl text-center font-bold'>
+                                        95%
+                                    </Text>
+                                    <Text className='text-secondary-100 text-xs text-center'>
+                                        Weekly % Return w/in SLA
+                                    </Text>
+                                </Div>
+                            </FlexRow>
                         </Div>
                         <FlexColumn className='justify-between shadow-lg rounded-lg border border-grey-400 p-5 w-1/3 h-48'>
                             <Text className='text-secondary-100 text-xs font-bold'>
                                 Summary per Reason as of Mar 2023
                             </Text>
                             <Div className='overflow-scroll w-full h-28'>
-                            {
-                                tempDispostionData.map((list: any) => (
-                                    <DeliveryDataRow
-                                        deliveryId={list.deliveryId}
-                                        deliverySize={list.deliverySize}
-                                        logisticsType={list.logisticsType}
-                                        deliveryDate={list.deliveryDate}
-                                        transactionDate={list.transactionDate}
-                                        clientNameFrom={list.clientNameFrom}
-                                        clientAddressFrom={list.clientAddressFrom}
-                                        clientNameTo={list.clientNameTo}
-                                        clientAddressTo={list.clientAddressTo}
-                                    />
-                                ))
-                            }
+                                {
+                                    tempDispostionData.map((list: any) => (
+                                        <DeliveryDataRow
+                                            deliveryId={list.deliveryId}
+                                            deliverySize={list.deliverySize}
+                                            logisticsType={list.logisticsType}
+                                            deliveryDate={list.deliveryDate}
+                                            transactionDate={list.transactionDate}
+                                            clientNameFrom={list.clientNameFrom}
+                                            clientAddressFrom={list.clientAddressFrom}
+                                            clientNameTo={list.clientNameTo}
+                                            clientAddressTo={list.clientAddressTo}
+                                        />
+                                    ))
+                                }
                             </Div>
                         </FlexColumn>
                     </FlexRow>
@@ -157,12 +191,12 @@ export const DashboardDeliveryTableData: FC<any> = () => {
                             {`Disclaimer: Coverage is Twelve (12) months from encoded date.`}
                         </Text>
                         <Div className='w-full'>
-                        <Pagination
-                        currentPage={currentPage}
-                        itemsPerPage={articlesPerPage}
-                        paginate={paginate}
-                        totalItems={tempPerformanceDataRow.length}
-                        />
+                            <Pagination
+                                currentPage={currentPage}
+                                itemsPerPage={articlesPerPage}
+                                paginate={paginate}
+                                totalItems={tempPerformanceDataRow.length}
+                            />
                         </Div>
                     </FlexColumn>
                 </Div>

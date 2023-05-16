@@ -59,7 +59,7 @@ export const PerformanceReports: FC<any> = () => {
                 textType="end"
                 textElement={
                     <Link to="/dashboard-home/delivery-table-data">
-                        <Text className='text-red-100 text-xs font-bold'>
+                        <Text className='text-red-400 text-xs font-bold'>
                             View all
                         </Text>
                     </Link>

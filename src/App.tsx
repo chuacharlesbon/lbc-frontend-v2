@@ -15,6 +15,8 @@ import { Text } from './core/Text';
 import { FlexRow } from './core/Containers';
 import { BsFillChatRightDotsFill } from 'react-icons/bs';
 import { DashboardDeliveryTableData } from './pages/Dashboard/DashboardHome/DeliveryReports';
+import { SummaryRemittanceReportsPage } from './pages/Dashboard/DashboardHome/SummaryRemittanceReportsPage';
+import { RemittanceReportsPage } from './pages/Dashboard/DashboardHome/RemittanceReportsPage';
 
 function App() {
   return (
@@ -34,6 +36,8 @@ function App() {
 
           {/* Sub Pages */}
           <Route element={<DashboardDeliveryTableData />} path="/dashboard-home/delivery-table-data" />
+          <Route element={<SummaryRemittanceReportsPage />} path="/dashboard-home/summary-remittance-table-data" />
+          <Route element={<RemittanceReportsPage />} path="/dashboard-home/remittance-table-data" />
 
           {/* Profile */}
           <Route element={<UserProfile />} path="/profile" />

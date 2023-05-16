@@ -8,7 +8,7 @@ import { DeliveryDataRow } from '../../../components/Tables/DeliveryDataRow';
 import { tempPerformanceDataRow, tempDispostionData } from '../../../constants/TempData';
 import { Pagination } from '../../../components/Tables/Pagination';
 
-export const DashboardDeliveryTableData: FC<any> = () => {
+export const RemittanceReportsPage: FC<any> = () => {
 
     const [currentPage, setCurrentPage] = React.useState(1);
     const [articlesPerPage] = React.useState(5);
@@ -35,7 +35,7 @@ export const DashboardDeliveryTableData: FC<any> = () => {
                     <FlexRow className='justify-between w-full'>
                         <Div className='shadow-lg rounded-lg border border-grey-400 p-5 w-3/5 h-48'>
                             <Text className='text-secondary-100 text-xs font-bold'>
-                                For Disposition as of MM DD YY
+                            Remittance History as of
                             </Text>
                         </Div>
                         <FlexColumn className='justify-between shadow-lg rounded-lg border border-grey-400 p-5 w-1/3 h-48'>

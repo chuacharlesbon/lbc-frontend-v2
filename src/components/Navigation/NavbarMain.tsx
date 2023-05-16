@@ -8,7 +8,11 @@ import { AiFillBook } from 'react-icons/ai';
 import { CgCalendarDates } from 'react-icons/cg';
 import { FaTruck, FaQuestionCircle } from 'react-icons/fa';
 
-export const NavbarMain: FC<any> = () => {
+interface NavigationProps {
+	route: string;
+}
+
+export const NavbarMain: FC<NavigationProps> = ({route}) => {
 
 return (
     <FlexColumn className='bg-red-100 h-full w-32 py-5 items-center justify-between'>
@@ -26,42 +30,42 @@ return (
                 SOLUTIONS
             </Text>
         </FlexColumn>
-        <FlexColumn className='mx-auto py-5 justify-center items-center w-24'>
-            <ImHome className='text-white text-2xl'/>
-            <Text className='text-white text-xs text-center'>
+        <FlexColumn className={`${route === 'Home' ? 'text-white' : 'text-secondary-200'} mx-auto py-5 justify-center items-center w-24 rounded-lg hover:bg-red-400 hover:bg-opacity-50 hover:text-white`}>
+            <ImHome className={`text-2xl`}/>
+            <Text className={`text-xs text-center`}>
                 Home
             </Text>
         </FlexColumn>
-        <FlexColumn className='mx-auto py-5 justify-center items-center w-24'>
-            <AiFillBook className='text-white text-2xl'/>
-            <Text className='text-white text-xs text-center'>
+        <FlexColumn className={`${route === 'Book Now' ? 'text-white' : 'text-secondary-200'} mx-auto py-5 justify-center items-center w-24 rounded-lg hover:bg-red-400 hover:bg-opacity-50 hover:text-white`}>
+            <AiFillBook className={`text-2xl`}/>
+            <Text className={`text-xs text-center`}>
                 Book Now
             </Text>
         </FlexColumn>
-        <FlexColumn className='mx-auto py-5 justify-center items-center w-24'>
-            <CgCalendarDates className='text-white text-2xl'/>
-            <Text className='text-white text-xs text-center'>
+        <FlexColumn className={`${route === 'Activity' ? 'text-white' : 'text-secondary-200'} mx-auto py-5 justify-center items-center w-24 rounded-lg hover:bg-red-400 hover:bg-opacity-50 hover:text-white`}>
+            <CgCalendarDates className={`text-2xl`}/>
+            <Text className={`text-xs text-center`}>
                 Activity
             </Text>
         </FlexColumn>
-        <FlexColumn className='mx-auto py-5 justify-center items-center w-24'>
-            <FaTruck className='text-white text-2xl'/>
-            <Text className='text-white text-xs text-center'>
+        <FlexColumn className={`${route === 'Reports' ? 'text-white' : 'text-secondary-200'} mx-auto py-5 justify-center items-center w-24 rounded-lg hover:bg-red-400 hover:bg-opacity-50 hover:text-white`}>
+            <FaTruck className={`text-2xl`}/>
+            <Text className={`text-xs text-center`}>
                 Reports
             </Text>
         </FlexColumn>
         </Div>
 
         <Div>
-        <FlexColumn className='mx-auto py-5 justify-center items-center w-24'>
-            <IoMdApps className='text-white text-2xl'/>
-            <Text className='text-white text-xs text-center'>
+        <FlexColumn className={`text-white mx-auto py-5 justify-center items-center w-24 rounded-lg hover:bg-red-400 hover:bg-opacity-50 hover:text-white`}>
+            <IoMdApps className={`text-2xl`}/>
+            <Text className={`text-xs text-center`}>
                 Tools
             </Text>
         </FlexColumn>
-        <FlexColumn className='mx-auto py-5 justify-center items-center w-24'>
-            <FaQuestionCircle className='text-white text-2xl'/>
-            <Text className='text-white text-xs text-center'>
+        <FlexColumn className={`text-white mx-auto py-5 justify-center items-center w-24 rounded-lg hover:bg-red-400 hover:bg-opacity-50 hover:text-white`}>
+            <FaQuestionCircle className={`text-2xl`}/>
+            <Text className={`text-xs text-center`}>
                 Help
             </Text>
         </FlexColumn>

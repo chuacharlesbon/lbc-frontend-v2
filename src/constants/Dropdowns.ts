@@ -24,11 +24,55 @@ export const UserDrawers = [
       links: [
         {
           name: 'Delivery Status',
-          url: '/dashboard-home?delivery-status',
+          url: '/dashboard-home?status=delivery-status',
+          filter: [
+            {
+              name: 'In-Transit',
+              url: 'in-transit'
+            },
+            {
+              name: 'For Disposition',
+              url: 'for-disposition'
+            },
+            {
+              name: 'Delivered',
+              url: 'delivered'
+            },
+            {
+              name: 'Returned',
+              url: 'returned'
+            },
+            {
+              name: 'Others',
+              url: 'others'
+            },
+            {
+              name: 'Make Default',
+              url: 'default-delivery-status'
+            },
+          ]
         },
         {
           name: 'Remittance Status',
-          url: '/dashboard-home?remittance-status',
+          url: '/dashboard-home?status=remittance-status',
+          filter: [
+            {
+              name: 'Total COD Amount',
+              url: 'total-cod-amount'
+            },
+            {
+              name: 'Amount Remitted',
+              url: 'amount-remitted'
+            },
+            {
+              name: 'For Remittance',
+              url: 'for-remittance'
+            },
+            {
+              name: 'Make Default',
+              url: 'default-remittance'
+            },
+          ]
         },
       ],
     },
