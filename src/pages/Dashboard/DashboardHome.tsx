@@ -21,7 +21,7 @@ return (
 
             {/* Dashboard */}
             <Div className='w-full h-full overflow-y-scroll p-10 bg-white'>
-            <FlexRow className='justify-between w-full h-500px'>
+            <FlexRow className='justify-between w-full h-700px'>
                 <Analytics/>
                 <Div className='mx-auto w-1/2'>
                     <LBCCarouselSlider />
