@@ -1,9 +1,12 @@
 import React, { FC } from 'react';
-import { FlexRow, FlexColumn, Spacer } from '../../core/Containers';
+import { FlexRow, FlexColumn, Spacer, Div } from '../../core/Containers';
 import { Text, Span } from '../../core/Text';
 import { Image } from '../../core/Image';
 import { Link, useNavigate } from 'react-router-dom';
 import { RawInput } from '../../core/Forms';
+import { ImSpinner2 } from 'react-icons/im';
+import { LBCModal } from '../../components/Modals/LBCModal';
+import { Loading } from '../Window/Loading';
 
 export const Login: FC<any> = () => {
 
@@ -11,16 +14,76 @@ export const Login: FC<any> = () => {
 
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
+    const [loading, setLoading] = React.useState(false);
+
+    const [isToastOpen, setToastOpen] = React.useState(false);
+    const [toastKind, setToastKind] = React.useState('');
+    const [toastTitle, setToastTitle] = React.useState('Account Created');
+    const [toastDesc, setToastDesc] = React.useState('Redirecting to onboarding.');
 
     const onSubmit = (e: any) => {
         e.preventDefault();
+        setLoading(true);
 
-        setTimeout(() => {
-            navigate(`/dashboard-home`);
-        }, 2000);
+        if(email !== 'charlessbonnchua@gmail.com'){
+            setToastKind('error');
+            setToastTitle('Login Failed!');
+            setToastDesc('Please enter your correct email.');
+            setTimeout(() => {
+                setLoading(false);
+            }, 1000);
+            setTimeout(() => {
+                setToastOpen(true);
+            }, 1500);
+            setTimeout(() => {
+                setToastOpen(false);
+            }, 3000);
+        }else if(password !== '1111'){
+            setToastKind('error');
+            setToastTitle('Login Failed!');
+            setToastDesc('Please enter your correct password.');
+            setTimeout(() => {
+                setLoading(false);
+            }, 1000);
+            setTimeout(() => {
+                setToastOpen(true);
+            }, 1500);
+            setTimeout(() => {
+                setToastOpen(false);
+            }, 3000);
+        }else if(email == 'charlessbonnchua@gmail.com' && password == '1111'){
+            setToastKind('success');
+            setToastTitle('Logging in');
+            setToastDesc('Redirecting...');
+            
+            setTimeout(() => {
+                setLoading(false);
+            }, 1000);
+            setTimeout(() => {
+                setToastOpen(true);
+            }, 1500);
+            setTimeout(() => {
+                setLoading(false);
+                navigate(`/dashboard-home`);
+            }, 3000);
+        }
     }
 
 return (
+    <>
+    {
+        loading ?
+        <Loading />
+        :
+        <></>
+    }
+    <LBCModal
+        description={toastDesc}
+        isOpen={isToastOpen}
+        onClose={() => setToastOpen(false)}
+        title={toastTitle}
+        toastKind={toastKind}
+    />
     <FlexRow className='justify-center items-center h-full w-full'>
         <FlexColumn className='justify-center items-center w-500px h-500px rounded-lg shadow-xl border border-grey-400'>
 
@@ -87,5 +150,6 @@ return (
 
         </FlexColumn>
     </FlexRow>
+    </>
 );
 };
