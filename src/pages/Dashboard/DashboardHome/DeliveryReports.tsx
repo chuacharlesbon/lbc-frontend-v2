@@ -28,7 +28,11 @@ export const DashboardDeliveryTableData: FC<any> = () => {
             <FlexColumn className='w-11/12 h-full'>
 
                 {/* Top Navigation */}
-                <TopNavBar />
+                <TopNavBar
+                    showMenu={true}
+                    showNotifBell={true}
+                    showSearchBar={true}
+                />
 
                 {/* Body */}
                 <Div className='w-full h-full overflow-y-scroll p-10 bg-white'>

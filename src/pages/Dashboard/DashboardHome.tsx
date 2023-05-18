@@ -26,7 +26,11 @@ return (
         <FlexColumn className='w-full h-full'>
 
             {/* Top Navigation */}
-            <TopNavBar/>
+            <TopNavBar
+                showMenu={true}
+                showNotifBell={true}
+                showSearchBar={true}
+            />
 
             {/* Dashboard */}
             <Div className='w-full h-full overflow-y-scroll p-10 bg-white'>
