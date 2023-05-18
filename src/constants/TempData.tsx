@@ -136,3 +136,27 @@ export const tempDispostionData = [
         clientAddressTo: "321 Edge Street",
     },
 ];
+
+export const tempNotificationData = [
+    {
+        id: 1,
+        date: "01/01/2023 00:00 AM",
+        subject: "Notice of Releases",
+        excerpt: "This is an announcement to provide information!",
+        status: 'Unread'
+    },
+    {
+        id: 2,
+        date: "01/01/2023 00:00 AM",
+        subject: "Notice of Releases",
+        excerpt: "This is an announcement to provide information! This is an announcement to provide information!",
+        status: 'Unread'
+    },
+    {
+        id: 3,
+        date: "01/01/2023 00:00 AM",
+        subject: "Notice of Releases",
+        excerpt: "This is an announcement to provide information! This is an announcement to provide information!",
+        status: 'Read'
+    },
+];
