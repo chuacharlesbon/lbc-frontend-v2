@@ -3,10 +3,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { Route, Routes } from 'react-router-dom';
 import { Login } from './pages/Auth/Login';
 import { ForgotPassword } from './pages/Auth/ForgotPassword';
-import { BookNow } from './pages/Dashboard/BookNow';
-import { Reports } from './pages/Dashboard/Reports';
-import { Payments } from './pages/Dashboard/Payments';
-import { DashboardHome } from './pages/Dashboard/DashboardHome';
+import { BookNow, Reports, Payments, DashboardHome, Activity } from './pages/Dashboard/';
 import { UserProfile } from './pages/Profile/UserProfile';
 import { Error } from './pages/Window/Error';
 import { NoAuth } from './pages/Window/NoAuth';
@@ -17,6 +14,7 @@ import { BsFillChatRightDotsFill } from 'react-icons/bs';
 import { DashboardDeliveryTableData } from './pages/Dashboard/DashboardHome/DeliveryReports';
 import { SummaryRemittanceReportsPage } from './pages/Dashboard/DashboardHome/SummaryRemittanceReportsPage';
 import { RemittanceReportsPage } from './pages/Dashboard/DashboardHome/RemittanceReportsPage';
+import { Notifications } from './pages/Notifications';
 
 function App() {
   return (
@@ -28,19 +26,27 @@ function App() {
           <Route element={<Login />} path="/" />
           <Route element={<ForgotPassword />} path="/forgot-password" />
 
-          {/* Main Pages */}
+          {/* Dashboard Pages */}
           <Route element={<DashboardHome />} path="/dashboard-home" />
-          <Route element={<BookNow />} path="/book-now" />
-          <Route element={<Reports />} path="/reports" />
-          <Route element={<Payments />} path="/payments" />
-
-          {/* Sub Pages */}
           <Route element={<DashboardDeliveryTableData />} path="/dashboard-home/delivery-table-data" />
           <Route element={<SummaryRemittanceReportsPage />} path="/dashboard-home/summary-remittance-table-data" />
           <Route element={<RemittanceReportsPage />} path="/dashboard-home/remittance-table-data" />
 
+          {/* Book Now Pages */}
+          <Route element={<BookNow />} path="/book-now" />
+
+          {/* Reports Pages */}
+          <Route element={<Reports />} path="/reports" />
+
+          {/* Activity Pages */}
+          <Route element={<Activity />} path="/activity" />
+
+          {/* Payment Pages */}
+          <Route element={<Payments />} path="/payments" />
+
           {/* Profile */}
           <Route element={<UserProfile />} path="/profile" />
+          <Route element={<Notifications />} path="/notifications" />
 
           {/* Window States */}
           <Route element={<Error />} path="*" />
