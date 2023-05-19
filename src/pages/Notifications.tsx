@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Div, Divider, FlexColumn, FlexRow, Spacer } from './../core/Containers';
+import { Div, FlexColumn, FlexRow, Spacer } from './../core/Containers';
 import { Text } from './../core/Text';
 import { NavbarMain } from './../components/Navigation/NavbarMain';
 import { TopNavBar } from './../components/Navigation/TopNavBar';
@@ -29,7 +29,7 @@ export const Notifications: FC<any> = () => {
     const indexOfLastArticle = currentPage * articlesPerPage;
     const indexOfFirstArticle = indexOfLastArticle - articlesPerPage;
 
-    const newPartners = tempNotificationData.slice(indexOfFirstArticle, indexOfLastArticle);
+    const currentNotifications = tempNotificationData.slice(indexOfFirstArticle, indexOfLastArticle);
 
     const paginate = (pageNumber: React.SetStateAction<number>) => setCurrentPage(pageNumber);
 
@@ -66,7 +66,7 @@ export const Notifications: FC<any> = () => {
         }else if(statusQuery === 'true'){
             onSortStatus(actionQuery || '- -  - -');
         }
-    }, [actionQuery])
+    }, [actionQuery, dateQuery, statusQuery])
 
     return (
         <FlexRow className='w-full h-full items-center justify-between'>
@@ -149,7 +149,7 @@ export const Notifications: FC<any> = () => {
                             </FlexRow>
 
                             {
-                                tempNotificationData.map((list: any) => (
+                                currentNotifications.map((list: any) => (
                                     <NotificationsRow
                                         id={list.id}
                                         date={list.date}

@@ -109,3 +109,18 @@ export const DataSortStatus1 = [
     ]
   }
 ];
+
+export const BookNowOptions = [
+  {
+    name: 'Book Now',
+    url: '/book-now?option=0'
+  },
+  {
+    name: 'Schedule Pick Up',
+    url: '/book-now?option=1'
+  },
+  {
+    name: 'Request Supplies',
+    url: '/book-now?option=2'
+  },
+];
