@@ -1,12 +1,13 @@
 import React, { FC } from 'react';
-import { FlexRow, FlexColumn, Spacer, Div } from '../../core/Containers';
+import validator from 'validator';
+import { Link, useNavigate } from 'react-router-dom';
+import { FlexRow, FlexColumn, Spacer } from '../../core/Containers';
 import { Text, Span } from '../../core/Text';
 import { Image } from '../../core/Image';
-import { Link, useNavigate } from 'react-router-dom';
 import { RawInput } from '../../core/Forms';
-import { ImSpinner2 } from 'react-icons/im';
 import { LBCModal } from '../../components/Modals/LBCModal';
 import { Loading } from '../Window/Loading';
+import { Images } from '../../assets/images/images';
 
 export const Login: FC<any> = () => {
 
@@ -25,7 +26,9 @@ export const Login: FC<any> = () => {
         e.preventDefault();
         setLoading(true);
 
-        if(email !== 'charlessbonnchua@gmail.com'){
+        const isEmail = validator.isEmail(email);
+
+        if(email !== 'charles@xtendly.com' || !isEmail){
             setToastKind('error');
             setToastTitle('Login Failed!');
             setToastDesc('Please enter your correct email.');
@@ -51,7 +54,7 @@ export const Login: FC<any> = () => {
             setTimeout(() => {
                 setToastOpen(false);
             }, 3000);
-        }else if(email == 'charlessbonnchua@gmail.com' && password == '1111'){
+        }else if(email === 'charles@xtendly.com' && password === '1111'){
             setToastKind('success');
             setToastTitle('Logging in');
             setToastDesc('Redirecting...');
@@ -87,8 +90,9 @@ return (
     <FlexRow className='justify-center items-center h-full w-full'>
         <FlexColumn className='justify-center items-center w-500px h-500px rounded-lg shadow-xl border border-grey-400'>
 
-            <Image className='h-14 w-14 rounded-lg shadow-lg border border-grey-400' alt='LBC' src="N/A"/>
-            <Spacer className='h-10' />
+            <Image className='h-32 w-32' alt='LBC logo' src={Images.LBClogo}/>
+
+            <Spacer className='h-2' />
             
             <Text className='text-secondary-100 text-sm font-bold text-center'>
                 BUSINESS
@@ -97,7 +101,7 @@ return (
                 SOLUTIONS
             </Text>
 
-            <Spacer className='h-10' />
+            <Spacer className='h-5' />
             
             <Text className='text-secondary-200 text-xl font-bold text-center'>
                 Sign in
@@ -135,9 +139,9 @@ return (
 
             <Spacer className='h-10' />
 
-            <Text className='text-red-400 text-sm font-bold text-center'>
+            <Link className='text-red-400 text-sm font-bold text-center' to='/forgot-password'>
                 Forgot Password?
-            </Text>
+            </Link>
             <Text className=' text-xs italic text-center'>
                 <Span className='text-secondary-200 italic mr-2'>
                     Issuses in logging in?
@@ -146,7 +150,6 @@ return (
                     Support Center
                 </Link>
             </Text>
-
 
         </FlexColumn>
     </FlexRow>

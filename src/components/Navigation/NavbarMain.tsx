@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Div, FlexColumn } from '../../core/Containers';
+import { Div, FlexColumn, Spacer } from '../../core/Containers';
 import { Text } from '../../core/Text';
 import { Image } from '../../core/Image';
 import { ImHome } from 'react-icons/im';
@@ -8,6 +8,8 @@ import { AiFillBook } from 'react-icons/ai';
 import { CgCalendarDates } from 'react-icons/cg';
 import { FaTruck, FaQuestionCircle } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import { BookNowOptions } from '../../constants/Dropdowns';
+import { Images } from '../../assets/images/images';
 
 interface NavigationProps {
 	route: string;
@@ -18,12 +20,8 @@ export const NavbarMain: FC<NavigationProps> = ({route}) => {
 return (
     <FlexColumn className='bg-red-400 h-full w-32 py-5 items-center justify-between'>
         <Div>
-        <FlexColumn className='mx-auto py-5 justify-center items-center w-24'>
-            <Image
-                alt='LBC'
-                className='border border-grey-400 bg-white hover:bg-grey-400 rounded-lg h-10 w-10'
-                src='N/A'
-            />
+        <FlexColumn className='mx-auto justify-center items-center w-24'>
+            <Image className='h-14 w-14' alt='LBC logo' src={Images.LBClogo}/>
             <Text className='text-white text-xs text-center'>
                 BUSINESS
             </Text>
@@ -31,6 +29,8 @@ return (
                 SOLUTIONS
             </Text>
         </FlexColumn>
+
+        <Spacer className='border border-white bg-white my-2' />
         
         <Link to='/dashboard-home'>
         <FlexColumn className={`${route === 'Home' ? 'text-white' : 'text-secondary-200'} mx-auto py-5 justify-center items-center w-24 rounded-lg hover:bg-red-100 hover:bg-opacity-50 hover:text-white`}>
@@ -42,11 +42,23 @@ return (
         </Link>
 
         <Link to='/book-now'>
-        <FlexColumn className={`${route === 'Book Now' ? 'text-white' : 'text-secondary-200'} mx-auto py-5 justify-center items-center w-24 rounded-lg hover:bg-red-100 hover:bg-opacity-50 hover:text-white`}>
+        <FlexColumn className={`${route === 'Book Now' ? 'text-white' : 'text-secondary-200'} mx-auto py-5 justify-center items-center w-24 rounded-lg hover:bg-red-100 hover:bg-opacity-50 hover:text-white parentToolTip`}>
             <AiFillBook className={`text-2xl`}/>
             <Text className={`text-xs text-center`}>
                 Book Now
             </Text>
+
+            <Div className='childTooltip left-full pl-5 z-10'>
+                <Div className='w-48 p-5 rounded-lg shadow-lg bg-white border border-grey-400'>
+                    {
+                        BookNowOptions.map((link: any) => (
+                            <Link className='block text-secondary-100 hover:text-red-100 hover:font-bold hover:bg-grey-400 p-2' to={link.url}>
+                                {link.name}
+                            </Link>
+                        ))
+                    }
+                </Div>
+            </Div>
         </FlexColumn>
         </Link>
 
