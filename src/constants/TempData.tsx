@@ -160,3 +160,60 @@ export const tempNotificationData = [
         status: 'Read'
     },
 ];
+
+export const tempPickupScheduleData = [
+    {
+        id: 1,
+        pickUpSchedule: "Recurs ever Monday and Wednesdays",
+        address: ": Unit 1D Three World Square, McKinley Hill Dr, Taguig, Metro Manila",
+        contactPerson: "John Doe",
+        estVolumePerPickup: '50',
+        specialInstruction: "None"
+    },
+    {
+        id: 2,
+        pickUpSchedule: "Recurs ever Monday and Wednesdays",
+        address: ": Unit 1D Three World Square, McKinley Hill Dr, Taguig, Metro Manila",
+        contactPerson: "John Doe",
+        estVolumePerPickup: '50',
+        specialInstruction: "None"
+    },
+    {
+        id: 3,
+        pickUpSchedule: "Recurs ever Monday and Wednesdays",
+        address: ": Unit 1D Three World Square, McKinley Hill Dr, Taguig, Metro Manila",
+        contactPerson: "John Doe",
+        estVolumePerPickup: '50',
+        specialInstruction: "None"
+    },
+    {
+        id: 1,
+        pickUpSchedule: "Recurs ever Monday and Wednesdays",
+        address: ": Unit 1D Three World Square, McKinley Hill Dr, Taguig, Metro Manila",
+        contactPerson: "John Doe",
+        estVolumePerPickup: '50',
+        specialInstruction: "None"
+    },
+    {
+        id: 2,
+        pickUpSchedule: "Recurs ever Monday and Wednesdays",
+        address: ": Unit 1D Three World Square, McKinley Hill Dr, Taguig, Metro Manila",
+        contactPerson: "John Doe",
+        estVolumePerPickup: '5',
+        specialInstruction: "None"
+    },
+    {
+        id: 3,
+        pickUpSchedule: "Recurs ever Monday and Wednesdays",
+        address: ": Unit 1D Three World Square, McKinley Hill Dr, Taguig, Metro Manila",
+        contactPerson: "John Doe",
+        estVolumePerPickup: '50',
+        specialInstruction: "None"
+    },
+];
+
+export const tempBorderColors = [
+    "border-l-yellow-100",
+    "border-l-blue-100",
+    "border-l-red-100"
+];

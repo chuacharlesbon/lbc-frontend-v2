@@ -124,3 +124,23 @@ export const BookNowOptions = [
     url: '/book-now?option=2'
   },
 ];
+
+export const RecurrenceOptions = [
+  {
+    name: 'Recurrence',
+    links: [
+      {
+        name: "Once a Week (Mon)",
+        url: "/book-now?recurrence=0"
+      },
+      {
+        name: "Twice a Week (Mon & Thu)",
+        url: "/book-now?recurrence=1"
+      },
+      {
+        name: "Once a Month",
+        url: "/book-now?recurrence=2"
+      },
+    ]
+  }
+];
