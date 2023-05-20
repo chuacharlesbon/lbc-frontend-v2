@@ -1,11 +1,11 @@
 import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, useLocation, useNavigate } from 'react-router-dom';
 import { Route, Routes } from 'react-router-dom';
 import { Login } from './pages/Auth/Login';
 import { ForgotPassword } from './pages/Auth/ForgotPassword';
 import { BookNow, Reports, Payments, DashboardHome, Activity } from './pages/Dashboard/';
 import { UserProfile } from './pages/Profile/UserProfile';
-import { Error } from './pages/Window/Error';
+import { Error, Incompatible } from './pages/Window/Error';
 import { NoAuth } from './pages/Window/NoAuth';
 import { Loading } from './pages/Window/Loading';
 import { Text } from './core/Text';
@@ -16,58 +16,84 @@ import { SummaryRemittanceReportsPage } from './pages/Dashboard/DashboardHome/Su
 import { RemittanceReportsPage } from './pages/Dashboard/DashboardHome/RemittanceReportsPage';
 import { Notifications } from './pages/Notifications';
 import { Logout } from './pages/Auth/Logout';
+import { useWindowSize } from './hooks';
 
 function App() {
+
+  const dimension = useWindowSize();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  React.useEffect(() => {
+    if (dimension.width < 1024) {
+      navigate('/incompatible');
+    }else{
+      navigate('/dashboard-home')
+    }
+  }, [dimension])
+
   return (
     <div className="h-full w-full relative">
-      <BrowserRouter>
-        <Routes>
 
-          {/* Authentication Pages */}
-          <Route element={<Login />} path="/" />
-          <Route element={<ForgotPassword />} path="/forgot-password" />
+      <Routes>
 
-          {/* Dashboard Pages */}
-          <Route element={<DashboardHome />} path="/dashboard-home" />
-          <Route element={<DashboardDeliveryTableData />} path="/dashboard-home/delivery-table-data" />
-          <Route element={<SummaryRemittanceReportsPage />} path="/dashboard-home/summary-remittance-table-data" />
-          <Route element={<RemittanceReportsPage />} path="/dashboard-home/remittance-table-data" />
+        {/* Authentication Pages */}
+        <Route element={<Login />} path="/" />
+        <Route element={<ForgotPassword />} path="/forgot-password" />
 
-          {/* Book Now Pages */}
-          <Route element={<BookNow />} path="/book-now" />
+        {/* Dashboard Pages */}
+        <Route element={<DashboardHome />} path="/dashboard-home" />
+        <Route element={<DashboardDeliveryTableData />} path="/dashboard-home/delivery-table-data" />
+        <Route element={<SummaryRemittanceReportsPage />} path="/dashboard-home/summary-remittance-table-data" />
+        <Route element={<RemittanceReportsPage />} path="/dashboard-home/remittance-table-data" />
 
-          {/* Reports Pages */}
-          <Route element={<Reports />} path="/reports" />
+        {/* Book Now Pages */}
+        <Route element={<BookNow />} path="/book-now" />
 
-          {/* Activity Pages */}
-          <Route element={<Activity />} path="/activity" />
+        {/* Reports Pages */}
+        <Route element={<Reports />} path="/reports" />
 
-          {/* Payment Pages */}
-          <Route element={<Payments />} path="/payments" />
+        {/* Activity Pages */}
+        <Route element={<Activity />} path="/activity" />
 
-          {/* Profile */}
-          <Route element={<UserProfile />} path="/profile" />
-          <Route element={<Notifications />} path="/notifications" />
+        {/* Payment Pages */}
+        <Route element={<Payments />} path="/payments" />
 
-          {/* Window States */}
-          <Route element={<Error />} path="*" />
-          <Route element={<Loading />} path="/load" />
-          <Route element={<NoAuth />} path="/no-auth" />
-          <Route element={<Logout />} path="/logout" />
+        {/* Profile */}
+        <Route element={<UserProfile />} path="/profile" />
+        <Route element={<Notifications />} path="/notifications" />
 
-        </Routes>
-      </BrowserRouter>
+        {/* Window States */}
+        <Route element={<Error />} path="*" />
+        <Route element={<Loading />} path="/load" />
+        <Route element={<NoAuth />} path="/no-auth" />
+        <Route element={<Logout />} path="/logout" />
+        <Route element={<Incompatible />} path="/incompatible" />
 
-      <FlexRow className='absolute items-center justify-end w-full z-10 bottom-0'>
-        <div className=' h-12 w-36 bg-white mr-20 rounded-tr-xl rounded-tl-xl'>
-          <FlexRow className='items-center justify-center h-full w-full bg-grey-200 rounded-tr-xl rounded-tl-xl'>
-              <BsFillChatRightDotsFill className='text-red-400 mr-2'/>
-              <Text className='text-red-400 font-semibold'>
-                Chat with us!
-              </Text>
+      </Routes>
+
+      {
+        location.pathname === '/' ||
+        location.pathname === '/forgot-password' ||
+        location.pathname === '/incompatible' ||
+        location.pathname === '/load' ||
+        location.pathname === '/*' ||
+        location.pathname === '/no-auth' ||
+        location.pathname === '/logout'?
+          <></>
+          :
+          <FlexRow className='absolute items-center justify-end w-full z-10 bottom-0'>
+            <div className=' h-12 w-36 bg-white mr-20 rounded-tr-xl rounded-tl-xl'>
+              <FlexRow className='items-center justify-center h-full w-full bg-grey-200 rounded-tr-xl rounded-tl-xl'>
+                <BsFillChatRightDotsFill className='text-red-400 mr-2' />
+                <Text className='text-red-400 font-semibold'>
+                  Chat with us!
+                </Text>
+              </FlexRow>
+            </div>
           </FlexRow>
-        </div>
-      </FlexRow>
+      }
+      
     </div>
   );
 }
