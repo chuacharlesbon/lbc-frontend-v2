@@ -3,8 +3,17 @@ import { Menu, Transition } from '@headlessui/react';
 import { Link } from 'react-router-dom';
 import { Div } from '../Containers';
 import { Text } from '../Text';
-import { FaUserAlt, FaChevronDown } from 'react-icons/fa';
+import { FaUserAlt, FaChevronDown, FaCaretDown } from 'react-icons/fa';
 import { UserDrawers } from '../../constants/Dropdowns';
+import { RawButton } from './RawButton';
+
+interface DataProps {
+  icon: any;
+  value: string;
+  width: string;
+  options: any;
+  onSelect: any;
+}
 
 export const Dropdown: FC<any> = () => {
 
@@ -57,6 +66,59 @@ export const Dropdown: FC<any> = () => {
                 ))}
               </div>
             ))}
+          </Menu.Items>
+      </Transition>
+    </Menu>
+  </Div>
+)};
+
+export const RawDropdown: FC<DataProps> = ({
+  icon, value, width, options, onSelect
+}) => {
+
+  return(
+  <Div className={`${width} px-2 text-right`}>
+    <Menu as="div" className={`${width} px-2 relative inline-block text-left`}>
+      <div>
+        <Menu.Button
+          className={`${width} px-2 flex flex-row items-center justify-center rounded-lg hover:border border-grey-400 hover:shadow-xl hover:bg-opacity-20`}
+        >
+          {icon}
+          <Text className={`p-2 mr-auto truncate text-ellipsis text-left text-red-400 text-sm font-semibold`}>
+            {value}
+          </Text>
+          <FaCaretDown className="text-red-400" />
+        </Menu.Button>
+      </div>
+      <Transition
+        as={Fragment}
+        enter="transition ease-out duration-100"
+        enterFrom="transform opacity-0 scale-95"
+        enterTo="transform opacity-100 scale-100"
+        leave="transition ease-in duration-75"
+        leaveFrom="transform opacity-100 scale-100"
+        leaveTo="transform opacity-0 scale-95"
+      >
+          <Menu.Items
+            className={`${width} absolute -right-2 mt-1 origin-top-right bg-white divide-y divide-secondary-300 rounded-lg shadow-lg`}
+          >
+            <Menu.Item>
+            <div className='w-full'>
+            {options.map((value: any) => (
+              <div className="w-full px-1 py-1" key={value.name}>
+                {value.links.map((link: any) => (
+                    <RawButton className='w-full' onClick={() => onSelect(link.name)}>
+                      <Text
+                        className={`hover:bg-red-400 hover:text-white text-secondary-100 group flex rounded-md items-center p-2 text-sm text-ellipsis truncate`}
+                      >
+                        {link.name}
+                      </Text>
+                    </RawButton>
+                ))}
+              </div>
+            ))}
+            </div>
+            </Menu.Item>
           </Menu.Items>
       </Transition>
     </Menu>

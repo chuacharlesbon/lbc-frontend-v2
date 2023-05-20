@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import { ImSpinner2 } from 'react-icons/im';
 
 interface ButtonProps {
   className?: string;
@@ -20,12 +21,12 @@ export const Button: FC<ButtonProps> = ({
   disabled,
 }) => (
   <button
-    className={`text-white bg-primary-100 hover:bg-opacity-80 font-poppins font-regular rounded-lg p-3 text-center inline-flex items-center ${className}`}
+    className={`text-white text-center font-semibold bg-red-400 hover:bg-opacity-80 rounded-lg p-2 inline-flex justify-center items-center ${className}`}
     disabled={disabled || false}
     type={type || 'button'}
     {...props}
     onClick={!isLoading ? onClick : null}
   >
-    {isLoading ? <i className="fad fa-spinner-third animate-spin text-2xl" /> : children}
+    {isLoading ? <ImSpinner2 className="animate-spin" /> : children}
   </button>
 );
