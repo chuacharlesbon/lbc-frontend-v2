@@ -16,7 +16,7 @@ import { SummaryRemittanceReportsPage } from './pages/Dashboard/DashboardHome/Su
 import { RemittanceReportsPage } from './pages/Dashboard/DashboardHome/RemittanceReportsPage';
 import { Notifications } from './pages/Notifications';
 import { Logout } from './pages/Auth/Logout';
-import { useWindowSize } from './hooks';
+import { useCookie, useWindowSize } from './hooks';
 
 function App() {
 
@@ -24,11 +24,16 @@ function App() {
   const navigate = useNavigate();
   const location = useLocation();
 
+  const [cookie, updateCookie] = useCookie('location', '/');
+
   React.useEffect(() => {
+    
     if (dimension.width < 1024) {
       navigate('/incompatible');
+    }else if(location.pathname === '/incompatible'){
+      navigate(cookie);
     }else{
-      navigate('/dashboard-home')
+      updateCookie(location.pathname, 0.5);
     }
   }, [dimension])
 
