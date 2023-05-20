@@ -4,6 +4,7 @@ import { Text } from '../core/Text';
 import { RawButton } from '../core/Buttons';
 import { FaRegEdit } from 'react-icons/fa';
 import { PickUpScheduleChange } from './Modals';
+import { Link } from 'react-router-dom';
 
 interface DivProps {
   id: number;
@@ -81,6 +82,26 @@ export const PickupScheduleItem: FC<DivProps> = ({
           <RawButton className='' onClick={() => setToastOpenA(true)}>
             <FaRegEdit className='text-red-100 text-xl ml-2' />
           </RawButton>
+        </Div>
+      </FlexRow>
+    </>
+  );
+};
+
+export const PickupScheduleItemSummary: FC<DivProps> = ({
+  className, address
+}) => {
+
+  return (
+    <>
+      <FlexRow className={`my-2 p-2 hover:bg-grey-500 items-start justify-between w-full border-l-8 border border-t-grey-400 border-r-grey-400 border-b-grey-400 rounded-lg shadow-xl ${className}`} >
+        <Div className='w-11/12'>
+          <Text className='text-secondary-200 text-sm'>
+            Scheduled Pick up at {address}
+          </Text>
+          <Link className='text-red-400 text-x font-bold' to='/book-now?option=1&schedule=updated'>
+            View Transaction Details
+          </Link>
         </Div>
       </FlexRow>
     </>

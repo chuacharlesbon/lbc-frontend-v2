@@ -25,8 +25,6 @@ export const LBCModal: FC<ButtonProps> = ({
         color = 'border-primary-100';
     }
 
-    console.log(color);
-
     const getIcon = () => {
         if (toastKind === 'success') {
             return <HiCheckCircle className='text-green-100 text-4xl' />
@@ -42,7 +40,7 @@ export const LBCModal: FC<ButtonProps> = ({
         <Transition appear as={Fragment} show={isOpen}>
             <Dialog
                 as="div"
-                className='fixed z-50 overflow-hide right-1/3 w-1/3 top-1/4'
+                className='fixed inset-0 z-50 overflow-hide'
                 onClose={onClose}
             >
                 <div className="h-full w-full text-center flex justify-end">
@@ -58,7 +56,7 @@ export const LBCModal: FC<ButtonProps> = ({
                         <div
                             className="h-full w-full overflow-hidden text-left z-20 p-5 align-middle transition-all transform flex flex-col items-center"
                         >
-                            <div className='border border-grey-400 w-full rounded-lg shadow-lg'>
+                            <div className='w-400px border border-grey-400 rounded-lg shadow-lg mt-48'>
                                 <div
                                     className={`flex flex-col items-center justify-between p-4 w-full bg-white border-l-8 rounded-lg shadow-lg ${color}`}
                                     id="toast-success"

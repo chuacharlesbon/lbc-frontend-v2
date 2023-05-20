@@ -33,7 +33,7 @@ export const BookNow: FC<any> = () => {
     return (
         <FlexRow className='w-full h-full items-center justify-between overflow-hidden scrollbar-hide'>
             {/* Side Navigation */}
-            <NavbarMain route='Home' />
+            <NavbarMain route='Book Now' />
 
             {/* Main Dashboard */}
             <FlexColumn className='w-11/12 h-full'>

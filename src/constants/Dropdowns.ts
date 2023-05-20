@@ -130,17 +130,48 @@ export const RecurrenceOptions = [
     name: 'Recurrence',
     links: [
       {
-        name: "Once a Week (Mon)",
+        name: "Daily",
         url: "/book-now?recurrence=0"
       },
       {
-        name: "Twice a Week (Mon & Thu)",
+        name: "Weekly",
         url: "/book-now?recurrence=1"
       },
       {
-        name: "Once a Month",
+        name: "Monthly",
         url: "/book-now?recurrence=2"
       },
     ]
   }
+];
+
+export const Weekly = [
+  {
+    abb: "M",
+    value: "Mon",
+  },
+  {
+    abb: "T",
+    value: "Tue",
+  },
+  {
+    abb: "W",
+    value: "Wed",
+  },
+  {
+    abb: "Th",
+    value: "Thu",
+  },
+  {
+    abb: "F",
+    value: "Fri",
+  },
+  {
+    abb: "S",
+    value: "Sat",
+  },
+  {
+    abb: "Su",
+    value: "Sun",
+  },
 ];
