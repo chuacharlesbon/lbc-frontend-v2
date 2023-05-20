@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import validator from 'validator';
 import { Link, useNavigate } from 'react-router-dom';
-import { FlexRow, FlexColumn, Spacer, Div } from '../../core/Containers';
+import { FlexRow, FlexColumn, Spacer } from '../../core/Containers';
 import { Text, Span } from '../../core/Text';
 import { Image } from '../../core/Image';
 import { RawInput } from '../../core/Forms';
@@ -14,7 +14,7 @@ export const ForgotPassword: FC<any> = () => {
     const navigate = useNavigate();
 
     const [email, setEmail] = React.useState('');
-    const [password, setPassword] = React.useState('');
+    //const [password, setPassword] = React.useState('');
     const [loading, setLoading] = React.useState(false);
 
     const [isToastOpen, setToastOpen] = React.useState(false);
@@ -120,9 +120,9 @@ return (
                 <Span className='text-secondary-200 italic mr-2'>
                     Issuses in logging in?
                 </Span>
-                <Link className='text-red-400 font-bold' to='/'>
+                <a className='text-red-400 font-bold' href='https://www.lbcexpress.com/us/contact-support' rel="noreferrer" target='_blank'>
                     Support Center
-                </Link>
+                </a>
             </Text>
 
         </FlexColumn>

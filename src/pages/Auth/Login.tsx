@@ -146,9 +146,9 @@ return (
                 <Span className='text-secondary-200 italic mr-2'>
                     Issuses in logging in?
                 </Span>
-                <Link className='text-red-400 font-bold' to='/'>
+                <a className='text-red-400 font-bold' href='https://www.lbcexpress.com/us/contact-support' rel="noreferrer" target='_blank'>
                     Support Center
-                </Link>
+                </a>
             </Text>
 
         </FlexColumn>

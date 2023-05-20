@@ -15,6 +15,7 @@ import { DashboardDeliveryTableData } from './pages/Dashboard/DashboardHome/Deli
 import { SummaryRemittanceReportsPage } from './pages/Dashboard/DashboardHome/SummaryRemittanceReportsPage';
 import { RemittanceReportsPage } from './pages/Dashboard/DashboardHome/RemittanceReportsPage';
 import { Notifications } from './pages/Notifications';
+import { Logout } from './pages/Auth/Logout';
 
 function App() {
   return (
@@ -52,6 +53,7 @@ function App() {
           <Route element={<Error />} path="*" />
           <Route element={<Loading />} path="/load" />
           <Route element={<NoAuth />} path="/no-auth" />
+          <Route element={<Logout />} path="/logout" />
 
         </Routes>
       </BrowserRouter>
