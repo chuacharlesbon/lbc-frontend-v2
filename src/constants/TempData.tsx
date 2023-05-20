@@ -212,6 +212,20 @@ export const tempPickupScheduleData = [
     },
 ];
 
+export const scheduledPickups = [
+    'Tue Apr 04 2023 00:00:00 GMT+0800 (Singapore Standard Time)',
+    'Thu Apr 20 2023 00:00:00 GMT+0800 (Singapore Standard Time)',
+    'Thu Apr 27 2023 00:00:00 GMT+0800 (Singapore Standard Time)',
+    'Thu May 04 2023 00:00:00 GMT+0800 (Singapore Standard Time)',
+    'Tue May 09 2023 00:00:00 GMT+0800 (Singapore Standard Time)',
+    'Wed May 10 2023 00:00:00 GMT+0800 (Singapore Standard Time)',
+    'Thu May 18 2023 00:00:00 GMT+0800 (Singapore Standard Time)',
+    'Sat May 20 2023 22:58:25 GMT+0800 (Singapore Standard Time)',
+    'Thu Jun 01 2023 00:00:00 GMT+0800 (Singapore Standard Time)',
+    'Fri Jun 02 2023 00:00:00 GMT+0800 (Singapore Standard Time)',
+    'Tue Jun 13 2023 00:00:00 GMT+0800 (Singapore Standard Time)',
+];
+
 export const tempBorderColors = [
     "border-l-yellow-100",
     "border-l-blue-100",
