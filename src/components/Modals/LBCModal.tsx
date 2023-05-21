@@ -1,17 +1,25 @@
 import React, { FC, Fragment } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { HiExclamationCircle, HiCheckCircle } from 'react-icons/hi';
-import { FaTimesCircle } from 'react-icons/fa';
+import { FaTimes, FaTimesCircle } from 'react-icons/fa';
+import { Button, RawButton } from '../../core/Buttons';
+import { FlexColumn, FlexRow } from '../../core/Containers';
+import { Text } from '../../core/Text';
 
-interface ButtonProps {
-    title: string;
+interface DataProps {
+    title: any;
     onClose: any;
-    description: string;
+    description: any;
     isOpen: boolean;
     toastKind: string;
+    buttonTextFirst?: string;
+    buttonTextSecond?: string;
+    onClickFirst?: any;
+    onClickSecond?: any;
+    loading?: boolean;
 }
 
-export const LBCModal: FC<ButtonProps> = ({
+export const LBCModal: FC<DataProps> = ({
     title, description, onClose, isOpen, toastKind,
 }) => {
     let color = 'border-white';
@@ -82,5 +90,72 @@ export const LBCModal: FC<ButtonProps> = ({
                 </div>
             </Dialog>
         </Transition>
+    );
+};
+
+export const LBCModalTwoFunc: FC<DataProps> = ({
+    onClose, isOpen, title, description, buttonTextFirst, buttonTextSecond, onClickFirst, onClickSecond, loading
+}) => {
+
+    return (
+        <>
+            <Transition appear as={Fragment} show={isOpen}>
+                <Dialog
+                    as="div"
+                    className='fixed inset-0 z-50 overflow-hide'
+                    onClose={onClose}
+                >
+                    <div className="h-full w-full text-center flex justify-end">
+                        <Transition.Child
+                            as={Fragment}
+                            enter="transition ease duration-300 transform"
+                            enterFrom="opacity-0 -translate-y-full"
+                            enterTo="opacity-100 translate-y-0"
+                            leave="transition ease duration-300 transform"
+                            leaveFrom="opacity-100 translate-y-0"
+                            leaveTo="opacity-0 -translate-y-full"
+                        >
+                            <div
+                                className="h-full w-full overflow-hidden z-20 p-5 align-middle transition-all transform flex flex-col items-center justify-center bg-secondary-200"
+                            >
+
+                                {/* ---------- Modal Body ---------- */}
+
+                                <FlexColumn className='justify-between bg-white border border-grey-400 w-400px p-5 rounded-lg shadow-lg'>
+                                    <FlexRow className='w-full items-center justify-between'>
+                                        <Text className='text-secondary-200 text-xl font-bold italic'>
+                                            {title ?? 'INFO'}
+                                        </Text>
+                                        <RawButton onClick={onClose}>
+                                            <FaTimes className='text-secondary-200 text-xl' />
+                                        </RawButton>
+                                    </FlexRow>
+
+                                    <Text className='text-secondary-200 text-left my-5'>
+                                        {description ?? 'Are you sure you want to proceed'}
+                                    </Text>
+
+                                    <FlexRow className='w-full items-center justify-center'>
+                                        <Button
+                                            className='w-40 mr-2 phone:bg-white phone:text-secondary-200 hover:bg-grey-500 phone:border phone:border-grey-400 h-10'
+                                            onClick={onClickFirst ?? onClose}
+                                        >
+                                            {buttonTextFirst ?? 'Cancel'}
+                                        </Button>
+                                        <Button
+                                            className='w-40 ml-2 h-10'
+                                            onClick={onClickSecond ?? onClose}
+                                            isLoading={loading ?? false}
+                                        >
+                                            {buttonTextSecond ?? 'Continue'}
+                                        </Button>
+                                    </FlexRow>
+                                </FlexColumn>
+                            </div>
+                        </Transition.Child>
+                    </div>
+                </Dialog>
+            </Transition>
+        </>
     );
 };

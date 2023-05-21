@@ -41,9 +41,9 @@ export const Months = [
     'Oct',
     'Nov',
     'Dec',
-  ]
-  
-  export const MonthsFull = [
+]
+
+export const MonthsFull = [
     'January',
     'February',
     'March',
@@ -56,4 +56,46 @@ export const Months = [
     'October',
     'November',
     'December',
-  ]
+]
+
+/////////////////////////////////////
+//  Book Now Data
+/////////////////////////////////////
+
+export const BookNowSummaryColumn = [
+    {
+        name: 'Package',
+        width: 'w-1/5',
+    },
+    {
+        name: 'Sender',
+        width: 'w-1/5',
+    },
+    {
+        name: 'Receiver',
+        width: 'w-1/5',
+    },
+    {
+        name: 'COD/COP Amount',
+        width: 'w-1/5',
+    },
+    {
+        name: 'COD/COP Disbursal',
+        width: 'w-1/5',
+    },
+];
+
+export const BookNowStage = [
+    {
+        name: 'Sender',
+        stage: 1,
+    },
+    {
+        name: 'Receiver',
+        stage: 2,
+    },
+    {
+        name: 'Package',
+        stage: 3,
+    },
+];

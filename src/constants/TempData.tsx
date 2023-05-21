@@ -226,6 +226,57 @@ export const scheduledPickups = [
     'Tue Jun 13 2023 00:00:00 GMT+0800 (Singapore Standard Time)',
 ];
 
+export const BookNowSummaryDetails = [
+    {
+        package: 'NP Dress',
+        sender: {
+            name: 'John Doe',
+            contact: '+63 91234567890',
+            address: 'Metro Manila',
+            type: 'via Pickup',
+            pickUpDate: '01/01/2023'
+        },
+        receiver: {
+            name: 'John Doe',
+            contact: '+63 91234567890',
+            address: 'Metro Manila',
+            type: 'via Pickup',
+            pickUpDate: '01/01/2023'
+        },
+        amount: {
+            value: 1234.56,
+            data: {}
+        },
+        disbursal: {
+            type: 'Bank Deposit'
+        }
+    },
+    {
+        package: 'NP Dress',
+        sender: {
+            name: 'John Doe',
+            contact: '+63 91234567890',
+            address: 'Metro Manila',
+            type: 'via Pickup',
+            pickUpDate: '01/01/2023'
+        },
+        receiver: {
+            name: 'John Doe',
+            contact: '+63 91234567890',
+            address: 'Metro Manila',
+            type: 'via Pickup',
+            pickUpDate: '01/01/2023'
+        },
+        amount: {
+            value: 1234.56,
+            data: {}
+        },
+        disbursal: {
+            type: 'Bank Deposit'
+        }
+    },
+];
+
 export const tempBorderColors = [
     "border-l-yellow-100",
     "border-l-blue-100",

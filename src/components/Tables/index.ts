@@ -5,3 +5,4 @@ export * from './RecentBookingSummary';
 export * from './RemittanceHistorySummary';
 export * from './ColumnHeaderSearch';
 export * from './ColumnHeaderDropdown';
+export * from './BookNowDataRow';

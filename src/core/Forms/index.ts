@@ -1,2 +1,4 @@
 export * from './Input';
 export * from './RawInput';
+export * from './CheckBox';
+export * from './FormLabel';
