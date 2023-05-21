@@ -2,15 +2,15 @@ import React, { FC, Fragment } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { Div, FlexColumn, FlexRow, Spacer } from '../../core/Containers';
 import { Span, Text } from '../../core/Text';
-import { FaTimes } from 'react-icons/fa';
-import { Button, RawButton, ScheduleDropdown } from '../../core/Buttons';
-import { RecurrenceOptions } from '../../constants/Dropdowns';
-import { CheckBox, RawInput } from '../../core/Forms';
+import { Button, RawButton } from '../../core/Buttons';
+import { CheckBox, Radio, RawInput } from '../../core/Forms';
 import { useNavigate } from 'react-router-dom';
 import { LBCModalTwoFunc } from './LBCModal';
-import { BookNowStage, ToastData } from '../../constants/ConstantsData';
+import { BookNowStage } from '../../constants/ConstantsData';
 import { StageUI } from '../Feature';
 import { FormLabel } from '../../core/Forms/FormLabel';
+import { PackageItem } from '../Feature/PackageItem';
+import { tempLBCPackage } from '../../constants/TempData';
 
 interface DataProps {
     onClose: any;
@@ -31,6 +31,8 @@ export const BookNowModal: FC<DataProps> = ({
     const [contactName, setContactName] = React.useState('');
     const [contactNum, setContactNum] = React.useState('');
 
+    const [shipmentType, setShipmentType] = React.useState('Air');
+
     const onSaveLater = () => {
         setLoading(true);
         if (currentStage > 0) {
@@ -45,7 +47,10 @@ export const BookNowModal: FC<DataProps> = ({
     }
 
     const onChangeStage = (stage: number, type: string) => {
-        if (type === 'next') {
+        if(type === 'next' && stage === 3){
+            navigate('/book-now?booking=added')
+            onClose();
+        }else if (type === 'next') {
             setStage(stage + 1)
         } else if (type === 'prev') {
             setStage(stage - 1)
@@ -340,9 +345,9 @@ export const BookNowModal: FC<DataProps> = ({
                                         {
                                             currentStage === 3 ?
                                                 <Div className='w-full'>
-                                                    <FlexRow>
-                                                        <Div className='w-1/4'>
-                                                            <FormLabel isRequired>
+                                                    <FlexRow className='w-full items-center justify-between'>
+                                                        <Div className='w-1/4 p-2'>
+                                                            <FormLabel className='text-secondary-200 text-left' isRequired>
                                                                 Item name
                                                             </FormLabel>
                                                             <RawInput
@@ -355,8 +360,8 @@ export const BookNowModal: FC<DataProps> = ({
                                                             //value=''
                                                             />
                                                         </Div>
-                                                        <Div className='w-1/4'>
-                                                            <FormLabel isRequired>
+                                                        <Div className='w-1/4 p-2'>
+                                                            <FormLabel className='text-secondary-200 text-left' isRequired>
                                                                 Item Value
                                                             </FormLabel>
                                                             <RawInput
@@ -369,12 +374,148 @@ export const BookNowModal: FC<DataProps> = ({
                                                             //value=''
                                                             />
                                                         </Div>
-                                                        <Div className='w-1/2'>
-                                                            <FormLabel isRequired>
+                                                        <Div className='w-1/2 p-2'>
+                                                            <FormLabel className='text-secondary-200 text-left' isRequired>
                                                                 Shipment Type
                                                             </FormLabel>
+                                                            <FlexRow className='w-full items-center justify-start'>
+                                                                <Radio
+                                                                    containerClass='rounded-lg p-2 border border-grey-400 m-2 w-2/5'
+                                                                    isChecked={shipmentType === 'Air'}
+                                                                    label="Air"
+                                                                    name="air"
+                                                                    onClick={() => setShipmentType('Air')}
+                                                                    optionId="shipment"
+                                                                />
+                                                                <Radio
+                                                                    containerClass='rounded-lg p-2 border border-grey-400 m-2 w-2/5'
+                                                                    isChecked={shipmentType === 'Sea'}
+                                                                    label="Sea"
+                                                                    name="sea"
+                                                                    onClick={() => setShipmentType('Sea')}
+                                                                    optionId="shipment"
+                                                                />
+                                                            </FlexRow>
                                                         </Div>
                                                     </FlexRow>
+
+                                                    <CheckBox
+                                                        containerClass=''
+                                                        id='save-address'
+                                                        name='save-address'
+                                                        label='Use Cash on Delivery (COD) or Cash on Pick Up (COP)'
+                                                    />
+
+                                                    <Text className='text-secondary-200 text-left text-sm p-2'>
+                                                        LBC will collect the payment from the receiver on your behalf upon delivery of your item
+                                                    </Text>
+
+                                                    <Div className='pl-5'>
+                                                        <FlexRow className='w-full items-center justify-start'>
+                                                            <CheckBox
+                                                                containerClass=''
+                                                                id='save-address'
+                                                                name='save-address'
+                                                                label='COD Amount'
+                                                            />
+                                                            <RawInput
+                                                                className='phone:border-grey-400 text-secondary-200 text-sm'
+                                                                containerClass='mx-5'
+                                                                name=''
+                                                                placeholder='Enter amount'
+                                                                onChange={() => { }}
+                                                                type='text'
+                                                            //value=''
+                                                            />
+                                                        </FlexRow>
+                                                        <CheckBox
+                                                            containerClass=''
+                                                            id='save-address'
+                                                            name='save-address'
+                                                            label='Freight Amount'
+                                                        />
+                                                    </Div>
+
+                                                    <Spacer className='h-5' />
+
+                                                    <FlexRow className='w-full items-center justify-between'>
+                                                        <Div className='w-1/4 p-2'>
+                                                            <FormLabel className='text-secondary-200 text-left' isRequired>
+                                                                {`Act. Weight (kg)`}
+                                                            </FormLabel>
+                                                            <RawInput
+                                                                className='phone:border-grey-400 text-secondary-200 text-sm'
+                                                                containerClass='my-2'
+                                                                name=''
+                                                                placeholder=''
+                                                                onChange={() => { }}
+                                                                type='text'
+                                                            //value=''
+                                                            />
+                                                        </Div>
+                                                        <Div className='w-3/4 p-2'>
+                                                            <FormLabel className='text-secondary-200 text-left' isRequired>
+                                                                {`Item Dimensions (cm)`}
+                                                            </FormLabel>
+                                                            <FlexRow className='w-full items-center justify-start'>
+                                                                <Text className='text-secondary-200 text-xs'>
+                                                                    Length
+                                                                </Text>
+                                                                <RawInput
+                                                                    className='phone:border-grey-400 text-secondary-200 text-sm'
+                                                                    containerClass='m-2 w-12'
+                                                                    name=''
+                                                                    placeholder=''
+                                                                    onChange={() => { }}
+                                                                    type='text'
+                                                                //value=''
+                                                                />
+                                                                <Text className='text-secondary-200 text-xs'>
+                                                                    x Width
+                                                                </Text>
+                                                                <RawInput
+                                                                    className='phone:border-grey-400 text-secondary-200 text-sm'
+                                                                    containerClass='m-2 w-12'
+                                                                    name=''
+                                                                    placeholder=''
+                                                                    onChange={() => { }}
+                                                                    type='text'
+                                                                //value=''
+                                                                />
+                                                                <Text className='text-secondary-200 text-xs'>
+                                                                    x Height
+                                                                </Text>
+                                                                <RawInput
+                                                                    className='phone:border-grey-400 text-secondary-200 text-sm'
+                                                                    containerClass='m-2 w-12'
+                                                                    name=''
+                                                                    placeholder=''
+                                                                    onChange={() => { }}
+                                                                    type='text'
+                                                                //value=''
+                                                                />
+                                                            </FlexRow>
+                                                        </Div>
+                                                    </FlexRow>
+
+                                                    <Text className='text-secondary-200 text-left font-bold'>
+                                                        Packaging
+                                                    </Text>
+
+                                                    <Div className='w-full overflow-x-scroll py-2'>
+                                                    <FlexRow className='w-1000px py-2'>
+                                                        {
+                                                            tempLBCPackage.map((item: any) => (
+                                                                <PackageItem
+                                                                    className='w-200px mx-2'
+                                                                    isSelected={false}
+                                                                    data={item}
+                                                                    onClick={() => {}}
+                                                                />
+                                                            ))
+                                                        }
+                                                    </FlexRow>
+                                                    </Div>
                                                 </Div>
                                                 :
                                                 <></>

@@ -1,33 +1,64 @@
 import React, { FC } from 'react';
 import { Div, Divider, FlexColumn, FlexRow, Spacer } from '../../../core/Containers';
+import { Image } from '../../../core/Image';
 import { Span, Text } from '../../../core/Text';
 import { ColumnHeader } from '../../../components/Tables';
 import { Button, RawButton } from '../../../core/Buttons';
 import { ImUpload3, ImInfo } from 'react-icons/im';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { BookNowDataRow } from '../../../components/Tables/BookNowDataRow';
 import { BookNowSummaryColumn } from '../../../constants/ConstantsData';
 import { BookNowSummaryDetails } from '../../../constants/TempData';
-import { BookNowDataSummaryRow } from '../../../components/Tables/BookNowSummaryRow';
-import { CheckBox } from '../../../core/Forms';
+import { BookNowDataEditRow, BookNowDataSummaryRow } from '../../../components/Tables/BookNowSummaryRow';
+import { CheckBox, FileInput } from '../../../core/Forms';
 import { BookNowModal } from '../../../components/Modals/BookNowModal';
+import { FaTimes } from 'react-icons/fa';
+import { HiCheckCircle } from 'react-icons/hi';
+import { Images } from '../../../assets/images/images';
 
 export const BookNowTab: FC<any> = () => {
 
+    const navigate = useNavigate();
     const { search } = useLocation();
     const query = new URLSearchParams(search);
     const actionQuery = query.get('booking');
 
     const [bookType, setBookType] = React.useState('default');
     const [bookAdded, setBookAdded] = React.useState(false);
-    
+
     const [isToastOpenA, setToastOpenA] = React.useState(false);
+
+    const inputFileRef = React.useRef<any>(null);
+    const [file, setFile] = React.useState<any>([{ name: 'browse', size: 0 }]);
+    const [prevFile, setPrevFile] = React.useState<any>([{ name: 'browse', size: 0 }]);
+    const [uploaded, setUpload] = React.useState(false);
 
     React.useEffect(() => {
         if (actionQuery === 'added') {
             setBookAdded(true)
+            setBookType('summary')
         }
     }, [actionQuery])
+
+    React.useEffect(() => {
+        setPrevFile(file)
+        setUpload(true)
+        setTimeout(() => {
+            if (file != null) {
+                if (file.length > 0) {
+                    if (file[0].name !== 'browse' && prevFile !== file) {
+                        setUpload(false)
+                        setBookAdded(true)
+                    }
+                }
+            }
+        }, 2000)
+    }, [file, prevFile, inputFileRef])
+
+    const onCancelFile = () => {
+        setUpload(false)
+        setFile(prevFile)
+    }
 
     return (
         <>
@@ -95,9 +126,9 @@ export const BookNowTab: FC<any> = () => {
                             </Button>
                             <Button
                                 className='w-32 ml-2 h-10'
-                                onClick={() => { }}
+                                onClick={() => setBookType('booked')}
                             >
-                                View Activity
+                                Book Now
                             </Button>
                         </FlexRow>
 
@@ -106,8 +137,80 @@ export const BookNowTab: FC<any> = () => {
                     <></>
             }
             {
+                bookType === 'booked' ?
+                    <FlexColumn className='w-full h-4/5 desktop:h-full items-center overflow-y-scroll scrollbar-hide'>
+                        <Div className='w-500px border border-grey-400 rounded-lg shadow-lg my-5'>
+                            <Div
+                                className='flex flex-col items-center justify-between p-4 w-full bg-white border-l-8 rounded-lg shadow-lg border-green-100'
+                            >
+                                <Div className='w-full flex flex-row items-center phone:justify-between tablet:justify-center'>
+                                    <Div className='w-1/5'>
+                                        <HiCheckCircle className='text-green-100 text-4xl' />
+                                    </Div>
+                                    <Div className='w-4/5'>
+                                        <Text className='font-bold italic text-2xl text-secondary-100 pb-2'>
+                                            Booking Confirmed
+                                        </Text>
+                                        <Text className='text-sm text-secondary-200 pt-2'>
+                                            You’ve successfully booked multiple orders! November 11, 2022 9:06 AM
+                                        </Text>
+                                    </Div>
+                                </Div>
+                            </Div>
+                        </Div>
+
+                        <Div className='w-full rounded-sm shadow-sm border border-grey-400 p-10'>
+                            <FlexRow className='w-full items-center justify-between'>
+                                <Image className='h-14 w-14' alt='LBC logo' src={Images.LBClogo} />
+                                <Div>
+                                    <Text className='text-sm text-secondary-200'>
+                                        PICK UP CHANGE REQUEST REFERENCE NO.
+                                    </Text>
+                                    <Text className='text-xl text-secondary-200 font-bold'>
+                                        32528190004353
+                                    </Text>
+                                </Div>
+                                <Div>
+                                    <Image className='' alt='Code' src={Images.SampleQrBarCode} />
+                                    <Text className='flex flex-row items-center jusitfy-center text-secondary-200 text-xs font-bold'>
+                                        <ImInfo className='inline mr-2' />
+                                        <Span>Keep this QR and barcode as reference</Span>
+                                    </Text>
+                                </Div>
+                            </FlexRow>
+
+                            <Spacer className='h-5' />
+
+                            {
+                                BookNowSummaryDetails.map((list: any) => (
+                                    <BookNowDataEditRow
+                                        data={list}
+                                    />
+                                ))
+                            }
+                        </Div>
+
+                        <FlexRow className='w-full items-center justify-center pt-5 pb-20'>
+                            <Button
+                                className='w-32 mr-2 phone:bg-white phone:text-secondary-200 hover:bg-grey-500 phone:border phone:border-grey-400 h-10'
+                                onClick={() => navigate('/')}
+                            >
+                                Home
+                            </Button>
+                            <Button
+                                className='w-32 ml-2 h-10'
+                                onClick={() => { }}
+                            >
+                                View Activity
+                            </Button>
+                        </FlexRow>
+                    </FlexColumn>
+                    :
+                    <></>
+            }
+            {
                 bookType === 'default' ?
-                    <FlexColumn className='w-full h-4/5 desktop:h-full overflow-y-scroll scrollbar-hide'>
+                    <Div className='w-full h-4/5 desktop:h-full overflow-y-scroll scrollbar-hide'>
                         <Spacer className='h-5' />
                         <FlexRow className='items-center justify-between'>
                             <Text className='text-secondary-200 font-bold'>
@@ -117,7 +220,7 @@ export const BookNowTab: FC<any> = () => {
                         </FlexRow>
                         <Spacer className='h-5' />
 
-                        <Div className='w-full overflow-x-scroll'>
+                        <Div className='w-full h-200px border border-grey-400 rounded-lg shadow-lg overflow-scroll  my-5'>
                             <FlexRow className='items-center justify-between w-3000px'>
                                 <ColumnHeader
                                     icon={false}
@@ -235,12 +338,14 @@ export const BookNowTab: FC<any> = () => {
                                         <BookNowDataRow deliveryId='1' />
                                     </Div>
                                     :
-                                    <></>
+                                    <Text className='text-secondary-200 text-sm text-center p-5'>
+                                        No data to be displayed
+                                    </Text>
                             }
 
                         </Div>
 
-                        <Div className='w-full h-3/4 desktop:h-4/5 p-2 overflow-y-scroll scrollbar-hide'>
+                        <Div className='w-full p-2'>
 
                             <FlexRow className='justify-center w-full'>
                                 <RawButton className='bg-grey-500 hover:bg-grey-400 rounded-lg p-2' onClick={() => setToastOpenA(true)}>
@@ -262,19 +367,60 @@ export const BookNowTab: FC<any> = () => {
                                 <Spacer className='border-t-2 border-grey-400 w-2/5' />
                             </FlexRow>
 
-                            <FlexColumn className='items-center jusitfy-center w-96 m-5 p-5 mx-auto rounded-lg bg-grey-500 hover:bg-grey-400'>
-                                <ImUpload3 className='text-grey-300 text-center' />
-                                <FlexRow className='items-center jusitfy-center'>
-                                    <Text className='text-secondary-200 text-sm my-2'>
-                                        Drop xlsx or
-                                    </Text>
-                                    <RawButton>
-                                        <Text className='text-blue-100 text-sm my-2 mx-1 hover:underline'>
-                                            browse
-                                        </Text>
-                                    </RawButton>
-                                </FlexRow>
-                            </FlexColumn>
+                            {
+                                uploaded && file[0].name !== 'browse' ?
+                                    <FlexColumn className='items-start jusitfy-center w-96 m-5 p-5 mx-auto rounded-lg bg-grey-500 hover:bg-grey-400'>
+
+                                        <FlexRow className='w-full items-center justify-between mb-2'>
+                                            <Text className='text-secondary-200 text-sm'>
+                                                File Upload
+                                            </Text>
+                                            <RawButton onClick={onCancelFile}>
+                                                <FaTimes className='text-secondary-200 text-xs' />
+                                            </RawButton>
+                                        </FlexRow>
+                                        <FlexRow className='w-96 items-center justify-between'>
+                                            <Div className='w-72'>
+                                                <div
+                                                    className='rounded-full background-play h-2.5'
+                                                    style={{
+                                                        width: `100%`
+                                                    }}
+                                                />
+                                            </Div>
+                                            <Text className='text-secondary-200 text-xs w-24 pl-5'>
+                                                {(file[0].size / 1000000).toFixed(2)} MB
+                                            </Text>
+                                        </FlexRow>
+                                    </FlexColumn>
+                                    :
+                                    <FlexColumn className='items-center jusitfy-center w-96 m-5 p-5 mx-auto rounded-lg bg-grey-500 hover:bg-grey-400'>
+                                        <ImUpload3 className='text-grey-300 text-center' />
+                                        <FlexRow className='items-center jusitfy-center'>
+                                            <Text className='text-secondary-200 text-sm my-2'>
+                                                Drop xlsx or
+                                            </Text>
+                                            <FileInput
+                                                file={file}
+                                                setFile={setFile}
+                                                fileRef={inputFileRef}
+                                            >
+                                                <Text className={`${file[0].name !== 'browse' ? 'w-40' : ''} truncate text-blue-100 text-sm my-2 mx-1 hover:underline`}>
+                                                    {file[0].name}
+                                                </Text>
+                                            </FileInput>
+                                            
+                                            {
+                                                file[0].name !== 'browse' ?
+                                                    <RawButton onClick={() => setFile([{ name: 'browse', size: 0 }])}>
+                                                        <FaTimes className='text-secondary-200 text-xs' />
+                                                    </RawButton>
+                                                    :
+                                                    <></>
+                                            }
+                                        </FlexRow>
+                                    </FlexColumn>
+                            }
 
                             <Link to="/sample_lbc_book_now.xlsx" target="_blank" download className="text-blue-100 text-center text-sm mx-auto hover:underline block">Download a sample .xlsx template</Link>
 
@@ -300,8 +446,29 @@ export const BookNowTab: FC<any> = () => {
                                     </Div>
                                 </Div>
                             </Div>
+
+                            {
+                                bookAdded ?
+                                    <FlexRow className='w-full items-center justify-center pt-5 pb-20'>
+                                        <Button
+                                            className='w-32 mr-2 phone:bg-white phone:text-secondary-200 hover:bg-grey-500 phone:border phone:border-grey-400 h-10'
+                                            onClick={() => setBookType('default')}
+                                        >
+                                            Back
+                                        </Button>
+                                        <Button
+                                            className='w-32 ml-2 h-10'
+                                            onClick={() => setBookType('summary')}
+                                        >
+                                            Next
+                                        </Button>
+                                    </FlexRow>
+                                    :
+                                    <></>
+                            }
+
                         </Div>
-                    </FlexColumn>
+                    </Div>
                     :
                     <></>
             }

@@ -1,3 +1,9 @@
+export const tempBorderColors = [
+    "border-l-yellow-100",
+    "border-l-blue-100",
+    "border-l-red-100"
+];
+
 export const tempPerformanceDataRow = [
     {
         deliveryId: "#NCR8372846246",
@@ -277,8 +283,41 @@ export const BookNowSummaryDetails = [
     },
 ];
 
-export const tempBorderColors = [
-    "border-l-yellow-100",
-    "border-l-blue-100",
-    "border-l-red-100"
+export const tempLBCPackage = [
+    {
+        name: 'SAKTO',
+        type: 'Pouch',
+        dimension: '"9x7.5"'
+    },
+    {
+        name: 'N-Pack Small',
+        type: 'Pouch',
+        dimension: '"9x7.5"'
+    },
+    {
+        name: 'N-Pack Large',
+        type: 'Pouch',
+        dimension: '"9x7.5"'
+    },
+    {
+        name: 'KB Mini',
+        type: 'Pouch',
+        dimension: '"9x7.5"'
+    },
+    {
+        name: 'KB Medium',
+        type: 'Pouch',
+        dimension: '"9x7.5"'
+    },
+    {
+        name: 'KB Large',
+        type: 'Pouch',
+        dimension: '"9x7.5"'
+    },
 ];
+
+export const tempReceiverData = {
+    name: 'John Doe',
+    contact: '+63 91234567890',
+    address: 'Metro Manila'
+};

@@ -64,7 +64,7 @@ export const PickUpScheduleChange: FC<DataProps> = ({
                 setToastDesc(ToastData.desc.err02);
             }, 2000);
             setTimeout(() => {
-                onClose();
+                setToastOpen(false);
             }, 5000);
         }else{
             setTimeout(() => {
@@ -280,8 +280,6 @@ export const PickUpScheduleChange: FC<DataProps> = ({
 export const PickUpScheduleCreate: FC<DataProps> = ({
     onClose, isOpen
 }) => {
-
-    const navigate = useNavigate();
 
     const [loading, setLoading] = React.useState(false);
     const [recurrence, setRecurrence] = React.useState('Daily');

@@ -25,10 +25,10 @@ export const TopNavBar: FC<TopNavBarProps> = ({showSearchBar, showNotifBell, sho
     }
 
 return (
-    <FlexRow className='h-32 w-full p-10 items-center justify-between'>
+    <FlexRow className='w-full px-10 py-5 items-center justify-between bg-grey-400'>
         {
             showSearchBar ?
-            <FlexRow className='items-center border border-grey-400 rounded-lg shadow-lg p-2'>
+            <FlexRow className='items-center border border-grey-400 rounded-lg shadow-lg p-2 bg-white'>
                 <BiSearchAlt2 className='text-red-100 text-2xl mr-4'/>
                 <form className='' onSubmit={e => onSubmit(e)}>
                 <RawInput
