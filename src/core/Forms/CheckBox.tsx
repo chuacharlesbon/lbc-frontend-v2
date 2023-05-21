@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 
 interface DataProps {
+    className?: string;
     containerClass?: string;
     checked?: boolean;
     onClick?: any;
@@ -10,14 +11,14 @@ interface DataProps {
 }
 
 export const CheckBox: FC<DataProps> = ({
-    containerClass, onClick, checked, id, name, label
+    className, containerClass, onClick, checked, id, name, label
 }) => {
 
     return (
         <div className={`flex flex row items-center justify-start ${containerClass}`}>
             <input
                 checked={checked}
-                className="w-4 h-4 mx-2 rounded border border-red-400 focus:ring-2 focus:ring-red-100 text-red-400"
+                className={`w-4 h-4 mx-2 rounded border border-red-400 focus:ring-2 focus:ring-red-100 text-red-400 ${className}`}
                 type="checkbox"
                 onClick={onClick}
                 id={id}
