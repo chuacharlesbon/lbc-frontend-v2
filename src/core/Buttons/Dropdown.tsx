@@ -53,7 +53,7 @@ export const Dropdown: FC<any> = () => {
           leaveTo="transform opacity-0 scale-95"
         >
           <Menu.Items
-            className={`absolute right-0 mt-1 origin-top-right font-poppins
+            className={`z-10 absolute right-0 mt-1 origin-top-right font-poppins
             bg-white divide-y w-64 divide-secondary-300 
             rounded-md shadow-lg`}
           >
