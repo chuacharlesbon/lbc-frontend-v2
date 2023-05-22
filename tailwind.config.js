@@ -55,6 +55,7 @@ module.exports = {
       medium: '540px',
       tablet: '768px',
       tabletWide: '1024px',
+      laptopSm: '1280px',
       laptop: '1440px',
       desktop: '1600px',
     },
