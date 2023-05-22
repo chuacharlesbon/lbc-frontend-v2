@@ -5,7 +5,7 @@ import { TopNavBar } from '../../components/Navigation/TopNavBar';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Tab } from '@headlessui/react';
 import { classNames } from '../../helpers/ClassNames';
-import { BookNowTab, RequestSuppliesTab, SchedulePickUpTab } from './BookNowTabs';
+import { ActiveTab, PastTab, DraftTab } from './ActivityTabs';
 
 export const Activity: FC<any> = () => {
 
@@ -70,13 +70,13 @@ export const Activity: FC<any> = () => {
                                 <Divider className="text-grey-400" />
                                 <Tab.Panels className="w-full h-full">
                                     <Tab.Panel className={`w-full h-full`}>
-                                        //
+                                        <ActiveTab />
                                     </Tab.Panel>
                                     <Tab.Panel className={`w-full h-full`}>
-                                        //
+                                        <PastTab />
                                     </Tab.Panel>
                                     <Tab.Panel className={`w-full h-full`}>
-                                        //
+                                        <DraftTab />
                                     </Tab.Panel>
                                 </Tab.Panels>
                             </FlexColumn>
