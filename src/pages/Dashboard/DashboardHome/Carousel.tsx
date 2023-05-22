@@ -10,15 +10,14 @@ export const LBCCarouselSlider: FC<any> = () => {
     return (
         <Div className='w-full'>
             <FlexRow className='items-center justify-between w-full'>
-                <RawButton className='m-2'>
+                <RawButton className='m-2 hidden'>
                     <BsChevronLeft className='text-red-400 text-2xl font-bold' />
                 </RawButton>
-                <Div className='w-4/5'>
+                <Div className='w-full'>
                     <Carousel
                         autoPlay={true}
                         interval={2000}
                         infiniteLoop={true}
-                        showArrows={false}
                         showThumbs={false}
                     >
                         <div className='w-full rounded-lg shadow-lg'>
@@ -35,7 +34,7 @@ export const LBCCarouselSlider: FC<any> = () => {
                         </div>
                     </Carousel>
                 </Div>
-                <RawButton className='m-2'>
+                <RawButton className='m-2 hidden'>
                     <BsChevronRight className='text-red-400 text-2xl font-bold' />
                 </RawButton>
             </FlexRow>
