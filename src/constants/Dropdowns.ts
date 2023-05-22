@@ -125,6 +125,51 @@ export const BookNowOptions = [
   },
 ];
 
+export const ToolsOptions = {
+  tools1: [
+    {
+      name: 'Address Book',
+      url: '/tools/address-book'
+    },
+    {
+      name: 'Nearby Branches',
+      url: '/tools/nearby-branches'
+    },
+    {
+      name: 'Prohibited Items',
+      url: '/tools/prohibited-items'
+    },
+  ],
+  tools2: [
+    {
+      name: 'Delivery Zones',
+      url: '/tools/delivery-zones'
+    },
+    {
+      name: 'Delivery Lead Time',
+      url: '/tools/delivery-lead-time'
+    },
+    {
+      name: 'Customer Support',
+      url: '/tools/customer-support'
+    },
+  ],
+  tools3: [
+    {
+      name: 'Terms & Conditions',
+      url: '/tools/terms-conditions'
+    },
+    {
+      name: 'Products & Services',
+      url: '/tools/products-services'
+    },
+    {
+      name: 'Send Tipid',
+      url: '/tools/send-tipid'
+    },
+  ]
+};
+
 export const RecurrenceOptions = [
   {
     name: 'Recurrence',
