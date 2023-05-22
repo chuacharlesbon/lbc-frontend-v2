@@ -29,9 +29,9 @@ function App() {
   React.useEffect(() => {
     
     if (dimension.width < 1024) {
-      navigate('/incompatible');
+      //navigate('/incompatible');
     }else if(location.pathname === '/incompatible'){
-      navigate(cookie);
+      //navigate(cookie);
     }else{
       updateCookie(location.pathname, 0.5);
     }
