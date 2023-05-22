@@ -1,14 +1,14 @@
 import { FC } from 'react';
-import { Div, FlexColumn, Spacer } from '../../core/Containers';
+import { Div, FlexColumn, FlexRow, Spacer } from '../../core/Containers';
 import { Text } from '../../core/Text';
 import { Image } from '../../core/Image';
 import { ImHome } from 'react-icons/im';
 import { IoMdApps } from 'react-icons/io';
 import { AiFillBook } from 'react-icons/ai';
 import { CgCalendarDates } from 'react-icons/cg';
-import { FaTruck, FaQuestionCircle } from 'react-icons/fa';
+import { FaTruck, FaQuestionCircle, FaWallet } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
-import { BookNowOptions } from '../../constants/Dropdowns';
+import { BookNowOptions, ToolsOptions } from '../../constants/Dropdowns';
 import { Images } from '../../assets/images/images';
 
 interface NavigationProps {
@@ -18,9 +18,9 @@ interface NavigationProps {
 export const NavbarMain: FC<NavigationProps> = ({route}) => {
 
 return (
-    <FlexColumn className='bg-red-400 h-full w-32 py-5 items-center justify-between'>
+    <FlexColumn className='bg-red-400 h-full w-1/12 py-2 laptopSm:py-5 items-center justify-between'>
         <Div>
-        <FlexColumn className='mx-auto justify-center items-center w-24'>
+        <FlexColumn className='mx-auto justify-center items-center laptopSm:w-24'>
             <Image className='h-14 w-14' alt='LBC logo' src={Images.LBClogo}/>
             <Text className='text-white text-xs text-center'>
                 BUSINESS
@@ -33,8 +33,8 @@ return (
         <Spacer className='border border-white bg-white my-2' />
         
         <Link to='/dashboard-home'>
-        <FlexColumn className={`${route === 'Home' ? 'text-white' : 'text-secondary-200'} mx-auto py-5 justify-center items-center w-24 rounded-lg hover:bg-red-100 hover:bg-opacity-50 hover:text-white`}>
-            <ImHome className={`text-2xl`}/>
+        <FlexColumn className={`${route === 'Home' ? 'text-white' : 'text-secondary-200'} mx-auto py-2 laptopSm:py-5 justify-center items-center laptopSm:w-24 rounded-lg hover:bg-red-100 hover:bg-opacity-50 hover:text-white`}>
+            <ImHome className={`laptopSm:text-2xl`}/>
             <Text className={`text-xs text-center`}>
                 Home
             </Text>
@@ -42,17 +42,17 @@ return (
         </Link>
 
         <Link to='/book-now'>
-        <FlexColumn className={`${route === 'Book Now' ? 'text-white' : 'text-secondary-200'} mx-auto py-5 justify-center items-center w-24 rounded-lg hover:bg-red-100 hover:bg-opacity-50 hover:text-white parentToolTip`}>
-            <AiFillBook className={`text-2xl`}/>
+        <FlexColumn className={`${route === 'Book Now' ? 'text-white' : 'text-secondary-200'} mx-auto py-2 laptopSm:py-5 justify-center items-center laptopSm:w-24 rounded-lg hover:bg-red-100 hover:bg-opacity-50 hover:text-white parentToolTip`}>
+            <AiFillBook className={`laptopSm:text-2xl`}/>
             <Text className={`text-xs text-center`}>
                 Book Now
             </Text>
 
             <Div className='childTooltip left-full pl-5 z-10'>
-                <Div className='w-48 p-5 rounded-lg shadow-lg bg-white border border-grey-400'>
+                <Div className='w-48 p-2 laptopSm:p-5 rounded-lg shadow-lg bg-white border border-grey-400'>
                     {
                         BookNowOptions.map((link: any) => (
-                            <Link className='block text-secondary-100 hover:text-red-100 hover:font-bold hover:bg-grey-400 p-2' to={link.url}>
+                            <Link className='block text-secondary-100 text-xs laptopSm:text-base hover:text-red-100 hover:font-bold hover:bg-grey-400 p-2' to={link.url}>
                                 {link.name}
                             </Link>
                         ))
@@ -63,8 +63,8 @@ return (
         </Link>
 
         <Link to='/activity'>
-        <FlexColumn className={`${route === 'Activity' ? 'text-white' : 'text-secondary-200'} mx-auto py-5 justify-center items-center w-24 rounded-lg hover:bg-red-100 hover:bg-opacity-50 hover:text-white`}>
-            <CgCalendarDates className={`text-2xl`}/>
+        <FlexColumn className={`${route === 'Activity' ? 'text-white' : 'text-secondary-200'} mx-auto py-2 laptopSm:py-5 justify-center items-center laptopSm:w-24 rounded-lg hover:bg-red-100 hover:bg-opacity-50 hover:text-white`}>
+            <CgCalendarDates className={`laptopSm:text-2xl`}/>
             <Text className={`text-xs text-center`}>
                 Activity
             </Text>
@@ -72,10 +72,19 @@ return (
         </Link>
 
         <Link to='/reports'>
-        <FlexColumn className={`${route === 'Reports' ? 'text-white' : 'text-secondary-200'} mx-auto py-5 justify-center items-center w-24 rounded-lg hover:bg-red-100 hover:bg-opacity-50 hover:text-white`}>
-            <FaTruck className={`text-2xl`}/>
+        <FlexColumn className={`${route === 'Reports' ? 'text-white' : 'text-secondary-200'} mx-auto py-2 laptopSm:py-5 justify-center items-center laptopSm:w-24 rounded-lg hover:bg-red-100 hover:bg-opacity-50 hover:text-white`}>
+            <FaTruck className={`laptopSm:text-2xl`}/>
             <Text className={`text-xs text-center`}>
                 Reports
+            </Text>
+        </FlexColumn>
+        </Link>
+
+        <Link to='/payments'>
+        <FlexColumn className={`${route === 'Payments' ? 'text-white' : 'text-secondary-200'} mx-auto py-2 laptopSm:py-5 justify-center items-center laptopSm:w-24 rounded-lg hover:bg-red-100 hover:bg-opacity-50 hover:text-white`}>
+            <FaWallet className={`laptopSm:text-2xl`}/>
+            <Text className={`text-xs text-center`}>
+                Payments
             </Text>
         </FlexColumn>
         </Link>
@@ -83,14 +92,49 @@ return (
         </Div>
 
         <Div>
-        <FlexColumn className={`text-white mx-auto py-5 justify-center items-center w-24 rounded-lg hover:bg-red-100 hover:bg-opacity-50 hover:text-white`}>
-            <IoMdApps className={`text-2xl`}/>
+        <FlexColumn className={`text-white mx-auto py-2 laptopSm:py-5 justify-center items-center laptopSm:w-24 rounded-lg hover:bg-red-100 hover:bg-opacity-50 hover:text-white parentToolTip`}>
+            <IoMdApps className={`laptopSm:text-2xl`}/>
             <Text className={`text-xs text-center`}>
                 Tools
             </Text>
+
+            <Div className='childTooltip left-full bottom-0 pl-5 z-10'>
+                <Div className='w-300px h-300px p-2 laptopSm:px-5 rounded-lg shadow-lg bg-white border border-grey-400'>
+                    <FlexRow className='items-start justify-between w-full'>
+                    {
+                        ToolsOptions.tools1.map((link: any) => (
+                            <Link className='w-20 block text-secondary-100 text-xs text-center rounded-ld hover:text-red-100 hover:bg-red-300 p-1' to={link.url}>
+                                <Spacer className='w-8 h-8 rounded-md bg-grey-300 mb-1 mx-auto' />
+                                {link.name}
+                            </Link>
+                        ))
+                    }
+                    </FlexRow>
+                    <FlexRow className='items-start justify-between w-full'>
+                    {
+                        ToolsOptions.tools2.map((link: any) => (
+                            <Link className='w-20 block text-secondary-100 text-xs text-center rounded-ld hover:text-red-100 hover:bg-red-300 p-1' to={link.url}>
+                                <Spacer className='w-8 h-8 rounded-md bg-grey-300 mb-1 mx-auto' />
+                                {link.name}
+                            </Link>
+                        ))
+                    }
+                    </FlexRow>
+                    <FlexRow className='items-start justify-between w-full'>
+                    {
+                        ToolsOptions.tools3.map((link: any) => (
+                            <Link className='w-20 block text-secondary-100 text-xs text-center rounded-ld hover:text-red-100 hover:bg-red-300 p-1 m-1' to={link.url}>
+                                <Spacer className='w-8 h-8 rounded-md bg-grey-300 mb-1 mx-auto' />
+                                {link.name}
+                            </Link>
+                        ))
+                    }
+                    </FlexRow>
+                </Div>
+            </Div>
         </FlexColumn>
-        <FlexColumn className={`text-white mx-auto py-5 justify-center items-center w-24 rounded-lg hover:bg-red-100 hover:bg-opacity-50 hover:text-white`}>
-            <FaQuestionCircle className={`text-2xl`}/>
+        <FlexColumn className={`text-white mx-auto py-2 laptopSm:py-5 justify-center items-center laptopSm:w-24 rounded-lg hover:bg-red-100 hover:bg-opacity-50 hover:text-white`}>
+            <FaQuestionCircle className={`laptopSm:text-2xl`}/>
             <Text className={`text-xs text-center`}>
                 Help
             </Text>
