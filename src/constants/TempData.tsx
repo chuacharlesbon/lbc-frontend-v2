@@ -234,6 +234,7 @@ export const scheduledPickups = [
 
 export const BookNowSummaryDetails = [
     {
+        id: '1',
         package: 'NP Dress',
         sender: {
             name: 'John Doe',
@@ -258,6 +259,7 @@ export const BookNowSummaryDetails = [
         }
     },
     {
+        id: '2',
         package: 'NP Dress',
         sender: {
             name: 'John Doe',
@@ -321,3 +323,90 @@ export const tempReceiverData = {
     contact: '+63 91234567890',
     address: 'Metro Manila'
 };
+
+export const tempActivityData = [
+    {
+        tracking: '1234567890',
+        createdBy: 'John Doe',
+        bookType: 'Book by Batch',
+        bookDate: 'Jan 01, 2023',
+        status: 'Booking Confirmed'
+    },
+    {
+        tracking: '1234567899',
+        createdBy: 'Black Jack',
+        bookType: 'Schedule Pick Up',
+        bookDate: 'Jan 01, 2023',
+        status: 'Pick Up - 01/01/2023'
+    },
+    {
+        tracking: '1234567898',
+        createdBy: 'Mary Jane',
+        bookType: 'Book by Batch',
+        bookDate: 'Jan 01, 2023',
+        status: 'Ongoing Recurring Pick Up'
+    },
+    {
+        tracking: '2234567890',
+        createdBy: 'John Doe',
+        bookType: 'Book by Batch',
+        bookDate: 'Jan 01, 2023',
+        status: 'Supplies Request Submitted'
+    },
+    {
+        tracking: '3234567899',
+        createdBy: 'Black Jack',
+        bookType: 'Request supplies',
+        bookDate: 'Jan 01, 2023',
+        status: 'Pick Up - 01/01/2023'
+    },
+    {
+        tracking: '4234567898',
+        createdBy: 'Mary Jane',
+        bookType: 'Book by Batch',
+        bookDate: 'Jan 01, 2023',
+        status: 'Pick Up - 01/01/2023'
+    },
+    {
+        tracking: '12345678901',
+        createdBy: 'John Doe',
+        bookType: 'Book by Batch',
+        bookDate: 'Jan 01, 2023',
+        status: 'Booking Confirmed'
+    },
+    {
+        tracking: '12345678992',
+        createdBy: 'Black Jack',
+        bookType: 'Schedule Pick Up',
+        bookDate: 'Jan 01, 2023',
+        status: 'Pick Up - 01/01/2023'
+    },
+    {
+        tracking: '12345678983',
+        createdBy: 'Mary Jane',
+        bookType: 'Book by Batch',
+        bookDate: 'Jan 01, 2023',
+        status: 'Ongoing Recurring Pick Up'
+    },
+    {
+        tracking: '22345678904',
+        createdBy: 'John Doe',
+        bookType: 'Book by Batch',
+        bookDate: 'Jan 01, 2023',
+        status: 'Supplies Request Submitted'
+    },
+    {
+        tracking: '32345678995',
+        createdBy: 'Black Jack',
+        bookType: 'Request supplies',
+        bookDate: 'Jan 01, 2023',
+        status: 'Pick Up - 01/01/2023'
+    },
+    {
+        tracking: '42345678986',
+        createdBy: 'Mary Jane',
+        bookType: 'Book by Batch',
+        bookDate: 'Jan 01, 2023',
+        status: 'Pick Up - 01/01/2023'
+    },
+];

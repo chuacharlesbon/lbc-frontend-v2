@@ -99,3 +99,26 @@ export const BookNowStage = [
         stage: 3,
     },
 ];
+
+/////////////////////////////////////
+//  Activity Pages Data
+/////////////////////////////////////
+
+export const ActiveColumns = [
+    {
+        name: 'Tracking No.',
+        url: ''
+    },
+    {
+        name: 'Created By',
+        url: ''
+    },
+    {
+        name: 'Book Type',
+        url: ''
+    },
+    {
+        name: 'Book Date',
+        url: ''
+    },
+]

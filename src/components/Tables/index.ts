@@ -6,3 +6,4 @@ export * from './RemittanceHistorySummary';
 export * from './ColumnHeaderSearch';
 export * from './ColumnHeaderDropdown';
 export * from './BookNowDataRow';
+export * from './ActivityDataRow';
