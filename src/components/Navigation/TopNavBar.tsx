@@ -29,7 +29,7 @@ return (
         {
             showSearchBar ?
             <FlexRow className='items-center border border-grey-400 rounded-lg shadow-lg p-2 bg-white'>
-                <BiSearchAlt2 className='text-red-100 text-2xl mr-4'/>
+                <BiSearchAlt2 className='text-red-400 text-2xl mr-4'/>
                 <form className='' onSubmit={e => onSubmit(e)}>
                 <RawInput
                     className='phone:border-none p-2'
@@ -52,8 +52,9 @@ return (
         <FlexRow className='items-center'>
             {
                 showNotifBell ?
-                <Link className='text-red-100 text-2xl p-4 mx-2 rounded-lg hover:bg-grey-400' to='/notifications'>
+                <Link className='text-red-400 text-2xl p-4 mx-2 rounded-lg hover:bg-grey-400 relative' to='/notifications'>
                     <BiBell />
+                    <Spacer className='absolute top-3 left-3 bg-red-100 rounded-full h-2 w-2' />
                 </Link>
                 :
                 <></>

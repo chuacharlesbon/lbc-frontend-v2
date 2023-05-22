@@ -34,13 +34,13 @@ export const Dropdown: FC<any> = () => {
           <Menu.Button
             className={`flex flex-row items-center justify-center w-full px-5 py-4 font-poppins text-base font-normal rounded-md hover:border border-grey-400 hover:shadow-xl hover:bg-opacity-20`}
           >
-            <FaUserAlt className='text-red-100 mr-4' />
+            <FaUserAlt className='text-red-400 mr-4' />
             <Div className="flex flex-col">
-              <Text className="mr-auto truncate text-ellipsis text-left text-red-100 w-40">
+              <Text className="mr-auto truncate text-ellipsis text-left text-red-400 w-40">
                 User
               </Text>
             </Div>
-            <FaChevronDown className="text-xl text-red-100" />
+            <FaChevronDown className="text-xl text-red-400" />
           </Menu.Button>
         </div>
         <Transition
