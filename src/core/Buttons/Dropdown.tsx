@@ -13,6 +13,7 @@ interface DataProps {
   width: string;
   options: any;
   onSelect: any;
+  border?: string;
 }
 
 interface ScheduleProps {
@@ -83,7 +84,7 @@ export const Dropdown: FC<any> = () => {
 };
 
 export const RawDropdown: FC<DataProps> = ({
-  icon, value, width, options, onSelect
+  icon, value, width, border, options, onSelect
 }) => {
 
   return (
@@ -91,7 +92,7 @@ export const RawDropdown: FC<DataProps> = ({
       <Menu as="div" className={`${width} px-2 relative inline-block text-left`}>
         <div>
           <Menu.Button
-            className={`${width} px-2 flex flex-row items-center justify-center rounded-lg hover:border border-grey-400 hover:shadow-xl hover:bg-opacity-20`}
+            className={`${width} px-2 flex flex-row items-center justify-center rounded-lg border-grey-400 hover:shadow-xl hover:bg-opacity-20 ${border ?? 'hover:border'}`}
           >
             {icon}
             <Text className={`p-2 mr-auto truncate text-ellipsis text-left text-secondary-100 text-sm font-semibold`}>
@@ -178,9 +179,9 @@ export const ScheduleDropdown: FC<ScheduleProps> = ({
                           {link.name}
                           {
                             link.name === 'Weekly' ?
-                            <FaCaretRight className='ml-auto text-secondary-100' />
-                            :
-                            <></>
+                              <FaCaretRight className='ml-auto text-secondary-100' />
+                              :
+                              <></>
                           }
                         </Text>
 
