@@ -121,4 +121,17 @@ export const ActiveColumns = [
         name: 'Book Date',
         url: ''
     },
-]
+];
+
+/////////////////////////////////////
+//  Payment Pages Data
+/////////////////////////////////////
+
+export const RemittanceHistoryColumns = [
+    "Reference No.",
+    "Posting Date",
+    "Disbursal Mode",
+    "Account Name",
+    "Payment Status",
+    "Amount"
+];

@@ -96,6 +96,97 @@ export const tempBarGraphData = [
     },
 ];
 
+export const tempBarGraphData2 = [
+    {
+        "country": "Dec 28",
+        "Picked up/Dropped Off": 135,
+        "For Disposition": 124,
+        "In-transit": 55,
+        "Delivered": 27,
+        "Returned": 24,
+    },
+    {
+        "country": "Dec 29",
+        "Picked up/Dropped Off": 120,
+        "For Disposition": 100,
+        "In-transit": 50,
+        "Delivered": 25,
+        "Returned": 20,
+    },
+    {
+        "country": "Dec 30",
+        "Picked up/Dropped Off": 135,
+        "For Disposition": 124,
+        "In-transit": 55,
+        "Delivered": 27,
+        "Returned": 24,
+    },
+    {
+        "country": "Dec 31",
+        "Picked up/Dropped Off": 120,
+        "For Disposition": 100,
+        "In-transit": 50,
+        "Delivered": 25,
+        "Returned": 20,
+    },
+    {
+        "country": "Jan 1",
+        "Picked up/Dropped Off": 215,
+        "For Disposition": 45,
+        "In-transit": 11,
+        "Delivered": 12,
+        "Returned": 20,
+    },
+    {
+        "country": "Jan 2",
+        "Picked up/Dropped Off": 178,
+        "For Disposition": 78,
+        "In-transit": 32,
+        "Delivered": 9,
+        "Returned": 18,
+    },
+    {
+        "country": "Jan 3",
+        "Picked up/Dropped Off": 121,
+        "For Disposition": 101,
+        "In-transit": 87,
+        "Delivered": 67,
+        "Returned": 15,
+    },
+    {
+        "country": "Jan 4",
+        "Picked up/Dropped Off": 75,
+        "For Disposition": 12,
+        "In-transit": 95,
+        "Delivered": 156,
+        "Returned": 9,
+    },
+    {
+        "country": "Jan 5",
+        "Picked up/Dropped Off": 97,
+        "For Disposition": 25,
+        "In-transit": 65,
+        "Delivered": 178,
+        "Returned": 21,
+    },
+    {
+        "country": "Jan 6",
+        "Picked up/Dropped Off": 135,
+        "For Disposition": 12,
+        "In-transit": 78,
+        "Delivered": 156,
+        "Returned": 13,
+    },
+    {
+        "country": "Jan 7",
+        "Picked up/Dropped Off": 141,
+        "For Disposition": 31,
+        "In-transit": 23,
+        "Delivered": 167,
+        "Returned": 34,
+    },
+];
+
 export const tempDispostionData = [
     {
         deliveryId: "Refused to Accept",
@@ -410,3 +501,241 @@ export const tempActivityData = [
         status: 'Pick Up - 01/01/2023'
     },
 ];
+
+export const tempProofDeliveryData = [
+    {
+        tracking: '1234567890',
+        sender: 'John Doe',
+        receiver: 'Mark Matt',
+        bookType: 'Book by Batch',
+        bookDate: 'Jan 01, 2023',
+        status: 'Booking Confirmed'
+    },
+    {
+        tracking: '1234567899',
+        sender: 'Black Jack',
+        receiver: 'Mark Matt',
+        bookType: 'Schedule Pick Up',
+        bookDate: 'Jan 01, 2023',
+        status: 'Pick Up - 01/01/2023'
+    },
+    {
+        tracking: '1234567898',
+        sender: 'Mary Jane',
+        receiver: 'Mark Matt',
+        bookType: 'Book by Batch',
+        bookDate: 'Jan 01, 2023',
+        status: 'Ongoing Recurring Pick Up'
+    },
+    {
+        tracking: '2234567890',
+        sender: 'John Doe',
+        receiver: 'Mark Matt',
+        bookType: 'Book by Batch',
+        bookDate: 'Jan 01, 2023',
+        status: 'Supplies Request Submitted'
+    },
+    {
+        tracking: '3234567899',
+        sender: 'Black Jack',
+        receiver: 'Mark Matt',
+        bookType: 'Request supplies',
+        bookDate: 'Jan 01, 2023',
+        status: 'Pick Up - 01/01/2023'
+    },
+    {
+        tracking: '4234567898',
+        sender: 'Mary Jane',
+        receiver: 'Mark Matt',
+        bookType: 'Book by Batch',
+        bookDate: 'Jan 01, 2023',
+        status: 'Pick Up - 01/01/2023'
+    },
+    {
+        tracking: '12345678901',
+        sender: 'John Doe',
+        receiver: 'Mark Matt',
+        bookType: 'Book by Batch',
+        bookDate: 'Jan 01, 2023',
+        status: 'Booking Confirmed'
+    },
+    {
+        tracking: '12345678992',
+        sender: 'Black Jack',
+        receiver: 'Mark Matt',
+        bookType: 'Schedule Pick Up',
+        bookDate: 'Jan 01, 2023',
+        status: 'Pick Up - 01/01/2023'
+    },
+    {
+        tracking: '12345678983',
+        sender: 'Mary Jane',
+        receiver: 'Mark Matt',
+        bookType: 'Book by Batch',
+        bookDate: 'Jan 01, 2023',
+        status: 'Ongoing Recurring Pick Up'
+    },
+    {
+        tracking: '22345678904',
+        sender: 'John Doe',
+        receiver: 'Mark Matt',
+        bookType: 'Book by Batch',
+        bookDate: 'Jan 01, 2023',
+        status: 'Supplies Request Submitted'
+    },
+    {
+        tracking: '32345678995',
+        sender: 'Black Jack',
+        receiver: 'Mark Matt',
+        bookType: 'Request supplies',
+        bookDate: 'Jan 01, 2023',
+        status: 'Pick Up - 01/01/2023'
+    },
+    {
+        tracking: '42345678986',
+        sender: 'Mary Jane',
+        receiver: 'Mark Matt',
+        bookType: 'Book by Batch',
+        bookDate: 'Jan 01, 2023',
+        status: 'Pick Up - 01/01/2023'
+    },
+];
+
+export const tempGroupBarGraphData = [
+    {
+        "Remaining Qty": 176,
+        "Consumed today": 23,
+        "date": "Oct-1"
+    },
+    {
+        "Remaining Qty": 158,
+        "Consumed today": 31,
+        "date": "Oct-2"
+    },
+    {
+        "Remaining Qty": 143,
+        "Consumed today": 19,
+        "date": "Oct-3"
+    },
+    {
+        "Remaining Qty": 134,
+        "Consumed today": 23,
+        "date": "Oct-4"
+    },
+    {
+        "Remaining Qty": 156,
+        "Consumed today": 31,
+        "date": "Oct-5"
+    },
+    {
+        "Remaining Qty": 151,
+        "Consumed today": 15,
+        "date": "Oct-6"
+    },
+    {
+        "Remaining Qty": 176,
+        "Consumed today": 23,
+        "date": "Oct-7"
+    },
+];
+
+export const tempRemittanceHistoryData = [
+    {
+        reference: "A1234567890",
+        postingDate: "Jan 01, 2023",
+        disbursalMode: "Bank Deposit",
+        accountName: "John Doe",
+        status: "Received payment from LBC Express",
+        amount: 1234
+    },
+    {
+        reference: "B1234567890",
+        postingDate: "Jan 02, 2023",
+        disbursalMode: "Bank Deposit",
+        accountName: "John Doe",
+        status: "Payment is ready for collection at Branch",
+        amount: 1234
+    },
+    {
+        reference: "C1234567890",
+        postingDate: "Jan 03, 2023",
+        disbursalMode: "GCash",
+        accountName: "John Doe",
+        status: "Received payment from LBC Express",
+        amount: 1234
+    },
+    {
+        reference: "D1234567890",
+        postingDate: "Jan 04, 2023",
+        disbursalMode: "GCash",
+        accountName: "John Doe",
+        status: "Payment is ready for collection at Branch",
+        amount: 1234
+    },
+    {
+        reference: "E1234567890",
+        postingDate: "Jan 05, 2023",
+        disbursalMode: "GCash",
+        accountName: "John Doe",
+        status: "Payment is ready for collection at Branch",
+        amount: 1234
+    },
+    {
+        reference: "F1234567890",
+        postingDate: "Jan 06, 2023",
+        disbursalMode: "GCash",
+        accountName: "John Doe",
+        status: "Received payment from LBC Express",
+        amount: 1234
+    },
+    {
+        reference: "G1234567890",
+        postingDate: "Jan 07, 2023",
+        disbursalMode: "Branch Collect",
+        accountName: "John Doe",
+        status: "Payment is ready for collection at Branch",
+        amount: 1234
+    },
+    {
+        reference: "H1234567890",
+        postingDate: "Jan 08, 2023",
+        disbursalMode: "GCash",
+        accountName: "John Doe",
+        status: "Received payment from LBC Express",
+        amount: 1234
+    },
+    {
+        reference: "I1234567890",
+        postingDate: "Jan 09, 2023",
+        disbursalMode: "Branch Collect",
+        accountName: "John Doe",
+        status: "Received payment from LBC Express",
+        amount: 1234
+    },
+    {
+        reference: "J1234567890",
+        postingDate: "Jan 10, 2023",
+        disbursalMode: "GCash",
+        accountName: "John Doe",
+        status: "Received payment from LBC Express",
+        amount: 1234
+    },
+    {
+        reference: "K1234567890",
+        postingDate: "Jan 11, 2023",
+        disbursalMode: "Bank Deposit",
+        accountName: "John Doe",
+        status: "Received payment from LBC Express",
+        amount: 1234
+    },
+    {
+        reference: "L1234567890",
+        postingDate: "Jan 12, 2023",
+        disbursalMode: "Bank Deposit",
+        accountName: "John Doe",
+        status: "Received payment from LBC Express",
+        amount: 1234
+    },
+];
+
+export const tempBillingHistoryData = [];

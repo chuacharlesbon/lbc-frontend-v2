@@ -5,7 +5,7 @@ import { TopNavBar } from '../../components/Navigation/TopNavBar';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Tab } from '@headlessui/react';
 import { classNames } from '../../helpers/ClassNames';
-import { BookNowTab, RequestSuppliesTab, SchedulePickUpTab } from './BookNowTabs';
+import { StatusReport, ProofOfDelivery, SuppliesMonitoring } from './ReportsTabs';
 
 export const Reports: FC<any> = () => {
 
@@ -33,7 +33,7 @@ export const Reports: FC<any> = () => {
     return (
         <FlexRow className='w-full h-full items-center justify-between overflow-hidden scrollbar-hide'>
             {/* Side Navigation */}
-            <NavbarMain route='Activity' />
+            <NavbarMain route='Reports' />
 
             {/* Main Dashboard */}
             <FlexColumn className='w-11/12 h-full'>
@@ -70,13 +70,13 @@ export const Reports: FC<any> = () => {
                                 <Divider className="text-grey-400" />
                                 <Tab.Panels className="w-full h-full">
                                     <Tab.Panel className={`w-full h-full`}>
-                                        //
+                                        <StatusReport />
                                     </Tab.Panel>
                                     <Tab.Panel className={`w-full h-full`}>
-                                        //
+                                        <ProofOfDelivery />
                                     </Tab.Panel>
                                     <Tab.Panel className={`w-full h-full`}>
-                                        //
+                                        <SuppliesMonitoring />
                                     </Tab.Panel>
                                 </Tab.Panels>
                             </FlexColumn>
