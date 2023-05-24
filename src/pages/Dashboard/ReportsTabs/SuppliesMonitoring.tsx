@@ -8,8 +8,12 @@ import { SupplyMonitoringDataRow } from '../../../components/Tables/ReportsDataR
 import { AiOutlineCalendar, AiOutlineDownload } from 'react-icons/ai';
 import { FaChevronDown, FaChevronUp, FaUserAlt } from 'react-icons/fa';
 import { ResponsiveBar } from '@nivo/bar';
+import { ImSpinner2 } from 'react-icons/im';
 
 export const SuppliesMonitoring: FC<any> = () => {
+
+    const [loading, setLoading] = React.useState(true);
+    const [loading1, setLoading1] = React.useState(true);
 
     const [currentPage, setCurrentPage] = React.useState(1);
     const [articlesPerPage] = React.useState(10);
@@ -21,6 +25,17 @@ export const SuppliesMonitoring: FC<any> = () => {
     const paginate = (pageNumber: React.SetStateAction<number>) => setCurrentPage(pageNumber);
 
     const colors = ['#F79520', '#D31245'];
+
+    React.useEffect(() => {
+        setLoading(true);
+        setLoading1(true);
+        setTimeout(() => {
+            setLoading(false);
+        }, 1000)
+        setTimeout(() => {
+            setLoading1(false);
+        }, 1500)
+    }, [])
 
     return (
         <>
@@ -61,65 +76,74 @@ export const SuppliesMonitoring: FC<any> = () => {
                             <Spacer className='w-4 h-4' />
 
                             {/* Bar Graph */}
-                            <Div className='h-52 w-full'>
-                                <ResponsiveBar
-                                    data={tempGroupBarGraphData}
-                                    groupMode='grouped'
-                                    keys={[
-                                        'Remaining Qty',
-                                        'Consumed today'
-                                    ]}
-                                    indexBy="date"
-                                    margin={{ top: 12, right: 12, bottom: 25, left: 36 }}
-                                    padding={0.3}
-                                    valueScale={{ type: 'linear' }}
-                                    indexScale={{ type: 'band', round: true }}
-                                    colors={colors}
-                                    enableGridX={false}
-                                    enableGridY={false}
-                                    borderColor={{
-                                        from: 'color',
-                                        modifiers: [
-                                            [
-                                                'darker',
-                                                1.6
-                                            ]
-                                        ]
-                                    }}
-                                    axisTop={null}
-                                    axisRight={null}
-                                    axisBottom={{
-                                        tickSize: 5,
-                                        tickPadding: 5,
-                                        tickRotation: 0,
-                                        legendPosition: 'middle',
-                                        legendOffset: 32
-                                    }}
-                                    axisLeft={{
-                                        tickSize: 5,
-                                        tickPadding: 5,
-                                        tickRotation: 0,
-                                        tickValues: 5,
-                                        legendPosition: 'middle',
-                                        legendOffset: 10
-                                    }}
-                                    labelSkipWidth={12}
-                                    labelSkipHeight={12}
-                                    labelTextColor={{
-                                        from: 'color',
-                                        modifiers: [
-                                            [
-                                                'darker',
-                                                1.6
-                                            ]
-                                        ]
-                                    }}
-                                    legends={[]}
-                                    role="application"
-                                    ariaLabel="Nivo bar chart demo"
-                                    barAriaLabel={e => e.id + ": " + e.formattedValue + " in country: " + e.indexValue}
-                                />
-                            </Div>
+
+                            {
+                                loading ?
+                                    <Text className='text-red-400 text-center flex flex-row justify-center items-center my-20'>
+                                        <ImSpinner2 className="animate-spin mr-2 text-2xl desktop:text-3xl" />
+                                        Loading data ...
+                                    </Text>
+                                    :
+                                    <Div className='h-52 w-full'>
+                                        <ResponsiveBar
+                                            data={tempGroupBarGraphData}
+                                            groupMode='grouped'
+                                            keys={[
+                                                'Remaining Qty',
+                                                'Consumed today'
+                                            ]}
+                                            indexBy="date"
+                                            margin={{ top: 12, right: 12, bottom: 25, left: 36 }}
+                                            padding={0.3}
+                                            valueScale={{ type: 'linear' }}
+                                            indexScale={{ type: 'band', round: true }}
+                                            colors={colors}
+                                            enableGridX={false}
+                                            enableGridY={false}
+                                            borderColor={{
+                                                from: 'color',
+                                                modifiers: [
+                                                    [
+                                                        'darker',
+                                                        1.6
+                                                    ]
+                                                ]
+                                            }}
+                                            axisTop={null}
+                                            axisRight={null}
+                                            axisBottom={{
+                                                tickSize: 5,
+                                                tickPadding: 5,
+                                                tickRotation: 0,
+                                                legendPosition: 'middle',
+                                                legendOffset: 32
+                                            }}
+                                            axisLeft={{
+                                                tickSize: 5,
+                                                tickPadding: 5,
+                                                tickRotation: 0,
+                                                tickValues: 5,
+                                                legendPosition: 'middle',
+                                                legendOffset: 10
+                                            }}
+                                            labelSkipWidth={12}
+                                            labelSkipHeight={12}
+                                            labelTextColor={{
+                                                from: 'color',
+                                                modifiers: [
+                                                    [
+                                                        'darker',
+                                                        1.6
+                                                    ]
+                                                ]
+                                            }}
+                                            legends={[]}
+                                            role="application"
+                                            ariaLabel="Nivo bar chart demo"
+                                            barAriaLabel={e => e.id + ": " + e.formattedValue + " in country: " + e.indexValue}
+                                        />
+                                    </Div>
+                            }
                         </Div>
                     </Div>
                     <Div className='w-2/5 h-80 pl-5'>
@@ -232,15 +256,23 @@ export const SuppliesMonitoring: FC<any> = () => {
                             Action
                         </Text>
                     </FlexRow>
-                    <Div className='w-full'>
-                        {
-                            newList.map((item: any) => (
-                                <SupplyMonitoringDataRow
-                                    data={item}
-                                />
-                            ))
-                        }
-                    </Div>
+                    {
+                        loading1 ?
+                            <Text className='text-red-400 text-center flex flex-row justify-center items-center my-20'>
+                                <ImSpinner2 className="animate-spin mr-2 text-2xl desktop:text-3xl" />
+                                Loading data ...
+                            </Text>
+                            :
+                            <Div className='w-full'>
+                                {
+                                    newList.map((item: any) => (
+                                        <SupplyMonitoringDataRow
+                                            data={item}
+                                        />
+                                    ))
+                                }
+                            </Div>
+                    }
                 </Div>
                 <Spacer className='w-full h-10' />
                 <Div className='w-full'>
