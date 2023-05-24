@@ -10,6 +10,7 @@ import { ColumnHeaderSearch, ColumnHeaderDropdown } from '../components/Tables';
 import { DataSort, DataSortStatus1 } from '../constants/Dropdowns';
 import { useLocation } from 'react-router-dom';
 import { NotificationsRow } from '../components/Tables/NotificationsRow';
+import { ImSpinner2 } from 'react-icons/im';
 
 export const Notifications: FC<any> = () => {
 
@@ -18,6 +19,8 @@ export const Notifications: FC<any> = () => {
     const actionQuery = query.get('sort');
     const dateQuery = query.get('date');
     const statusQuery = query.get('status');
+
+    const [loading, setLoading] = React.useState(true);
 
     const [notifKeyword, setKeyword] = React.useState('');
     const [notifDate, setDate] = React.useState('Date');
@@ -35,14 +38,14 @@ export const Notifications: FC<any> = () => {
 
     const onSearch = (e: any) => {
         e.preventDefault();
-        
+
     }
 
     const onSortDate = (type: string) => {
         setDate(type);
-        if(type === 'ascending'){
+        if (type === 'ascending') {
 
-        }else if(type === 'descending'){
+        } else if (type === 'descending') {
 
         }
     }
@@ -53,20 +56,27 @@ export const Notifications: FC<any> = () => {
 
     const onSortStatus = (type: string) => {
         setStatus(type);
-        if(type === 'read'){
+        if (type === 'read') {
 
-        }else if(type === 'unread'){
+        } else if (type === 'unread') {
 
         }
     }
 
     React.useEffect(() => {
-        if(dateQuery === 'true'){
+        if (dateQuery === 'true') {
             onSortDate(actionQuery || '- -  - -');
-        }else if(statusQuery === 'true'){
+        } else if (statusQuery === 'true') {
             onSortStatus(actionQuery || '- -  - -');
         }
     }, [actionQuery, dateQuery, statusQuery])
+
+    React.useEffect(() => {
+        setLoading(true);
+        setTimeout(() => {
+            setLoading(false);
+        }, 1000)
+    }, [])
 
     return (
         <FlexRow className='w-full h-full items-center justify-between'>
@@ -107,68 +117,74 @@ export const Notifications: FC<any> = () => {
                                 Log In
                             </button>
                         </form>
-                        
+
                         {/* Body */}
                         <Spacer className='h-10' />
                         <Div className='h-3/4 border border-grey-400 rounded-lg shadow-lg p-5'>
                             <FlexRow className='items-center justify-between w-full'>
                                 <Div className='w-1/5 p-2'>
-                                <ColumnHeaderDropdown
-                                    containerClass=''
-                                    containerButtonClass='border border-red-400'
-                                    newRoute='/notifications'
-                                    newParam='date=true&sort'
-                                    options={DataSort}
-                                    titleClassName='text-secondary-100'
-                                    value='Date'
-                                />
+                                    <ColumnHeaderDropdown
+                                        containerClass=''
+                                        containerButtonClass='border border-red-400'
+                                        newRoute='/notifications'
+                                        newParam='date=true&sort'
+                                        options={DataSort}
+                                        titleClassName='text-secondary-100'
+                                        value='Date'
+                                    />
                                 </Div>
                                 <Div className='w-3/5 p-2'>
-                                <ColumnHeaderSearch
-                                    className='phone:border-red-400 p-2'
-                                    containerClass=''
-                                    name='search'
-                                    placeholder='Subject'
-                                    onChange={setSubject}
-                                    onSubmit={onSortSubject}
-                                    type='search'
-                                    value={notifSubject}
-                                />
+                                    <ColumnHeaderSearch
+                                        className='phone:border-red-400 p-2'
+                                        containerClass=''
+                                        name='search'
+                                        placeholder='Subject'
+                                        onChange={setSubject}
+                                        onSubmit={onSortSubject}
+                                        type='search'
+                                        value={notifSubject}
+                                    />
                                 </Div>
                                 <Div className='w-1/5 p-2'>
-                                <ColumnHeaderDropdown
-                                    containerClass=''
-                                    containerButtonClass='border border-red-400'
-                                    newRoute='/notifications'
-                                    newParam='status=true&sort'
-                                    options={DataSortStatus1}
-                                    titleClassName='text-secondary-100'
-                                    value='Status'
-                                />
+                                    <ColumnHeaderDropdown
+                                        containerClass=''
+                                        containerButtonClass='border border-red-400'
+                                        newRoute='/notifications'
+                                        newParam='status=true&sort'
+                                        options={DataSortStatus1}
+                                        titleClassName='text-secondary-100'
+                                        value='Status'
+                                    />
                                 </Div>
                             </FlexRow>
 
                             {
-                                currentNotifications.map((list: any) => (
-                                    <NotificationsRow
-                                        id={list.id}
-                                        date={list.date}
-                                        subject={list.subject}
-                                        excerpt={list.excerpt}
-                                        status={list.status}
-                                    />
-                                ))
+                                loading ?
+                                    <Text className='text-red-400 text-center flex flex-row justify-center items-center my-24'>
+                                        <ImSpinner2 className="animate-spin mr-2 text-2xl desktop:text-3xl" />
+                                        Loading data ...
+                                    </Text>
+                                    :
+                                    currentNotifications.map((list: any) => (
+                                        <NotificationsRow
+                                            id={list.id}
+                                            date={list.date}
+                                            subject={list.subject}
+                                            excerpt={list.excerpt}
+                                            status={list.status}
+                                        />
+                                    ))
                             }
                         </Div>
 
                         <Spacer className='h-10' />
                         <Div className=''>
-                        <Pagination
-                        currentPage={currentPage}
-                        itemsPerPage={articlesPerPage}
-                        paginate={paginate}
-                        totalItems={tempNotificationData.length}
-                        />
+                            <Pagination
+                                currentPage={currentPage}
+                                itemsPerPage={articlesPerPage}
+                                paginate={paginate}
+                                totalItems={tempNotificationData.length}
+                            />
                         </Div>
                     </FlexColumn>
                 </Div>
