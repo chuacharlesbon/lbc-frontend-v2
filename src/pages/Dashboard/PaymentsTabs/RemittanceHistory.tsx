@@ -5,8 +5,11 @@ import { tempRemittanceHistoryData } from '../../../constants/TempData';
 import { Pagination } from '../../../components/Tables/Pagination';
 import { RemittanceHistoryDataRow } from '../../../components/Tables/ReportsDataRow';
 import { RemittanceHistoryColumns } from '../../../constants/ConstantsData';
+import { ImSpinner2 } from 'react-icons/im';
 
 export const RemittanceHistory: FC<any> = () => {
+
+    const [loading, setLoading] = React.useState(true);
 
     const [currentPage, setCurrentPage] = React.useState(1);
     const [articlesPerPage] = React.useState(10);
@@ -16,6 +19,13 @@ export const RemittanceHistory: FC<any> = () => {
     const newList = tempRemittanceHistoryData.slice(indexOfFirstArticle, indexOfLastArticle);
 
     const paginate = (pageNumber: React.SetStateAction<number>) => setCurrentPage(pageNumber);
+
+    React.useEffect(() => {
+        setLoading(true);
+        setTimeout(() => {
+            setLoading(false);
+        }, 1000)
+    }, [])
 
     return (
         <>
@@ -34,15 +44,23 @@ export const RemittanceHistory: FC<any> = () => {
                             ))
                         }
                     </FlexRow>
-                    <Div className='w-full'>
-                        {
-                            newList.map((item: any) => (
-                                <RemittanceHistoryDataRow
-                                    data={item}
-                                />
-                            ))
-                        }
-                    </Div>
+                    {
+                        loading ?
+                            <Text className='text-red-400 text-center flex flex-row justify-center items-center my-40'>
+                                <ImSpinner2 className="animate-spin mr-2 text-2xl desktop:text-3xl" />
+                                Loading data ...
+                            </Text>
+                            :
+                            <Div className='w-full'>
+                                {
+                                    newList.map((item: any) => (
+                                        <RemittanceHistoryDataRow
+                                            data={item}
+                                        />
+                                    ))
+                                }
+                            </Div>
+                    }
                 </Div>
                 <Spacer className='w-full h-10' />
                 <Div className='w-full'>
