@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { FlexRow, Div, Spacer, FlexColumn } from '../../../core/Containers';
 import { Text, Span } from '../../../core/Text';
 import { Image } from '../../../core/Image';
-import { ImInfo } from 'react-icons/im';
+import { ImInfo, ImSpinner2 } from 'react-icons/im';
 import { useLocation } from 'react-router-dom';
 import { PickupScheduleItem, PickupScheduleItemSummary } from '../../../components';
 import { scheduledPickups, tempBorderColors, tempPickupScheduleData } from '../../../constants/TempData';
@@ -22,6 +22,8 @@ export const SchedulePickUpTab: FC<any> = () => {
     const query = new URLSearchParams(search);
     const actionQuery = query.get('schedule');
 
+    const [loading, setLoading] = React.useState(true);
+    const [loading1, setLoading1] = React.useState(true);
     const [isToastOpenA, setToastOpenA] = React.useState(false);
     const [isSingleView, setIsSingleView] = React.useState(false);
 
@@ -32,6 +34,17 @@ export const SchedulePickUpTab: FC<any> = () => {
             setIsSingleView(true)
         }
     }, [actionQuery])
+
+    React.useEffect(() => {
+        setLoading(true);
+        setLoading1(true);
+        setTimeout(() => {
+            setLoading(false);
+        }, 1000)
+        setTimeout(() => {
+            setLoading1(false);
+        }, 1500)
+    }, [isSingleView])
 
     return (
         <>
@@ -173,22 +186,30 @@ export const SchedulePickUpTab: FC<any> = () => {
                                     </RawButton>
                                 </FlexRow>
 
-                                <Div className='overflow-y-scroll h-1/4 desktop:h-2/5 my-2'>
-                                    {
-                                        tempPickupScheduleData.map((item: any, index: number) => (
-                                            <PickupScheduleItemSummary
-                                                data={item}
-                                                className={`${tempBorderColors[index % 2]}`}
-                                                id={item.id}
-                                                pickUpSchedule={item.pickUpSchedule}
-                                                address={item.address}
-                                                contactPerson={item.contactPerson}
-                                                estVolumePerPickup={item.estVolumePerPickup}
-                                                specialInstruction={item.specialInstruction}
-                                            />
-                                        ))
-                                    }
-                                </Div>
+                                {
+                                    loading ?
+                                        <Text className='text-red-400 text-center flex flex-row justify-center items-center my-10 desktop:my-16'>
+                                            <ImSpinner2 className="animate-spin mr-2 text-2xl desktop:text-3xl" />
+                                            Loading data ...
+                                        </Text>
+                                        :
+                                        <Div className='overflow-y-scroll h-1/4 desktop:h-2/5 my-2'>
+                                            {
+                                                tempPickupScheduleData.map((item: any, index: number) => (
+                                                    <PickupScheduleItemSummary
+                                                        data={item}
+                                                        className={`${tempBorderColors[index % 2]}`}
+                                                        id={item.id}
+                                                        pickUpSchedule={item.pickUpSchedule}
+                                                        address={item.address}
+                                                        contactPerson={item.contactPerson}
+                                                        estVolumePerPickup={item.estVolumePerPickup}
+                                                        specialInstruction={item.specialInstruction}
+                                                    />
+                                                ))
+                                            }
+                                        </Div>
+                                }
 
                                 <Div className='my-5'>
                                     <Calendar
@@ -206,22 +227,30 @@ export const SchedulePickUpTab: FC<any> = () => {
                                     PICK UP SCHEDULES
                                 </Text>
                                 <Spacer className='h-5' />
-                                <Div className='overflow-y-scroll h-3/5'>
-                                    {
-                                        tempPickupScheduleData.map((item: any, index: number) => (
-                                            <PickupScheduleItem
-                                                data={item}
-                                                className={`${tempBorderColors[index % 2]}`}
-                                                id={item.id}
-                                                pickUpSchedule={item.pickUpSchedule}
-                                                address={item.address}
-                                                contactPerson={item.contactPerson}
-                                                estVolumePerPickup={item.estVolumePerPickup}
-                                                specialInstruction={item.specialInstruction}
-                                            />
-                                        ))
-                                    }
-                                </Div>
+                                {
+                                    loading1 ?
+                                        <Text className='text-red-400 text-center flex flex-row justify-center items-center my-20'>
+                                            <ImSpinner2 className="animate-spin mr-2 text-2xl desktop:text-3xl" />
+                                            Loading data ...
+                                        </Text>
+                                        :
+                                        <Div className='overflow-y-scroll h-3/5'>
+                                            {
+                                                tempPickupScheduleData.map((item: any, index: number) => (
+                                                    <PickupScheduleItem
+                                                        data={item}
+                                                        className={`${tempBorderColors[index % 2]}`}
+                                                        id={item.id}
+                                                        pickUpSchedule={item.pickUpSchedule}
+                                                        address={item.address}
+                                                        contactPerson={item.contactPerson}
+                                                        estVolumePerPickup={item.estVolumePerPickup}
+                                                        specialInstruction={item.specialInstruction}
+                                                    />
+                                                ))
+                                            }
+                                        </Div>
+                                }
                                 <FlexRow className='justify-center w-full my-2'>
                                     <RawButton className='bg-grey-500 hover:bg-grey-400 rounded-lg p-2' onClick={() => setToastOpenA(true)}>
                                         <Text className='text-secondary-200 text-sm font-bold'>

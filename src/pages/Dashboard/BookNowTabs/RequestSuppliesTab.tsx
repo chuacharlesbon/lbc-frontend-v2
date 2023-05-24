@@ -7,67 +7,85 @@ import { tempLBCPackage, tempReceiverData } from '../../../constants/TempData';
 import { PackageItem } from '../../../components/Feature/PackageItem';
 import { Button } from '../../../core/Buttons';
 import { Images } from '../../../assets/images/images';
+import { ImSpinner2 } from 'react-icons/im';
 
 export const RequestSuppliesTab: FC<any> = () => {
+
+    const [loading, setLoading] = React.useState(true);
+
+    React.useEffect(() => {
+        setLoading(true);
+        setTimeout(() => {
+            setLoading(false);
+        }, 1000)
+    }, [])
 
     return (
         <FlexRow className='justify-between w-full h-full'>
 
             {/* First Body */}
             <Div className='border-r border-grey-400 w-2/3 h-full p-5'>
-                <Div className='p-5 w-full h-48 shadow-lg rounded-lg border border-grey-400'>
-                    <Text className='text-secondary-100 text-xs font-bold'>
-                        Supplies Inventory Report
-                        <Span className='mx-1'>as of Jan 1, 2023, 12:00 PM</Span>
-                    </Text>
+                {
+                    loading ?
+                        <Text className='text-red-400 text-center flex flex-row justify-center items-center my-20'>
+                            <ImSpinner2 className="animate-spin mr-2 text-2xl desktop:text-3xl" />
+                            Loading data ...
+                        </Text>
+                        :
+                        <Div className='p-5 w-full h-48 shadow-lg rounded-lg border border-grey-400'>
+                            <Text className='text-secondary-100 text-xs font-bold'>
+                                Supplies Inventory Report
+                                <Span className='mx-1'>as of Jan 1, 2023, 12:00 PM</Span>
+                            </Text>
 
-                    <FlexRow className='justify-between items-center my-2 w-full'>
-                        <Div className='w-1/5'>
-                            <Text className='text-secondary-100 text-xl text-center font-bold'>
-                                295
-                            </Text>
-                            <Text className='text-secondary-100 text-center text-sm'>
-                                No. of Supplies Delivered
-                            </Text>
-                            <Text className='text-secondary-200 text-center text-xs my-2'>
-                                as of 01/01/2023
-                            </Text>
+                            <FlexRow className='justify-between items-center my-2 w-full'>
+                                <Div className='w-1/5'>
+                                    <Text className='text-secondary-100 text-xl text-center font-bold'>
+                                        295
+                                    </Text>
+                                    <Text className='text-secondary-100 text-center text-sm'>
+                                        No. of Supplies Delivered
+                                    </Text>
+                                    <Text className='text-secondary-200 text-center text-xs my-2'>
+                                        as of 01/01/2023
+                                    </Text>
+                                </Div>
+                                <Div className='w-1/5'>
+                                    <Text className='text-secondary-100 text-xl text-center font-bold'>
+                                        95
+                                    </Text>
+                                    <Text className='text-secondary-100 text-center text-sm'>
+                                        No. of Supplies Consumed
+                                    </Text>
+                                    <Text className='text-secondary-200 text-center text-xs my-2'>
+                                        as of 01/01/2023
+                                    </Text>
+                                </Div>
+                                <Div className='w-1/5'>
+                                    <Text className='text-secondary-100 text-xl text-center font-bold'>
+                                        232
+                                    </Text>
+                                    <Text className='text-secondary-100 text-center text-sm'>
+                                        No. of Supplies Remaining
+                                    </Text>
+                                    <Text className='text-secondary-200 text-center text-xs my-2'>
+                                        as of 01/01/2023
+                                    </Text>
+                                </Div>
+                                <Div className='w-1/5'>
+                                    <Text className='text-green-100 text-xl text-center font-bold'>
+                                        95%
+                                    </Text>
+                                    <Text className='text-secondary-100 text-center text-sm'>
+                                        % Supplies Remaining
+                                    </Text>
+                                    <Text className='text-secondary-200 text-center text-xs my-2'>
+                                        as of 01/01/2023
+                                    </Text>
+                                </Div>
+                            </FlexRow>
                         </Div>
-                        <Div className='w-1/5'>
-                            <Text className='text-secondary-100 text-xl text-center font-bold'>
-                                95
-                            </Text>
-                            <Text className='text-secondary-100 text-center text-sm'>
-                                No. of Supplies Consumed
-                            </Text>
-                            <Text className='text-secondary-200 text-center text-xs my-2'>
-                                as of 01/01/2023
-                            </Text>
-                        </Div>
-                        <Div className='w-1/5'>
-                            <Text className='text-secondary-100 text-xl text-center font-bold'>
-                                232
-                            </Text>
-                            <Text className='text-secondary-100 text-center text-sm'>
-                                No. of Supplies Remaining
-                            </Text>
-                            <Text className='text-secondary-200 text-center text-xs my-2'>
-                                as of 01/01/2023
-                            </Text>
-                        </Div>
-                        <Div className='w-1/5'>
-                            <Text className='text-green-100 text-xl text-center font-bold'>
-                                95%
-                            </Text>
-                            <Text className='text-secondary-100 text-center text-sm'>
-                                % Supplies Remaining
-                            </Text>
-                            <Text className='text-secondary-200 text-center text-xs my-2'>
-                                as of 01/01/2023
-                            </Text>
-                        </Div>
-                    </FlexRow>
-                </Div>
+                }
 
                 <Spacer className='h-5' />
 

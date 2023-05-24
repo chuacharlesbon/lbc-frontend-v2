@@ -4,7 +4,7 @@ import { Image } from '../../../core/Image';
 import { Span, Text } from '../../../core/Text';
 import { ColumnHeader } from '../../../components/Tables';
 import { Button, RawButton } from '../../../core/Buttons';
-import { ImUpload3, ImInfo } from 'react-icons/im';
+import { ImUpload3, ImInfo, ImSpinner2 } from 'react-icons/im';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { BookNowDataRow } from '../../../components/Tables/BookNowDataRow';
 import { BookNowSummaryColumn } from '../../../constants/ConstantsData';
@@ -26,6 +26,7 @@ export const BookNowTab: FC<any> = () => {
     const [bookType, setBookType] = React.useState('default');
     const [bookAdded, setBookAdded] = React.useState(false);
 
+    const [loading, setLoading] = React.useState(true);
     const [isToastOpenA, setToastOpenA] = React.useState(false);
 
     const inputFileRef = React.useRef<any>(null);
@@ -60,6 +61,13 @@ export const BookNowTab: FC<any> = () => {
         setFile(prevFile)
     }
 
+    React.useEffect(() => {
+        setLoading(true);
+        setTimeout(() => {
+            setLoading(false);
+        }, 1000)
+    }, [bookType, bookAdded])
+
     return (
         <>
             <BookNowModal
@@ -67,7 +75,7 @@ export const BookNowTab: FC<any> = () => {
                 onClose={() => setToastOpenA(false)}
             />
             {
-                bookType === 'summary' ?
+                bookType === 'summary' && !loading ?
                     <FlexColumn className='w-full h-4/5 desktop:h-full overflow-y-scroll scrollbar-hide'>
                         <Spacer className='p-5' />
                         <Text className='text-secondary-200 font-bold'>
@@ -110,7 +118,7 @@ export const BookNowTab: FC<any> = () => {
                             id='agreement'
                             name='agreement'
                             label={
-                                <Text className='text-secondary-200 text-xs'>
+                                <Text className='text-secondary-200 text-xs laptop:text-sm desktop:text-base'>
                                     I  have read, understood and agree to<a className='m-1 text-red-400 text-xs underline' href='https://www.lbcexpress.com' rel="noreferrer" target='_blank'>LBC’s Terms of Service</a>and
                                     <a className='ml-1 text-red-400 text-xs underline' href='https://www.lbcexpress.com' rel="noreferrer" target='_blank'>Privacy Policy</a>
                                 </Text>
@@ -134,10 +142,20 @@ export const BookNowTab: FC<any> = () => {
 
                     </FlexColumn>
                     :
-                    <></>
+                    <>
+                        {
+                            bookType === 'summary' && loading ?
+                                <Text className='text-red-400 text-center flex flex-row justify-center items-center my-40'>
+                                    <ImSpinner2 className="animate-spin mr-2 text-2xl desktop:text-3xl" />
+                                    Loading data ...
+                                </Text>
+                                :
+                                <></>
+                        }
+                    </>
             }
             {
-                bookType === 'booked' ?
+                bookType === 'booked' && !loading ?
                     <FlexColumn className='w-full h-4/5 desktop:h-full items-center overflow-y-scroll scrollbar-hide'>
                         <Div className='w-500px border border-grey-400 rounded-lg shadow-lg my-5'>
                             <Div
@@ -206,10 +224,20 @@ export const BookNowTab: FC<any> = () => {
                         </FlexRow>
                     </FlexColumn>
                     :
-                    <></>
+                    <>
+                        {
+                            bookType === 'booked' && loading ?
+                                <Text className='text-red-400 text-center flex flex-row justify-center items-center my-40'>
+                                    <ImSpinner2 className="animate-spin mr-2 text-2xl desktop:text-3xl" />
+                                    Loading data ...
+                                </Text>
+                                :
+                                <></>
+                        }
+                    </>
             }
             {
-                bookType === 'default' ?
+                bookType === 'default' && !loading ?
                     <Div className='w-full h-4/5 desktop:h-full overflow-y-scroll scrollbar-hide'>
                         <Spacer className='h-5' />
                         <FlexRow className='items-center justify-between'>
@@ -409,7 +437,7 @@ export const BookNowTab: FC<any> = () => {
                                                     {file[0].name}
                                                 </Text>
                                             </FileInput>
-                                            
+
                                             {
                                                 file[0].name !== 'browse' ?
                                                     <RawButton onClick={() => setFile([{ name: 'browse', size: 0 }])}>
@@ -470,7 +498,17 @@ export const BookNowTab: FC<any> = () => {
                         </Div>
                     </Div>
                     :
-                    <></>
+                    <>
+                        {
+                            bookType === 'default' && loading ?
+                                <Text className='text-red-400 text-center flex flex-row justify-center items-center my-40'>
+                                    <ImSpinner2 className="animate-spin mr-2 text-2xl desktop:text-3xl" />
+                                    Loading data ...
+                                </Text>
+                                :
+                                <></>
+                        }
+                    </>
             }
         </>
     );
