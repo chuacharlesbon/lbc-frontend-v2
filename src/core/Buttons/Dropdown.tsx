@@ -4,8 +4,9 @@ import { Link } from 'react-router-dom';
 import { Div, FlexRow } from '../Containers';
 import { Text } from '../Text';
 import { FaUserAlt, FaChevronDown, FaCaretDown, FaCaretRight } from 'react-icons/fa';
-import { UserDrawers, Weekly } from '../../constants/Dropdowns';
+import { UserDrawers, XtendlyDrawers, Weekly } from '../../constants/Dropdowns';
 import { RawButton } from './RawButton';
+import { getCookie } from '../../hooks';
 
 interface DataProps {
   icon: any;
@@ -28,6 +29,10 @@ interface ScheduleProps {
 
 export const Dropdown: FC<any> = () => {
 
+  const firstname: string = getCookie('firstName').toString();
+  const lastname: string = getCookie('lastName').toString();
+  const company: string = getCookie('company').toString();
+
   return (
     <Div className={`w-64 text-right`}>
       <Menu as="div" className="w-64 relative inline-block text-left">
@@ -38,7 +43,7 @@ export const Dropdown: FC<any> = () => {
             <FaUserAlt className='text-red-400 mr-4' />
             <Div className="flex flex-col">
               <Text className="mr-auto truncate text-ellipsis text-left text-red-400 w-40">
-                User
+                {firstname}{' '}{lastname}
               </Text>
             </Div>
             <FaChevronDown className="text-xl text-red-400" />
@@ -53,30 +58,58 @@ export const Dropdown: FC<any> = () => {
           leaveFrom="transform opacity-100 scale-100"
           leaveTo="transform opacity-0 scale-95"
         >
-          <Menu.Items
-            className={`z-10 absolute right-0 mt-1 origin-top-right font-poppins
+          {
+            company === 'Xtendly' ?
+              <Menu.Items
+                className={`z-10 absolute right-0 mt-1 origin-top-right font-poppins
             bg-white divide-y w-64 divide-secondary-300 
             rounded-md shadow-lg`}
-          >
-            {UserDrawers.map((value: any) => (
-              <div className="px-1 py-1 " key={value.name}>
-                {value.links.map((link: any) => (
-                  <Menu.Item key={link.name}>
-                    {({ active }) => (
-                      <Link
-                        className={`${active ? 'bg-red-100 text-white' : 'text-secondary-100'
-                          }  group flex rounded-md items-center
+              >
+                {XtendlyDrawers.map((value: any) => (
+                  <div className="px-1 py-1 " key={value.name}>
+                    {value.links.map((link: any) => (
+                      <Menu.Item key={link.name}>
+                        {({ active }) => (
+                          <Link
+                            className={`${active ? 'bg-red-400 text-white' : 'text-secondary-100'
+                              }  group flex rounded-md items-center
                     w-full px-4 py-3 text-base`}
-                        to={link.url}
-                      >
-                        {link.name}
-                      </Link>
-                    )}
-                  </Menu.Item>
+                            to={link.url}
+                          >
+                            {link.name}
+                          </Link>
+                        )}
+                      </Menu.Item>
+                    ))}
+                  </div>
                 ))}
-              </div>
-            ))}
-          </Menu.Items>
+              </Menu.Items>
+              :
+              <Menu.Items
+                className={`z-10 absolute right-0 mt-1 origin-top-right font-poppins
+            bg-white divide-y w-64 divide-secondary-300 
+            rounded-md shadow-lg`}
+              >
+                {UserDrawers.map((value: any) => (
+                  <div className="px-1 py-1 " key={value.name}>
+                    {value.links.map((link: any) => (
+                      <Menu.Item key={link.name}>
+                        {({ active }) => (
+                          <Link
+                            className={`${active ? 'bg-red-100 text-white' : 'text-secondary-100'
+                              }  group flex rounded-md items-center
+                    w-full px-4 py-3 text-base`}
+                            to={link.url}
+                          >
+                            {link.name}
+                          </Link>
+                        )}
+                      </Menu.Item>
+                    ))}
+                  </div>
+                ))}
+              </Menu.Items>
+          }
         </Transition>
       </Menu>
     </Div>
@@ -111,7 +144,7 @@ export const RawDropdown: FC<DataProps> = ({
           leaveTo="transform opacity-0 scale-95"
         >
           <Menu.Items
-            className={`${width} absolute -right-2 mt-1 origin-top-right bg-white divide-y divide-secondary-300 rounded-lg shadow-lg`}
+            className={`${width} absolute z-50 -right-2 mt-1 origin-top-right bg-white divide-y divide-secondary-300 rounded-lg shadow-lg`}
           >
             <Menu.Item>
               <div className='w-full rounded-lg border border-grey-500'>

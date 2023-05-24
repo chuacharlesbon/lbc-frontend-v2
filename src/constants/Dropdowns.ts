@@ -18,6 +18,22 @@ export const UserDrawers = [
   },
 ];
 
+export const XtendlyDrawers = [
+  {
+    name: 'USER 1',
+    links: [
+      {
+        name: 'Xtendly',
+        url: '/profile/xtendly',
+      },
+      {
+        name: 'Log Out',
+        url: '/logout',
+      },
+    ],
+  },
+];
+
 export const AnalyticsDeliveryDrawers = [
   {
     name: 'USER 1',
@@ -27,7 +43,7 @@ export const AnalyticsDeliveryDrawers = [
         url: '/dashboard-home?status=delivery-status',
         filter: [
           {
-            name: 'In-Transit',
+            name: 'In-transit',
             url: 'in-transit'
           },
           {

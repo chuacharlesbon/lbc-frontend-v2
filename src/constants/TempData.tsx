@@ -4,6 +4,39 @@ export const tempBorderColors = [
     "border-l-red-100"
 ];
 
+export const tempUsersData = [
+    {
+        email: 'charles@xtendly.com',
+        firstname: 'Charles',
+        lastname: 'Chua',
+        company: 'Xtendly'
+    },
+    {
+        email: 'bea@xtendly.com',
+        firstname: 'Bea',
+        lastname: 'Ercia',
+        company: 'Xtendly'
+    },
+    {
+        email: 'jan@xtendly.com',
+        firstname: 'Jary',
+        lastname: 'Ercia',
+        company: 'Xtendly'
+    },
+    {
+        email: 'rafael@xtendly.com',
+        firstname: 'Rafael',
+        lastname: 'Ripoll',
+        company: 'Xtendly'
+    },
+    {
+        email: 'testuser@gmail.com',
+        firstname: 'Test User',
+        lastname: '1',
+        company: 'Company Test'
+    },
+];
+
 export const tempPerformanceDataRow = [
     {
         deliveryId: "#NCR8372846246",
@@ -739,3 +772,60 @@ export const tempRemittanceHistoryData = [
 ];
 
 export const tempBillingHistoryData = [];
+
+export const tempDailyPerformancePercent = [
+    {
+        percent: '93.2',
+        title: 'Daily Delivery Performance'
+    },
+    {
+        percent: '95.1',
+        title: 'Daily Delivery Performance'
+    },
+    {
+        percent: '90.9',
+        title: 'Daily Delivery % with SLA'
+    },
+    {
+        percent: '92.7',
+        title: 'Daily % Return w/in SLA'
+    },
+];
+
+export const tempMonthlyPerformancePercent = [
+    {
+        percent: '95.2',
+        title: 'MTD Delivery Performance'
+    },
+    {
+        percent: '91.7',
+        title: 'MTD Delivery Performance'
+    },
+    {
+        percent: '94.7',
+        title: 'MTD Delivery % with SLA'
+    },
+    {
+        percent: '93.6',
+        title: 'MTD % Return w/in SLA'
+    },
+];
+
+export const tempWeeklyPerformancePercent = [
+    {
+        percent: '94.1',
+        title: 'WTD Delivery Performance'
+    },
+    {
+        percent: '90.3',
+        title: 'WTD Delivery Performance'
+    },
+    {
+        percent: '95.3',
+        title: 'WTD Delivery % with SLA'
+    },
+    {
+        percent: '94.6',
+        title: 'WTD % Return w/in SLA'
+    },
+];
