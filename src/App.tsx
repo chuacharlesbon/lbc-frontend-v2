@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Route, Routes } from 'react-router-dom';
 import { Login } from './pages/Auth/Login';
 import { ForgotPassword } from './pages/Auth/ForgotPassword';
@@ -16,10 +16,11 @@ import { SummaryRemittanceReportsPage } from './pages/Dashboard/DashboardHome/Su
 import { RemittanceReportsPage } from './pages/Dashboard/DashboardHome/RemittanceReportsPage';
 import { Notifications } from './pages/Notifications';
 import { Logout } from './pages/Auth/Logout';
-import { useCookie, useWindowSize } from './hooks';
+import { getCookie, useCookie, useWindowSize } from './hooks';
 
 function App() {
 
+  const token = getCookie('token');
   const dimension = useWindowSize();
   const navigate = useNavigate();
   const location = useLocation();
@@ -27,7 +28,6 @@ function App() {
   const [cookie, updateCookie] = useCookie('location', '/');
 
   React.useEffect(() => {
-    
     if (dimension.width < 1024) {
       //navigate('/incompatible');
     }else if(location.pathname === '/incompatible'){
@@ -37,9 +37,22 @@ function App() {
     }
   }, [dimension])
 
-  return (
-    <div className="h-full w-full relative">
+  React.useEffect(() => {
+    if (token !== '' && (location.pathname === '/' || location.pathname === '/forgot-password')) {
+      navigate('/dashboard-home');
+    }else if (token !== '' && location.pathname === '*') {
+      navigate('/dashboard-home');
+    }else if(token === '' && location.pathname !== '/' && location.pathname != '/forgot-password'){
+      navigate('/');
+    }else{
+      //
+    }
+  }, [location])
 
+  return (
+    //<div className="phone:h-780px phone:w-1440px tabletWide:h-full tabletWide:w-full relative">
+    <div className="h-full w-full relative">
+      
       <Routes>
 
         {/* Authentication Pages */}
