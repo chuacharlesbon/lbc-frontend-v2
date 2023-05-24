@@ -21,15 +21,15 @@ export const LBCCarouselSlider: FC<any> = () => {
                         showThumbs={false}
                     >
                         <div className='w-full rounded-lg shadow-lg'>
-                            <img alt='LBC 1' className='w-full h-full object-contain' src="https://remitusa.lbcexpress.com/images/default-source/carouselindex/carouselindexoct2021/02-lbc_online-remittanceresize_more-peso_539x272px.jpg" />
+                            <img alt='LBC 1' className='w-full h-full object-contain rounded-3xl' src="https://remitusa.lbcexpress.com/images/default-source/carouselindex/carouselindexoct2021/02-lbc_online-remittanceresize_more-peso_539x272px.jpg" />
                             <p className="legend hidden">Legend 1</p>
                         </div>
                         <div>
-                            <img alt='LBC 2' className='w-full h-full object-contain' src="https://remitusa.lbcexpress.com/images/default-source/carouselindex/carouselindexoct2021/01-lbconlineremittance539x272px2fa.jpg" />
+                            <img alt='LBC 2' className='w-full h-full object-contain rounded-3xl' src="https://remitusa.lbcexpress.com/images/default-source/carouselindex/carouselindexoct2021/01-lbconlineremittance539x272px2fa.jpg" />
                             <p className="legend hidden">Legend 2</p>
                         </div>
                         <div>
-                            <img alt='LBC 3' className='w-full h-full object-contain' src="https://digitalpinas.com/wp-content/uploads/2020/01/6.png" />
+                            <img alt='LBC 3' className='w-full h-full object-contain rounded-3xl' src="https://digitalpinas.com/wp-content/uploads/2020/01/6.png" />
                             <p className="legend hidden">Legend 3</p>
                         </div>
                     </Carousel>

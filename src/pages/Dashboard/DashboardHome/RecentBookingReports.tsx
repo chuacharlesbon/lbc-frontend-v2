@@ -14,7 +14,7 @@ export const RecentBookingReports: FC<any> = () => {
                     <Text className='text-secondary-100 text-xs font-bold'>
                         Recent Bookings
                     </Text>
-                    <Link className='ml-auto' to="/dashboard-home/recent-booking-table-data">
+                    <Link className='ml-auto' to="/activity">
                         <Text className='text-red-400 text-xs font-bold'>
                             View all
                         </Text>

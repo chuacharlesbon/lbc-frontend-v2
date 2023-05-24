@@ -1,11 +1,42 @@
 import React, { FC } from 'react';
-import { Div, FlexRow, Spacer, TextDivider } from '../../../core/Containers';
+import { Div, FlexRow, TextDivider } from '../../../core/Containers';
 import { Text } from '../../../core/Text';
-import { tempPerformanceDataRow } from '../../../constants/TempData';
+import { tempMonthlyPerformancePercent, tempWeeklyPerformancePercent, tempDailyPerformancePercent, tempPerformanceDataRow } from '../../../constants/TempData';
 import { PerformanceDataRow } from '../../../components/Tables/PerformanceDataRow';
 import { Link } from 'react-router-dom';
+import { RawDropdown } from '../../../core/Buttons';
+import { RecurrenceOptions } from '../../../constants/Dropdowns';
+import { ImSpinner2 } from 'react-icons/im';
 
 export const PerformanceReports: FC<any> = () => {
+
+    const [loading, setLoading] = React.useState(true);
+    const [loading1, setLoading1] = React.useState(true);
+
+    const [timeline, setTimeline] = React.useState('Monthly');
+    const [currentData, setData] = React.useState(tempMonthlyPerformancePercent);
+    const [newList, setList] = React.useState(tempPerformanceDataRow);
+
+    React.useEffect(() => {
+        const tempList = [...newList].reverse();
+        setList(tempList);
+        if (timeline === 'Monthly') {
+            setData(tempMonthlyPerformancePercent);
+        } else if (timeline === 'Weekly') {
+            setData(tempWeeklyPerformancePercent);
+        } else {
+            setData(tempDailyPerformancePercent);
+        }
+    }, [timeline])
+
+    React.useEffect(() => {
+        setTimeout(() => {
+            setLoading(false);
+        }, 2000)
+        setTimeout(() => {
+            setLoading1(false);
+        }, 2500)
+    }, [])
 
     return (
         <Div className='w-full rounded-lg border border-grey-400'>
@@ -13,46 +44,37 @@ export const PerformanceReports: FC<any> = () => {
                 <Text className='text-secondary-100 text-sm font-bold'>
                     Delivery Performance
                 </Text>
-                <Text className='text-secondary-100 text-sm'>
-                    Monthly May 2023
-                </Text>
-                <Spacer className='' />
+                <RawDropdown
+                    icon={<div />}
+                    width='w-40'
+                    value={timeline}
+                    options={RecurrenceOptions}
+                    onSelect={setTimeline}
+                />
+                <input className='text-sm w-40 mx-2 block rounded-lg' type='date' value='2023-01-01' />
             </FlexRow>
 
-            <FlexRow className='justify-between items-center border border-grey-400 shadow-xl rounded-xl m-5 py-4 px-10'>
-                <Div>
-                    <Text className='text-green-100 text-xl text-center font-bold'>
-                        95%
+            {
+                loading ?
+                    <Text className='text-red-400 text-center flex flex-row justify-center items-center my-4'>
+                        <ImSpinner2 className="animate-spin mr-2 text-2xl desktop:text-3xl" />
                     </Text>
-                    <Text className='text-secondary-100 text-xs text-center'>
-                        YTD Delivery Performance
-                    </Text>
-                </Div>
-                <Div>
-                    <Text className='text-green-100 text-xl text-center font-bold'>
-                        95%
-                    </Text>
-                    <Text className='text-secondary-100 text-xs text-center'>
-                        MTD Delivery Performance
-                    </Text>
-                </Div>
-                <Div>
-                    <Text className='text-green-100 text-xl text-center font-bold'>
-                        95%
-                    </Text>
-                    <Text className='text-secondary-100 text-xs text-center'>
-                        YTD Delivery % with SLA
-                    </Text>
-                </Div>
-                <Div>
-                    <Text className='text-green-100 text-xl text-center font-bold'>
-                        95%
-                    </Text>
-                    <Text className='text-secondary-100 text-xs text-center'>
-                        Weekly % Return w/in SLA
-                    </Text>
-                </Div>
-            </FlexRow>
+                    :
+                    <FlexRow className='justify-between items-center border border-grey-400 shadow-xl rounded-xl m-5 py-4 px-10'>
+                        {
+                            currentData.map((item: any) => (
+                                <Div>
+                                    <Text className='text-green-100 text-xl text-center font-bold'>
+                                        {item.percent}%
+                                    </Text>
+                                    <Text className='text-secondary-100 text-xs text-center'>
+                                        {item.title}
+                                    </Text>
+                                </Div>
+                            ))
+                        }
+                    </FlexRow>
+            }
 
             <TextDivider
                 className='bg-grey-400'
@@ -66,23 +88,30 @@ export const PerformanceReports: FC<any> = () => {
                 }
             />
 
-            <Div className='w-full p-5'>
-                {
-                    tempPerformanceDataRow.map((list: any) => (
-                        <PerformanceDataRow
-                            deliveryId={list.deliveryId}
-                            deliverySize={list.deliverySize}
-                            logisticsType={list.logisticsType}
-                            deliveryDate={list.deliveryDate}
-                            transactionDate={list.transactionDate}
-                            clientNameFrom={list.clientNameFrom}
-                            clientAddressFrom={list.clientAddressFrom}
-                            clientNameTo={list.clientNameTo}
-                            clientAddressTo={list.clientAddressTo}
-                        />
-                    ))
-                }
-            </Div>
+            {
+                loading1 ?
+                    <Text className='text-red-400 text-center flex flex-row justify-center items-center my-4'>
+                        <ImSpinner2 className="animate-spin mr-2 text-2xl desktop:text-3xl" />
+                    </Text>
+                    :
+                    <Div className='w-full p-5'>
+                        {
+                            newList.map((list: any) => (
+                                <PerformanceDataRow
+                                    deliveryId={list.deliveryId}
+                                    deliverySize={list.deliverySize}
+                                    logisticsType={list.logisticsType}
+                                    deliveryDate={list.deliveryDate}
+                                    transactionDate={list.transactionDate}
+                                    clientNameFrom={list.clientNameFrom}
+                                    clientAddressFrom={list.clientAddressFrom}
+                                    clientNameTo={list.clientNameTo}
+                                    clientAddressTo={list.clientAddressTo}
+                                />
+                            ))
+                        }
+                    </Div>
+            }
         </Div>
     );
 };

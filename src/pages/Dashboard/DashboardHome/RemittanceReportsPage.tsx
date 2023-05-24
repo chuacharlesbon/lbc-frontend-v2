@@ -142,7 +142,7 @@ export const RemittanceReportsPage: FC<any> = () => {
                             <Divider className='text-grey-100 my-2 w-2400px' />
 
                             {
-                                tempPerformanceDataRow.map((list: any) => (
+                                newPartners.map((list: any) => (
                                     <DeliveryDataRow
                                         deliveryId={list.deliveryId}
                                         deliverySize={list.deliverySize}
