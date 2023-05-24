@@ -4,8 +4,18 @@ import { Text } from '../../../core/Text';
 import { tempPerformanceDataRow } from '../../../constants/TempData';
 import { Link } from 'react-router-dom';
 import { RecentBookingSummary } from '../../../components/Tables';
+import { ImSpinner2 } from 'react-icons/im';
 
 export const RecentBookingReports: FC<any> = () => {
+
+    const [loading, setLoading] = React.useState(true);
+
+    React.useEffect(() => {
+        setLoading(true);
+        setTimeout(() => {
+            setLoading(false);
+        }, 1000)
+    }, [])
 
     return (
         <Div className='w-1/2'>
@@ -22,23 +32,31 @@ export const RecentBookingReports: FC<any> = () => {
                     <Spacer className='' />
                 </FlexRow>
 
-                <Div className='w-full p-5'>
-                    {
-                        tempPerformanceDataRow.map((list: any) => (
-                            <RecentBookingSummary
-                                deliveryId={list.deliveryId}
-                                deliverySize={list.deliverySize}
-                                logisticsType={list.logisticsType}
-                                deliveryDate={list.deliveryDate}
-                                transactionDate={list.transactionDate}
-                                clientNameFrom={list.clientNameFrom}
-                                clientAddressFrom={list.clientAddressFrom}
-                                clientNameTo={list.clientNameTo}
-                                clientAddressTo={list.clientAddressTo}
-                            />
-                        ))
-                    }
-                </Div>
+                {
+                    loading ?
+                        <Text className='text-red-400 text-center flex flex-row justify-center items-center my-20'>
+                            <ImSpinner2 className="animate-spin mr-2 text-2xl desktop:text-3xl" />
+                            Loading data ...
+                        </Text>
+                        :
+                        <Div className='w-full p-5'>
+                            {
+                                tempPerformanceDataRow.map((list: any) => (
+                                    <RecentBookingSummary
+                                        deliveryId={list.deliveryId}
+                                        deliverySize={list.deliverySize}
+                                        logisticsType={list.logisticsType}
+                                        deliveryDate={list.deliveryDate}
+                                        transactionDate={list.transactionDate}
+                                        clientNameFrom={list.clientNameFrom}
+                                        clientAddressFrom={list.clientAddressFrom}
+                                        clientNameTo={list.clientNameTo}
+                                        clientAddressTo={list.clientAddressTo}
+                                    />
+                                ))
+                            }
+                        </Div>
+                }
             </Div>
         </Div>
     );

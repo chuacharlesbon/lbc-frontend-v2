@@ -49,7 +49,7 @@ export const AnalyticsDropdown: FC<DataProps> = ({
           leaveTo="transform opacity-0 scale-95"
         >
           <Menu.Items
-            className={`absolute right-0 mt-1 origin-top-right font-poppins border border-grey-400
+            className={`absolute z-50 right-0 mt-1 origin-top-right font-poppins border border-grey-400
             bg-white divide-y w-64 divide-secondary-300 
             rounded-md shadow-lg`}
           >
@@ -69,7 +69,10 @@ export const AnalyticsDropdown: FC<DataProps> = ({
                     <Div className='childTooltip left-full z-10 w-64 bg-white border border-grey-400'>
                       {link.filter.map((childLink: any) => (
                         <RawButton
-                          onClick={() => onSelectSubMenu(link.name, childLink.name)}
+                          onClick={() => {
+                            navigate(link.url)
+                            onSelectSubMenu(link.name, childLink.name)
+                          }}
                           className={`hover:bg-grey-400 hover:text-secondary-100 text-secondary-200
                                   group flex flex-row rounded-md items-center justify-start w-full px-4 py-3 text-base`}
                         >

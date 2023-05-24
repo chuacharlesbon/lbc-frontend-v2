@@ -4,8 +4,18 @@ import { Text } from '../../../core/Text';
 import { tempRemittanceDataRow } from '../../../constants/TempData';
 import { Link } from 'react-router-dom';
 import { RemittanceHistorySummary } from '../../../components/Tables';
+import { ImSpinner2 } from 'react-icons/im';
 
 export const RemittanceReports: FC<any> = () => {
+
+    const [loading, setLoading] = React.useState(true);
+
+    React.useEffect(() => {
+        setLoading(true);
+        setTimeout(() => {
+            setLoading(false);
+        }, 1500)
+    }, [])
 
     return (
         <Div className='w-1/2'>
@@ -22,17 +32,25 @@ export const RemittanceReports: FC<any> = () => {
                     <Spacer className='' />
                 </FlexRow>
 
-                <Div className='w-full p-5'>
-                    {
-                        tempRemittanceDataRow.map((list: any) => (
-                            <RemittanceHistorySummary
-                                referenceId={list.referenceId}
-                                depositedDate={list.depositedDate}
-                                amount={list.amount}
-                            />
-                        ))
-                    }
-                </Div>
+                {
+                    loading ?
+                        <Text className='text-red-400 text-center flex flex-row justify-center items-center my-20'>
+                            <ImSpinner2 className="animate-spin mr-2 text-2xl desktop:text-3xl" />
+                            Loading data ...
+                        </Text>
+                        :
+                        <Div className='w-full p-5'>
+                            {
+                                tempRemittanceDataRow.map((list: any) => (
+                                    <RemittanceHistorySummary
+                                        referenceId={list.referenceId}
+                                        depositedDate={list.depositedDate}
+                                        amount={list.amount}
+                                    />
+                                ))
+                            }
+                        </Div>
+                }
             </Div>
         </Div>
     );
