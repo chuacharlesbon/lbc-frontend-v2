@@ -44,7 +44,7 @@ export const SchedulePickUpTab: FC<any> = () => {
         setTimeout(() => {
             setLoading1(false);
         }, 1500)
-    }, [isSingleView])
+    }, [isSingleView, currentDate])
 
     return (
         <>
@@ -166,7 +166,7 @@ export const SchedulePickUpTab: FC<any> = () => {
                     /* Pick Up Schedule Summary */
 
                     <FlexRow className='justify-between w-full h-full'>
-                        <Div className='w-1/3 h-3/4 p-5'>
+                        <Div className='w-1/3 h-4/5 p-5'>
                             <Div className='shadow-lg rounded-lg border border-grey-400 p-5 w-full h-full overflow-y-scroll scrollbar-hide'>
                                 <FlexRow className='items-center w-full'>
                                     <Div>
@@ -188,7 +188,7 @@ export const SchedulePickUpTab: FC<any> = () => {
 
                                 {
                                     loading ?
-                                        <Text className='text-red-400 text-center flex flex-row justify-center items-center my-10 desktop:my-16'>
+                                        <Text className='text-red-400 text-center flex flex-row justify-center items-center my-16 desktop:my-20'>
                                             <ImSpinner2 className="animate-spin mr-2 text-2xl desktop:text-3xl" />
                                             Loading data ...
                                         </Text>
@@ -211,7 +211,7 @@ export const SchedulePickUpTab: FC<any> = () => {
                                         </Div>
                                 }
 
-                                <Div className='my-5'>
+                                <Div className='w-250px h-250px mx-auto my-5'>
                                     <Calendar
                                         className={`rounded-lg mx-auto`}
                                         tileClassName={({ activeStartDate, date, view }) => view === 'month' && scheduledPickups.includes((new Date(date)).toString()) ? 'text-blue-100 font-bold' : 'text-grey-200'}
@@ -221,7 +221,7 @@ export const SchedulePickUpTab: FC<any> = () => {
                                 </Div>
                             </Div>
                         </Div>
-                        <Div className='w-2/3 h-3/4 p-5'>
+                        <Div className='w-2/3 h-4/5 p-5'>
                             <Div className='shadow-lg rounded-lg border border-grey-400 p-5 w-full h-full'>
                                 <Text className='text-secondary-200 font-bold'>
                                     PICK UP SCHEDULES
@@ -229,7 +229,7 @@ export const SchedulePickUpTab: FC<any> = () => {
                                 <Spacer className='h-5' />
                                 {
                                     loading1 ?
-                                        <Text className='text-red-400 text-center flex flex-row justify-center items-center my-20'>
+                                        <Text className='text-red-400 text-center flex flex-row justify-center items-center my-24'>
                                             <ImSpinner2 className="animate-spin mr-2 text-2xl desktop:text-3xl" />
                                             Loading data ...
                                         </Text>
