@@ -8,6 +8,7 @@ import { Pagination, PaginationCustom } from '../../../components/Tables/Paginat
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Images } from '../../../assets/images/images';
 import { Button, RawButton, RawDropdown } from '../../../core/Buttons';
+import { ImSpinner2 } from 'react-icons/im';
 
 export const DraftTab: FC<any> = () => {
 
@@ -16,8 +17,9 @@ export const DraftTab: FC<any> = () => {
     const query = new URLSearchParams(search);
     const actionQuery = query.get('active');
 
-    const [singleView, setSingleView] = React.useState('default');
+    const [loading, setLoading] = React.useState(true);
 
+    const [singleView, setSingleView] = React.useState('default');
     const [selected, setSelected] = React.useState('default');
     const [selectedList, setSelectedList] = React.useState<string[]>([]);
 
@@ -36,9 +38,16 @@ export const DraftTab: FC<any> = () => {
         }
     }, [actionQuery])
 
+    React.useEffect(() => {
+        setLoading(true);
+        setTimeout(() => {
+            setLoading(false);
+        }, 1000)
+    }, [])
+
     const onSelectItems = (id: string) => {
-        if(selectedList.includes(id)) {
-            const tempList = [...selectedList].filter((value:any) => value !== id);
+        if (selectedList.includes(id)) {
+            const tempList = [...selectedList].filter((value: any) => value !== id);
             setSelectedList(tempList);
         } else {
             const tempList = [...selectedList];
@@ -80,16 +89,24 @@ export const DraftTab: FC<any> = () => {
                                     Action
                                 </Text>
                             </FlexRow>
-                            <Div className='w-full'>
-                                {
-                                    newList.map((item: any) => (
-                                        <DraftDataRow
-                                            data={item}
-                                            onSelect={() => {}}
-                                        />
-                                    ))
-                                }
-                            </Div>
+                            {
+                                loading ?
+                                    <Text className='text-red-400 text-center flex flex-row justify-center items-center my-40'>
+                                        <ImSpinner2 className="animate-spin mr-2 text-2xl desktop:text-3xl" />
+                                        Loading data ...
+                                    </Text>
+                                    :
+                                    <Div className='w-full'>
+                                        {
+                                            newList.map((item: any) => (
+                                                <DraftDataRow
+                                                    data={item}
+                                                    onSelect={() => { }}
+                                                />
+                                            ))
+                                        }
+                                    </Div>
+                            }
                         </Div>
                         <Spacer className='w-full h-10' />
                         <Div className='w-full'>
