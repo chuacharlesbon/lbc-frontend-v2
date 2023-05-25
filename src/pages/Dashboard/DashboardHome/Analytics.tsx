@@ -4,15 +4,17 @@ import { Div, FlexRow, Spacer, Divider } from '../../../core/Containers';
 import { Text } from '../../../core/Text';
 import { AnalyticsDropdown } from '../../../core/Buttons/AnalyticsDropdown';
 import { ResponsiveBar } from '@nivo/bar';
-import { FaUserCircle } from 'react-icons/fa';
+import { FaUserCircle, FaChartBar } from 'react-icons/fa';
 import { tempBarGraphData } from '../../../constants/TempData';
 import { getCookie } from '../../../hooks';
 import { ImSpinner2 } from 'react-icons/im';
-import { RawButton } from '../../../core/Buttons';
+import { RawButton, RawDropdown } from '../../../core/Buttons';
+import { RecurrenceOptions } from '../../../constants/Dropdowns';
+import { AiOutlineCalendar } from 'react-icons/ai';
 
 export const Analytics: FC<any> = () => {
 
-    const [customLegend, setLegend] = React.useState(false);
+    const [customLegend, setLegend] = React.useState(true);
 
     const [loading, setLoading] = React.useState(true);
     const [loading1, setLoading1] = React.useState(true);
@@ -22,11 +24,12 @@ export const Analytics: FC<any> = () => {
     const newDate = new Date().toString().substring(4, 21);
 
     const [enabled, setEnabled] = React.useState(true);
+    const [timeline, setTimeline] = React.useState('Monthly');
     const [current, setCurrent] = React.useState('Delivery Status');
     const [sortDeliveryStatus, setSortDeliveryStatus] = React.useState<string[]>(['Make Default']);
     const [sortRemittanceStatus, setSortRemittanceStatus] = React.useState<string[]>(['Make Default']);
 
-    const colors = ['#F79520', '#F37777', '#63C9A8', '#3173AF', '#202123B3'];
+    const colors = ['#F79520', '#F37777', '#63C9A8', '#3173AF', '#202123B3', '#F79520'];
 
     const onSelectItems = (type: string, sort: string) => {
         if (type === 'Delivery Status') {
@@ -36,12 +39,12 @@ export const Analytics: FC<any> = () => {
                 setSortDeliveryStatus([sort])
             } else if (sort === 'Others' && sortDeliveryStatus.includes('Make Default')) {
                 setSortDeliveryStatus(['Others', 'Picked up/Dropped Off'])
-            } else if (sort === 'Others' && sortDeliveryStatus.includes('Others')) {
+            } else if (sort === 'Others' && (sortDeliveryStatus.includes('Picked up/Dropped Off') || sortDeliveryStatus.includes('Others'))) {
                 const tempList = [...sortDeliveryStatus].filter((value: any) => value !== sort && value !== 'Picked up/Dropped Off');
                 setSortDeliveryStatus(tempList);
-            } else if (sort === 'Others' && !sortDeliveryStatus.includes('Others')) {
+            } else if (sort === 'Others' && (!sortDeliveryStatus.includes('Picked up/Dropped Off') || !sortDeliveryStatus.includes('Others'))) {
                 const tempList = [...sortDeliveryStatus];
-                tempList.push(sort);
+                tempList.push('Others');
                 tempList.push('Picked up/Dropped Off');
                 setSortDeliveryStatus(tempList);
             } else if (sortDeliveryStatus.includes(sort)) {
@@ -73,6 +76,17 @@ export const Analytics: FC<any> = () => {
         }, 1500)
     }, [])
 
+    React.useEffect(() => {
+        setLoading(true);
+        setLoading1(true);
+        setTimeout(() => {
+            setLoading(false);
+        }, 1000)
+        setTimeout(() => {
+            setLoading1(false);
+        }, 1500)
+    }, [timeline])
+
     return (
         <Div className='border border-grey-400 rounded-xl shadow-lg w-2/5 h-full'>
             <FlexRow className='items-center justify-start p-5'>
@@ -88,13 +102,22 @@ export const Analytics: FC<any> = () => {
                 </Div>
             </FlexRow>
             <Divider className='text-grey-400' />
-            <FlexRow>
+            <FlexRow className='w-full items-center justify-between'>
                 <AnalyticsDropdown
                     onSelectMenu={setCurrent}
                     onSelectSubMenu={onSelectItems}
                     list1={sortDeliveryStatus}
                     list2={sortRemittanceStatus}
+                    value={current}
                 />
+                <RawDropdown
+                    icon={<div />}
+                    width='w-40'
+                    value={timeline}
+                    options={RecurrenceOptions}
+                    onSelect={setTimeline}
+                />
+                <AiOutlineCalendar className='text-secondary-200 text-xl m-5 hover:bg-grey-400 rounded-lg' />
             </FlexRow>
 
             {
@@ -189,9 +212,9 @@ export const Analytics: FC<any> = () => {
                 </Text>
                 <RawButton className='ml-auto cursor-auto' onClick={() => setLegend(!customLegend)}>
                     <div title='This is Test Debugger Button'>
-                    <Text className='text-secondary-200 text-sm'>
-                        Data Updates as of {newDate}
-                    </Text>
+                        <Text className='text-secondary-200 text-sm'>
+                            Data Updates as of {newDate}
+                        </Text>
                     </div>
                 </RawButton>
 
@@ -206,105 +229,125 @@ export const Analytics: FC<any> = () => {
                         <ImSpinner2 className="animate-spin mr-2 text-2xl desktop:text-3xl" />
                     </Text>
                     :
-                    <Div className='h-200px w-full '>
-                        <ResponsiveBar
-                            enableLabel={enabled}
-                            data={tempBarGraphData}
-                            keys={
-                                sortDeliveryStatus.includes('Make Default')
-                                    ? [
-                                        'Picked up/Dropped Off',
-                                        'For Disposition',
-                                        'In-transit',
-                                        'Delivered',
-                                        'Returned',
-                                    ]
-                                    : sortDeliveryStatus
-                            }
-                            indexBy="country"
-                            margin={
-                                customLegend ?
-                                { top: 50, right: 50, bottom: 50, left: 50 }
+                    <>
+                        {
+                            sortDeliveryStatus.length === 0 ?
+                                <Div className='py-20 mx-auto'>
+                                <FaChartBar className='mx-auto block text-secondary-200 text-2xl text-center desktop:text-3xl' />
+                                <Text className='text-secondary-200 text-sm text-center desktop:text-base my-5'>
+                                    No data to be displayed
+                                </Text>
+                                </Div>
                                 :
-                                { top: 0, right: 200, bottom: 50, left: 0 }
-                            }
-                            padding={0.3}
-                            valueScale={{ type: 'linear' }}
-                            indexScale={{ type: 'band', round: true }}
-                            colors={colors}
-                            enableGridX={false}
-                            enableGridY={false}
-                            borderColor={{
-                                from: 'color',
-                                modifiers: [
-                                    [
-                                        'darker',
-                                        1.6
-                                    ]
-                                ]
-                            }}
-                            axisTop={null}
-                            axisRight={null}
-                            axisBottom={{
-                                tickSize: 5,
-                                tickPadding: 5,
-                                tickRotation: 0,
-                            }}
-                            axisLeft={null}
-                            labelSkipWidth={12}
-                            labelSkipHeight={12}
-                            labelTextColor={{
-                                from: 'color',
-                                modifiers: [
-                                    [
-                                        'darker',
-                                        1.6
-                                    ]
-                                ]
-                            }}
-                            legends={
-                                customLegend ?
-                                    []
-                                    :
-                                    [
-                                        {
-                                            dataFrom: 'keys',
-                                            anchor: 'bottom-right',
-                                            direction: 'column',
-                                            justify: false,
-                                            translateX: 120,
-                                            translateY: 0,
-                                            itemsSpacing: 2,
-                                            itemWidth: 100,
-                                            itemHeight: 20,
-                                            itemDirection: 'left-to-right',
-                                            itemOpacity: 0.85,
-                                            symbolSize: 20,
-                                            effects: [
-                                                {
-                                                    on: 'hover',
-                                                    style: {
-                                                        itemOpacity: 1
-                                                    }
-                                                }
-                                            ]
+                                <Div className='h-200px w-full '>
+                                    <ResponsiveBar
+                                        enableLabel={enabled}
+                                        data={tempBarGraphData}
+                                        keys={
+                                            sortDeliveryStatus.includes('Make Default')
+                                                ? [
+                                                    'Picked up/Dropped Off',
+                                                    'For Disposition',
+                                                    'In-transit',
+                                                    'Delivered',
+                                                    'Returned',
+                                                ]
+                                                : sortDeliveryStatus
                                         }
-                                    ]}
-                            role="application"
-                            ariaLabel="Nivo bar chart demo"
-                            barAriaLabel={e => e.id + ": " + e.formattedValue + " in country: " + e.indexValue}
-                        />
-                    </Div>
+                                        indexBy="country"
+                                        margin={
+                                            customLegend ?
+                                                { top: 50, right: 50, bottom: 50, left: 50 }
+                                                :
+                                                { top: 0, right: 200, bottom: 50, left: 0 }
+                                        }
+                                        padding={0.3}
+                                        valueScale={{ type: 'linear' }}
+                                        indexScale={{ type: 'band', round: true }}
+                                        colors={colors}
+                                        enableGridX={false}
+                                        enableGridY={false}
+                                        borderColor={{
+                                            from: 'color',
+                                            modifiers: [
+                                                [
+                                                    'darker',
+                                                    1.6
+                                                ]
+                                            ]
+                                        }}
+                                        axisTop={null}
+                                        axisRight={null}
+                                        axisBottom={{
+                                            tickSize: 5,
+                                            tickPadding: 5,
+                                            tickRotation: 0,
+                                        }}
+                                        axisLeft={null}
+                                        labelSkipWidth={12}
+                                        labelSkipHeight={12}
+                                        labelTextColor={{
+                                            from: 'color',
+                                            modifiers: [
+                                                [
+                                                    'darker',
+                                                    1.6
+                                                ]
+                                            ]
+                                        }}
+                                        legends={
+                                            customLegend ?
+                                                []
+                                                :
+                                                [
+                                                    {
+                                                        dataFrom: 'keys',
+                                                        anchor: 'bottom-right',
+                                                        direction: 'column',
+                                                        justify: false,
+                                                        translateX: 120,
+                                                        translateY: 0,
+                                                        itemsSpacing: 2,
+                                                        itemWidth: 100,
+                                                        itemHeight: 20,
+                                                        itemDirection: 'left-to-right',
+                                                        itemOpacity: 0.85,
+                                                        symbolSize: 20,
+                                                        effects: [
+                                                            {
+                                                                on: 'hover',
+                                                                style: {
+                                                                    itemOpacity: 1
+                                                                }
+                                                            }
+                                                        ]
+                                                    }
+                                                ]}
+                                        role="application"
+                                        ariaLabel="Nivo bar chart demo"
+                                        barAriaLabel={e => e.id + ": " + e.formattedValue + " in country: " + e.indexValue}
+                                    />
+                                </Div>
+                        }
+                    </>
             }
 
             {/*  Custom Legends - ( Non-Interactive ) */}
             {
-                customLegend ?
-                    <FlexRow className='items-start justify-start'>
+                customLegend && !loading1?
+                    <FlexRow className='items-start justify-center'>
                         {
-                            sortDeliveryStatus.includes('Others') || sortDeliveryStatus.includes('Make Default') ?
+                            sortDeliveryStatus.includes('Picked up/Dropped Off') || sortDeliveryStatus.includes('Make Default') ?
                                 <FlexRow className='w-1/3 items-center justify-center p-2'>
-                                    <Spacer className='w-4 h-4 rounded-sm mr-4 bg-yellow-100' />
+                                    {/* <Spacer className='w-4 h-4 rounded-sm mr-4 bg-yellow-100' /> */}
+                                    <div
+                                        className='w-4 h-4 rounded-sm mr-4'
+                                        style={{
+                                            backgroundColor: sortDeliveryStatus.includes('Make Default')
+                                                ? '#F79520'
+                                                : colors[sortDeliveryStatus.indexOf('Picked up/Dropped Off')]
+                                        }}
+                                    />
                                     <Text className='text-secondary-100 text-xs font-semibold'>
                                         Picked Up/ Dropped Off
                                     </Text>
@@ -316,7 +359,15 @@ export const Analytics: FC<any> = () => {
                             {
                                 sortDeliveryStatus.includes('For Disposition') || sortDeliveryStatus.includes('Make Default') ?
                                     <FlexRow className='w-full items-center justify-start py-2'>
-                                        <Spacer className='w-4 h-4 rounded-sm mr-4 bg-red-100' />
+                                        {/* <Spacer className='w-4 h-4 rounded-sm mr-4 bg-red-100' /> */}
+                                        <div
+                                            className='w-4 h-4 rounded-sm mr-4'
+                                            style={{
+                                                backgroundColor: sortDeliveryStatus.includes('Make Default')
+                                                    ? '#E94128'
+                                                    : colors[sortDeliveryStatus.indexOf('For Disposition')]
+                                            }}
+                                        />
                                         <Text className='text-secondary-100 text-xs font-semibold'>
                                             For Disposition
                                         </Text>
@@ -327,7 +378,15 @@ export const Analytics: FC<any> = () => {
                             {
                                 sortDeliveryStatus.includes('In-transit') || sortDeliveryStatus.includes('Make Default') ?
                                     <FlexRow className='w-full items-center justify- py-2'>
-                                        <Spacer className='w-4 h-4 rounded-sm mr-4 bg-blue-100' />
+                                        {/* <Spacer className='w-4 h-4 rounded-sm mr-4 bg-blue-100' /> */}
+                                        <div
+                                            className='w-4 h-4 rounded-sm mr-4'
+                                            style={{
+                                                backgroundColor: sortDeliveryStatus.includes('Make Default')
+                                                    ? '#3173AF'
+                                                    : colors[sortDeliveryStatus.indexOf('In-transit')]
+                                            }}
+                                        />
                                         <Text className='text-secondary-100 text-xs font-semibold'>
                                             In-transit
                                         </Text>
@@ -340,7 +399,15 @@ export const Analytics: FC<any> = () => {
                             {
                                 sortDeliveryStatus.includes('Delivered') || sortDeliveryStatus.includes('Make Default') ?
                                     <FlexRow className='w-full items-center justify-start py-2'>
-                                        <Spacer className='w-4 h-4 rounded-sm mr-4 bg-green-100' />
+                                        {/* <Spacer className='w-4 h-4 rounded-sm mr-4 bg-green-100' /> */}
+                                        <div
+                                            className='w-4 h-4 rounded-sm mr-4'
+                                            style={{
+                                                backgroundColor: sortDeliveryStatus.includes('Make Default')
+                                                    ? '#63C9A8'
+                                                    : colors[sortDeliveryStatus.indexOf('Delivered')]
+                                            }}
+                                        />
                                         <Text className='text-secondary-100 text-xs font-semibold'>
                                             Delivered
                                         </Text>
@@ -351,7 +418,15 @@ export const Analytics: FC<any> = () => {
                             {
                                 sortDeliveryStatus.includes('Returned') || sortDeliveryStatus.includes('Make Default') ?
                                     <FlexRow className='w-full items-center justify-start py-2'>
-                                        <Spacer className='w-4 h-4 rounded-sm mr-4 bg-secondary-200' />
+                                        {/* <Spacer className='w-4 h-4 rounded-sm mr-4 bg-secondary-200' /> */}
+                                        <div
+                                            className='w-4 h-4 rounded-sm mr-4'
+                                            style={{
+                                                backgroundColor: sortDeliveryStatus.includes('Make Default')
+                                                    ? '#202123B3'
+                                                    : colors[sortDeliveryStatus.indexOf('Returned')]
+                                            }}
+                                        />
                                         <Text className='text-secondary-100 text-xs font-semibold'>
                                             Returned
                                         </Text>

@@ -12,13 +12,15 @@ interface DataProps {
   onSelectSubMenu: any;
   list1: any;
   list2: any;
+  value: string;
 }
 
 export const AnalyticsDropdown: FC<DataProps> = ({
   onSelectMenu,
   onSelectSubMenu,
   list1,
-  list2
+  list2,
+  value
 }) => {
 
   const navigate = useNavigate();
@@ -33,7 +35,7 @@ export const AnalyticsDropdown: FC<DataProps> = ({
             <FaFilter className='text-red-100 mr-4' />
             <Div className="flex flex-col">
               <Text className="mr-auto truncate text-ellipsis text-left text-red-100 w-40">
-                Delivery Status
+                {value}
               </Text>
             </Div>
             <FaChevronDown className="text-xl text-red-100" />
@@ -60,7 +62,10 @@ export const AnalyticsDropdown: FC<DataProps> = ({
                     className={`hover:bg-grey-400 hover:text-secondary-100 text-secondary-200
                           group flex flex-row rounded-md items-center justify-between w-full px-4 py-3 text-base parentToolTip`}
                   >
-                    <RawButton onClick={() => navigate(link.url)}>
+                    <RawButton onClick={() => {
+                      onSelectMenu(link.name)
+                      navigate(link.url)
+                    }}>
                       <Text>
                         {link.name}
                       </Text>
