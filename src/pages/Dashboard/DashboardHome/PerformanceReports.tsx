@@ -30,6 +30,13 @@ export const PerformanceReports: FC<any> = () => {
     }, [timeline])
 
     React.useEffect(() => {
+        setLoading(true);
+        setTimeout(() => {
+            setLoading(false);
+        }, 750)
+    }, [timeline])
+
+    React.useEffect(() => {
         setTimeout(() => {
             setLoading(false);
         }, 2000)

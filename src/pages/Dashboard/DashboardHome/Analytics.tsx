@@ -8,8 +8,11 @@ import { FaUserCircle } from 'react-icons/fa';
 import { tempBarGraphData } from '../../../constants/TempData';
 import { getCookie } from '../../../hooks';
 import { ImSpinner2 } from 'react-icons/im';
+import { RawButton } from '../../../core/Buttons';
 
 export const Analytics: FC<any> = () => {
+
+    const [customLegend, setLegend] = React.useState(false);
 
     const [loading, setLoading] = React.useState(true);
     const [loading1, setLoading1] = React.useState(true);
@@ -184,9 +187,14 @@ export const Analytics: FC<any> = () => {
                 <Text className='text-secondary-200 text-sm'>
                     Show labels
                 </Text>
-                <Text className='text-secondary-200 text-sm ml-auto'>
-                    Data Updates as of {newDate}
-                </Text>
+                <RawButton className='ml-auto cursor-auto' onClick={() => setLegend(!customLegend)}>
+                    <div title='This is Test Debugger Button'>
+                    <Text className='text-secondary-200 text-sm'>
+                        Data Updates as of {newDate}
+                    </Text>
+                    </div>
+                </RawButton>
+
             </FlexRow>
 
             <Spacer className='w-10 h-10' />
@@ -214,7 +222,12 @@ export const Analytics: FC<any> = () => {
                                     : sortDeliveryStatus
                             }
                             indexBy="country"
-                            margin={{ top: 0, right: 200, bottom: 50, left: 0 }}
+                            margin={
+                                customLegend ?
+                                { top: 50, right: 50, bottom: 50, left: 50 }
+                                :
+                                { top: 0, right: 200, bottom: 50, left: 0 }
+                            }
                             padding={0.3}
                             valueScale={{ type: 'linear' }}
                             indexScale={{ type: 'band', round: true }}
@@ -249,30 +262,34 @@ export const Analytics: FC<any> = () => {
                                     ]
                                 ]
                             }}
-                            legends={[
-                                {
-                                    dataFrom: 'keys',
-                                    anchor: 'bottom-right',
-                                    direction: 'column',
-                                    justify: false,
-                                    translateX: 120,
-                                    translateY: 0,
-                                    itemsSpacing: 2,
-                                    itemWidth: 100,
-                                    itemHeight: 20,
-                                    itemDirection: 'left-to-right',
-                                    itemOpacity: 0.85,
-                                    symbolSize: 20,
-                                    effects: [
+                            legends={
+                                customLegend ?
+                                    []
+                                    :
+                                    [
                                         {
-                                            on: 'hover',
-                                            style: {
-                                                itemOpacity: 1
-                                            }
+                                            dataFrom: 'keys',
+                                            anchor: 'bottom-right',
+                                            direction: 'column',
+                                            justify: false,
+                                            translateX: 120,
+                                            translateY: 0,
+                                            itemsSpacing: 2,
+                                            itemWidth: 100,
+                                            itemHeight: 20,
+                                            itemDirection: 'left-to-right',
+                                            itemOpacity: 0.85,
+                                            symbolSize: 20,
+                                            effects: [
+                                                {
+                                                    on: 'hover',
+                                                    style: {
+                                                        itemOpacity: 1
+                                                    }
+                                                }
+                                            ]
                                         }
-                                    ]
-                                }
-                            ]}
+                                    ]}
                             role="application"
                             ariaLabel="Nivo bar chart demo"
                             barAriaLabel={e => e.id + ": " + e.formattedValue + " in country: " + e.indexValue}
@@ -281,68 +298,73 @@ export const Analytics: FC<any> = () => {
             }
 
             {/*  Custom Legends - ( Non-Interactive ) */}
-            <FlexRow className='items-start justify-start hidden'>
-                {
-                    sortDeliveryStatus.includes('Others') || sortDeliveryStatus.includes('Make Default') ?
-                        <FlexRow className='w-1/3 items-center justify-center p-2'>
-                            <Spacer className='w-4 h-4 rounded-sm mr-4 bg-yellow-100' />
-                            <Text className='text-secondary-100 text-xs font-semibold'>
-                                Picked Up/ Dropped Off
-                            </Text>
-                        </FlexRow>
-                        :
-                        <></>
-                }
-                <Div className={`w-1/3 p-2 ${sortDeliveryStatus.includes('For Disposition') || sortDeliveryStatus.includes('In-transit') || sortDeliveryStatus.includes('Make Default') ? '' : 'hidden'}`}>
-                    {
-                        sortDeliveryStatus.includes('For Disposition') || sortDeliveryStatus.includes('Make Default') ?
-                            <FlexRow className='w-full items-center justify-start py-2'>
-                                <Spacer className='w-4 h-4 rounded-sm mr-4 bg-red-100' />
-                                <Text className='text-secondary-100 text-xs font-semibold'>
-                                    For Disposition
-                                </Text>
-                            </FlexRow>
-                            :
-                            <></>
-                    }
-                    {
-                        sortDeliveryStatus.includes('In-transit') || sortDeliveryStatus.includes('Make Default') ?
-                            <FlexRow className='w-full items-center justify- py-2'>
-                                <Spacer className='w-4 h-4 rounded-sm mr-4 bg-blue-100' />
-                                <Text className='text-secondary-100 text-xs font-semibold'>
-                                    In-transit
-                                </Text>
-                            </FlexRow>
-                            :
-                            <></>
-                    }
-                </Div>
-                <Div className={`w-1/3 p-2 ${sortDeliveryStatus.includes('Delivered') || sortDeliveryStatus.includes('Returned') || sortDeliveryStatus.includes('Make Default') ? '' : 'hidden'}`}>
-                    {
-                        sortDeliveryStatus.includes('Delivered') || sortDeliveryStatus.includes('Make Default') ?
-                            <FlexRow className='w-full items-center justify-start py-2'>
-                                <Spacer className='w-4 h-4 rounded-sm mr-4 bg-green-100' />
-                                <Text className='text-secondary-100 text-xs font-semibold'>
-                                    Delivered
-                                </Text>
-                            </FlexRow>
-                            :
-                            <></>
-                    }
-                    {
-                        sortDeliveryStatus.includes('Returned') || sortDeliveryStatus.includes('Make Default') ?
-                            <FlexRow className='w-full items-center justify-start py-2'>
-                                <Spacer className='w-4 h-4 rounded-sm mr-4 bg-secondary-200' />
-                                <Text className='text-secondary-100 text-xs font-semibold'>
-                                    Returned
-                                </Text>
-                            </FlexRow>
-                            :
-                            <></>
-                    }
-                </Div>
+            {
+                customLegend ?
+                    <FlexRow className='items-start justify-start'>
+                        {
+                            sortDeliveryStatus.includes('Others') || sortDeliveryStatus.includes('Make Default') ?
+                                <FlexRow className='w-1/3 items-center justify-center p-2'>
+                                    <Spacer className='w-4 h-4 rounded-sm mr-4 bg-yellow-100' />
+                                    <Text className='text-secondary-100 text-xs font-semibold'>
+                                        Picked Up/ Dropped Off
+                                    </Text>
+                                </FlexRow>
+                                :
+                                <></>
+                        }
+                        <Div className={`w-1/3 p-2 ${sortDeliveryStatus.includes('For Disposition') || sortDeliveryStatus.includes('In-transit') || sortDeliveryStatus.includes('Make Default') ? '' : 'hidden'}`}>
+                            {
+                                sortDeliveryStatus.includes('For Disposition') || sortDeliveryStatus.includes('Make Default') ?
+                                    <FlexRow className='w-full items-center justify-start py-2'>
+                                        <Spacer className='w-4 h-4 rounded-sm mr-4 bg-red-100' />
+                                        <Text className='text-secondary-100 text-xs font-semibold'>
+                                            For Disposition
+                                        </Text>
+                                    </FlexRow>
+                                    :
+                                    <></>
+                            }
+                            {
+                                sortDeliveryStatus.includes('In-transit') || sortDeliveryStatus.includes('Make Default') ?
+                                    <FlexRow className='w-full items-center justify- py-2'>
+                                        <Spacer className='w-4 h-4 rounded-sm mr-4 bg-blue-100' />
+                                        <Text className='text-secondary-100 text-xs font-semibold'>
+                                            In-transit
+                                        </Text>
+                                    </FlexRow>
+                                    :
+                                    <></>
+                            }
+                        </Div>
+                        <Div className={`w-1/3 p-2 ${sortDeliveryStatus.includes('Delivered') || sortDeliveryStatus.includes('Returned') || sortDeliveryStatus.includes('Make Default') ? '' : 'hidden'}`}>
+                            {
+                                sortDeliveryStatus.includes('Delivered') || sortDeliveryStatus.includes('Make Default') ?
+                                    <FlexRow className='w-full items-center justify-start py-2'>
+                                        <Spacer className='w-4 h-4 rounded-sm mr-4 bg-green-100' />
+                                        <Text className='text-secondary-100 text-xs font-semibold'>
+                                            Delivered
+                                        </Text>
+                                    </FlexRow>
+                                    :
+                                    <></>
+                            }
+                            {
+                                sortDeliveryStatus.includes('Returned') || sortDeliveryStatus.includes('Make Default') ?
+                                    <FlexRow className='w-full items-center justify-start py-2'>
+                                        <Spacer className='w-4 h-4 rounded-sm mr-4 bg-secondary-200' />
+                                        <Text className='text-secondary-100 text-xs font-semibold'>
+                                            Returned
+                                        </Text>
+                                    </FlexRow>
+                                    :
+                                    <></>
+                            }
+                        </Div>
 
-            </FlexRow>
+                    </FlexRow>
+                    :
+                    <></>
+            }
         </Div>
     );
 };
