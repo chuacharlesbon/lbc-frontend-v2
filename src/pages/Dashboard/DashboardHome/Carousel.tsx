@@ -5,6 +5,7 @@ import { Carousel } from 'react-responsive-carousel';
 import { RawButton } from '../../../core/Buttons';
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 import { Transition } from '@headlessui/react';
+import { Images } from '../../../assets/images/images';
 
 export const LBCCarouselSlider: FC<any> = () => {
 
@@ -22,25 +23,21 @@ export const LBCCarouselSlider: FC<any> = () => {
                     enterTo="opacity-100"
                     show
                 >
-                    <Div className='w-full h-200px'>
+                    <Div className=''>
                         <Carousel
-                            className='h-200px'
+                            className=''
                             autoPlay={true}
                             interval={2000}
                             infiniteLoop={true}
                             showThumbs={false}
                         >
                             <div>
-                                <img alt='LBC 1' className='w-full h-200px object-fit rounded-3xl' src="https://remitusa.lbcexpress.com/images/default-source/carouselindex/carouselindexoct2021/02-lbc_online-remittanceresize_more-peso_539x272px.jpg" />
+                                <img alt='LBC 1' className='aspect-4/1 object-fit rounded-3xl' src={Images.banner1} />
                                 <p className="legend hidden">Legend 1</p>
                             </div>
                             <div>
-                                <img alt='LBC 2' className='w-full h-200px object-fit rounded-3xl' src="https://remitusa.lbcexpress.com/images/default-source/carouselindex/carouselindexoct2021/01-lbconlineremittance539x272px2fa.jpg" />
+                                <img alt='LBC 2' className='aspect-4/1 object-fit rounded-3xl' src={Images.banner2} />
                                 <p className="legend hidden">Legend 2</p>
-                            </div>
-                            <div>
-                                <img alt='LBC 3' className='w-full h-200px object-fit rounded-3xl' src="https://digitalpinas.com/wp-content/uploads/2020/01/6.png" />
-                                <p className="legend hidden">Legend 3</p>
                             </div>
                         </Carousel>
                     </Div>

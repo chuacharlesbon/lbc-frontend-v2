@@ -3,6 +3,9 @@ module.exports = {
   darkMode: false,
   theme: {
     extend: {
+      aspectRatio: {
+        '4/1': '4 / 1',
+      },
       fontFamily: {
         lato: ['Lato'],
         roboto: ['Roboto'],
