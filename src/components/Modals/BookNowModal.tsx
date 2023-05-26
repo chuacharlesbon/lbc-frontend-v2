@@ -33,6 +33,12 @@ export const BookNowModal: FC<DataProps> = ({
 
     const [shipmentType, setShipmentType] = React.useState('Air');
 
+    const [selectedItems, setSelected] = React.useState<any[]>([]);
+
+    const onSelectItems = (item: any) => {
+        setSelected([item])
+    }
+
     const onSaveLater = () => {
         setLoading(true);
         if (currentStage > 0) {
@@ -47,10 +53,10 @@ export const BookNowModal: FC<DataProps> = ({
     }
 
     const onChangeStage = (stage: number, type: string) => {
-        if(type === 'next' && stage === 3){
+        if (type === 'next' && stage === 3) {
             navigate('/book-now?booking=added')
             onClose();
-        }else if (type === 'next') {
+        } else if (type === 'next') {
             setStage(stage + 1)
         } else if (type === 'prev') {
             setStage(stage - 1)
@@ -503,18 +509,19 @@ export const BookNowModal: FC<DataProps> = ({
                                                     </Text>
 
                                                     <Div className='w-full overflow-x-scroll py-2'>
-                                                    <FlexRow className='w-1000px py-2'>
-                                                        {
-                                                            tempLBCPackage.map((item: any) => (
-                                                                <PackageItem
-                                                                    className='w-200px mx-2'
-                                                                    isSelected={false}
-                                                                    data={item}
-                                                                    onClick={() => {}}
-                                                                />
-                                                            ))
-                                                        }
-                                                    </FlexRow>
+                                                        <FlexRow className='w-1000px py-2'>
+                                                            {
+                                                                tempLBCPackage.map((item: any) => (
+                                                                    <PackageItem
+                                                                        className='w-200px mx-2'
+                                                                        isSelected={selectedItems.includes(item)}
+                                                                        data={item}
+                                                                        onClick={onSelectItems}
+                                                                        list={[]}
+                                                                    />
+                                                                ))
+                                                            }
+                                                        </FlexRow>
                                                     </Div>
                                                 </Div>
                                                 :
