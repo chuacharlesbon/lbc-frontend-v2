@@ -122,6 +122,10 @@ export const DataSortStatus1 = [
         name: 'Unread',
         link: 'unread',
       },
+      {
+        name: 'Default',
+        link: 'default',
+      },
     ]
   }
 ];

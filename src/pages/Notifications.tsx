@@ -8,17 +8,10 @@ import { Pagination } from './../components/Tables/Pagination';
 import { RawInput } from '../core/Forms';
 import { ColumnHeaderSearch, ColumnHeaderDropdown } from '../components/Tables';
 import { DataSort, DataSortStatus1 } from '../constants/Dropdowns';
-import { useLocation } from 'react-router-dom';
 import { NotificationsRow } from '../components/Tables/NotificationsRow';
 import { ImSpinner2 } from 'react-icons/im';
 
 export const Notifications: FC<any> = () => {
-
-    const { search } = useLocation();
-    const query = new URLSearchParams(search);
-    const actionQuery = query.get('sort');
-    const dateQuery = query.get('date');
-    const statusQuery = query.get('status');
 
     const [loading, setLoading] = React.useState(true);
 
@@ -26,13 +19,14 @@ export const Notifications: FC<any> = () => {
     const [notifDate, setDate] = React.useState('Date');
     const [notifSubject, setSubject] = React.useState('');
     const [notifStatus, setStatus] = React.useState('Status');
+    const [sortList, setSortList] = React.useState<any>(tempNotificationData);
 
     const [currentPage, setCurrentPage] = React.useState(1);
     const [articlesPerPage] = React.useState(5);
     const indexOfLastArticle = currentPage * articlesPerPage;
     const indexOfFirstArticle = indexOfLastArticle - articlesPerPage;
 
-    const currentNotifications = tempNotificationData.slice(indexOfFirstArticle, indexOfLastArticle);
+    const currentNotifications = sortList.slice(indexOfFirstArticle, indexOfLastArticle);
 
     const paginate = (pageNumber: React.SetStateAction<number>) => setCurrentPage(pageNumber);
 
@@ -41,35 +35,64 @@ export const Notifications: FC<any> = () => {
 
     }
 
-    const onSortDate = (type: string) => {
-        setDate(type);
-        if (type === 'ascending') {
-
-        } else if (type === 'descending') {
-
+    const onSortDate = async (type: string) => {
+        if (type === 'Ascending') {
+            const tempList = await sortList.sort((a: any, b: any) => {
+                if (a.date < b.date) { return -1; }
+                if (a.date > b.date) { return 1; }
+                return 0;
+            });
+            setSortList(tempList);
+            setLoading(true);
+            setTimeout(() => {
+                setLoading(false);
+            }, 1000)
+        } else if (type === 'Descending') {
+            const tempList = await sortList.sort((a: any, b: any) => {
+                if (a.date > b.date) { return -1; }
+                if (a.date < b.date) { return 1; }
+                return 0;
+            });
+            setSortList(tempList);
+            setLoading(true);
+            setTimeout(() => {
+                setLoading(false);
+            }, 1000)
         }
     }
 
-    const onSortSubject = () => {
-        //
-    }
-
-    const onSortStatus = (type: string) => {
-        setStatus(type);
-        if (type === 'read') {
-
-        } else if (type === 'unread') {
-
+    const onSortSubject = async () => {
+        if(notifSubject.trim() !== ''){
+            const tempList = await sortList.filter((a: any) => a.excerpt.toString().toLowerCase().includes(notifSubject.toLowerCase()) || a.date.toString().toLowerCase().includes(notifSubject.toLowerCase()));
+            setSortList(tempList);
+        }else{
+            setSortList(tempNotificationData);
         }
     }
 
-    React.useEffect(() => {
-        if (dateQuery === 'true') {
-            onSortDate(actionQuery || '- -  - -');
-        } else if (statusQuery === 'true') {
-            onSortStatus(actionQuery || '- -  - -');
+    const onSortStatus = async (type: string) => {
+        if (type === 'Read') {
+            const tempList = await tempNotificationData.filter((a: any) => a.status == 'Read');
+            setSortList(tempList);
+            setLoading(true);
+            setTimeout(() => {
+                setLoading(false);
+            }, 1000)
+        } else if (type === 'Unread') {
+            const tempList = await tempNotificationData.filter((a: any) => a.status == 'Unread');
+            setSortList(tempList);
+            setLoading(true);
+            setTimeout(() => {
+                setLoading(false);
+            }, 1000)
+        } else {
+            setSortList(tempNotificationData);
+            setLoading(true);
+            setTimeout(() => {
+                setLoading(false);
+            }, 1000)
         }
-    }, [actionQuery, dateQuery, statusQuery])
+    }
 
     React.useEffect(() => {
         setLoading(true);
@@ -77,6 +100,10 @@ export const Notifications: FC<any> = () => {
             setLoading(false);
         }, 1000)
     }, [])
+
+    React.useEffect(() => {
+        onSortSubject();
+    }, [notifSubject])
 
     return (
         <FlexRow className='w-full h-full items-center justify-between'>
@@ -126,9 +153,8 @@ export const Notifications: FC<any> = () => {
                                     <ColumnHeaderDropdown
                                         containerClass=''
                                         containerButtonClass='border border-red-400'
-                                        newRoute='/notifications'
-                                        newParam='date=true&sort'
                                         options={DataSort}
+                                        onSelect={onSortDate}
                                         titleClassName='text-secondary-100'
                                         value='Date'
                                     />
@@ -149,9 +175,8 @@ export const Notifications: FC<any> = () => {
                                     <ColumnHeaderDropdown
                                         containerClass=''
                                         containerButtonClass='border border-red-400'
-                                        newRoute='/notifications'
-                                        newParam='status=true&sort'
                                         options={DataSortStatus1}
+                                        onSelect={onSortStatus}
                                         titleClassName='text-secondary-100'
                                         value='Status'
                                     />
@@ -165,15 +190,28 @@ export const Notifications: FC<any> = () => {
                                         Loading data ...
                                     </Text>
                                     :
-                                    currentNotifications.map((list: any) => (
-                                        <NotificationsRow
-                                            id={list.id}
-                                            date={list.date}
-                                            subject={list.subject}
-                                            excerpt={list.excerpt}
-                                            status={list.status}
-                                        />
-                                    ))
+                                    <>
+                                        {
+                                            currentNotifications.length > 0 ?
+                                                <>
+                                                    {
+                                                        currentNotifications.map((list: any) => (
+                                                            <NotificationsRow
+                                                                id={list.id}
+                                                                date={list.date}
+                                                                subject={list.subject}
+                                                                excerpt={list.excerpt}
+                                                                status={list.status}
+                                                            />
+                                                        ))
+                                                    }
+                                                </>
+                                                :
+                                                <Text className='text-red-400 text-center flex flex-row justify-center items-center my-24'>
+                                                    No data to be displayed
+                                                </Text>
+                                        }
+                                    </>
                             }
                         </Div>
 

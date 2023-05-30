@@ -270,24 +270,52 @@ export const tempDispostionData = [
 export const tempNotificationData = [
     {
         id: 1,
-        date: "01/01/2023 00:00 AM",
+        date: "05/10/2023 00:00 AM",
         subject: "Notice of Releases",
         excerpt: "This is an announcement to provide information!",
-        status: 'Unread'
+        status: 'Read'
     },
     {
         id: 2,
-        date: "01/01/2023 00:00 AM",
+        date: "05/15/2023 00:00 AM",
         subject: "Notice of Releases",
-        excerpt: "This is an announcement to provide information! This is an announcement to provide information!",
+        excerpt: "This is an announcement to provide information! This is an announcement to provide information Dashboard!",
         status: 'Unread'
     },
     {
         id: 3,
-        date: "01/01/2023 00:00 AM",
+        date: "05/17/2023 00:00 AM",
         subject: "Notice of Releases",
-        excerpt: "This is an announcement to provide information! This is an announcement to provide information!",
-        status: 'Read'
+        excerpt: "This is an announcement to provide information! This is an announcement to provide information Components!",
+        status: 'Unread'
+    },
+    {
+        id: 4,
+        date: "05/20/2023 00:00 AM",
+        subject: "Notice of Releases",
+        excerpt: "This is an announcement to provide information! This is an announcement to provide information Book Now!",
+        status: 'Unread'
+    },
+    {
+        id: 5,
+        date: "05/22/2023 00:00 AM",
+        subject: "Notice of Releases",
+        excerpt: "This is an announcement to provide information! This is an announcement to provide information Activity!",
+        status: 'Unread'
+    },
+    {
+        id: 6,
+        date: "05/25/2023 00:00 AM",
+        subject: "Notice of Releases",
+        excerpt: "This is an announcement to provide information! This is an announcement to provide information Enhancements!",
+        status: 'Unread'
+    },
+    {
+        id: 7,
+        date: "05/30/2023 00:00 AM",
+        subject: "Notice of Releases",
+        excerpt: "This is an announcement to provide information! This is an announcement to provide information Table Sort!",
+        status: 'Unread'
     },
 ];
 
