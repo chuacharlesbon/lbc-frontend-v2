@@ -35,7 +35,7 @@ export const DashboardDeliveryTableData: FC<any> = () => {
                 />
 
                 {/* Body */}
-                <Div className='w-full h-full overflow-y-scroll p-10 bg-white'>
+                <Div className='w-full h-full overflow-y-auto p-10 bg-white'>
                     <FlexRow className='justify-between w-full'>
                         <Div className='shadow-lg rounded-lg border border-grey-400 p-5 w-3/5 h-48'>
                             <Text className='text-secondary-100 text-xs font-bold'>
@@ -66,8 +66,8 @@ export const DashboardDeliveryTableData: FC<any> = () => {
                         </FlexColumn>
                     </FlexRow>
                     <Spacer className='h-10' />
-                    <FlexColumn className='w-full h-3/5'>
-                        <Div className='h-full w-full overflow-x-scroll border border-grey-400 rounded-lg shadow-lg p-5'>
+                    <FlexColumn className='w-full'>
+                        <Div className='w-full overflow-x-scroll border border-grey-400 rounded-lg shadow-lg p-5'>
                             <FlexRow className='items-center justify-between w-2400px'>
                                 <ColumnHeader
                                     title="Tracking No."
