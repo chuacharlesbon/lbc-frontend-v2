@@ -31,7 +31,7 @@ export const Activity: FC<any> = () => {
     }, [actionQuery, navigate])
 
     return (
-        <FlexRow className='w-full h-full items-center justify-between overflow-hidden scrollbar-hide'>
+        <FlexRow className='w-full h-full items-center justify-between'>
             {/* Side Navigation */}
             <NavbarMain route='Activity' />
 
