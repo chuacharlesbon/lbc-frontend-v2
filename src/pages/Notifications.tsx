@@ -94,8 +94,8 @@ export const Notifications: FC<any> = () => {
                 />
 
                 {/* Body */}
-                <Div className='w-full h-full overflow-y-scroll p-10 bg-white'>
-                    <FlexColumn className='w-full h-full'>
+                <Div className='w-full h-full overflow-y-auto p-10 bg-white'>
+                    <FlexColumn className='w-full'>
                         {/* Header */}
                         <Text className='text-secondary-200 font-bold'>
                             Notifications
@@ -120,7 +120,7 @@ export const Notifications: FC<any> = () => {
 
                         {/* Body */}
                         <Spacer className='h-10' />
-                        <Div className='h-3/4 border border-grey-400 rounded-lg shadow-lg p-5'>
+                        <Div className='border border-grey-400 rounded-lg shadow-lg p-5'>
                             <FlexRow className='items-center justify-between w-full'>
                                 <Div className='w-1/5 p-2'>
                                     <ColumnHeaderDropdown
