@@ -25,17 +25,17 @@ export const BillingHistory: FC<any> = () => {
 
     return (
         <>
-            <Div className='w-full h-full'>
+            <Div className='w-full'>
                 <Spacer className='w-10 h-10' />
-                <FlexRow className='w-full h-4/5 items-center justify-center border border-grey-400 rounded-lg shadow-lg'>
+                <FlexRow className='w-full items-center justify-center border border-grey-400 rounded-lg shadow-lg'>
                     {
                         loading ?
-                            <Text className='text-red-400 text-center flex flex-row justify-center items-center my-40'>
+                            <Text className='text-red-400 text-center flex flex-row justify-center items-center my-20'>
                                 <ImSpinner2 className="animate-spin mr-2 text-2xl desktop:text-3xl" />
                                 Loading data ...
                             </Text>
                             :
-                            <Text className='text-secondary-200 text-sm text-center desktop:text-base'>
+                            <Text className='text-secondary-200 text-sm text-center desktop:text-base my-20'>
                                 No data to be displayed
                             </Text>
                     }

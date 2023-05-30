@@ -29,12 +29,12 @@ export const RemittanceHistory: FC<any> = () => {
 
     return (
         <>
-            <Div className='w-full h-full'>
+            <Div className='w-full'>
                 <FlexRow className='items-center justify-between py-5'>
                     <Spacer />
                     <input className='w-48 block rounded-lg' type='date' value='2023-01-01' />
                 </FlexRow>
-                <Div className='w-full border border-grey-400 rounded-lg shadow-lg overflow-y-scroll scrollbar-hide'>
+                <Div className='w-full border border-grey-400 rounded-lg shadow-lg'>
                     <FlexRow className='w-full items-center justify-between py-2 border border-grey-400'>
                         {
                             RemittanceHistoryColumns.map((column) => (
@@ -46,7 +46,7 @@ export const RemittanceHistory: FC<any> = () => {
                     </FlexRow>
                     {
                         loading ?
-                            <Text className='text-red-400 text-center flex flex-row justify-center items-center my-40'>
+                            <Text className='text-red-400 text-center flex flex-row justify-center items-center my-20'>
                                 <ImSpinner2 className="animate-spin mr-2 text-2xl desktop:text-3xl" />
                                 Loading data ...
                             </Text>
