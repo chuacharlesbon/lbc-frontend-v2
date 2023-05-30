@@ -60,9 +60,9 @@ export const PastTab: FC<any> = () => {
         <>
             {
                 singleView === 'default' ?
-                    <Div className='w-full h-full'>
+                    <Div className='w-full'>
                         <Spacer className='w-full h-10' />
-                        <Div className='w-full border border-grey-400 rounded-lg shadow-lg overflow-y-scroll scrollbar-hide'>
+                        <Div className='w-full border border-grey-400 rounded-lg shadow-lg'>
                             <FlexRow className='items-center justify-between py-2 border border-grey-400'>
                                 <Text className="text-secondary-100 text-xs text-center font-semibold w-1/6 px-4 py-2">
                                     Reference No.
@@ -94,7 +94,7 @@ export const PastTab: FC<any> = () => {
                             </FlexRow>
                             {
                                 loading ?
-                                    <Text className='text-red-400 text-center flex flex-row justify-center items-center my-40'>
+                                    <Text className='text-red-400 text-center flex flex-row justify-center items-center my-20'>
                                         <ImSpinner2 className="animate-spin mr-2 text-2xl desktop:text-3xl" />
                                         Loading data ...
                                     </Text>
@@ -126,7 +126,7 @@ export const PastTab: FC<any> = () => {
                         </Div>
                     </Div>
                     :
-                    <Div className='w-full h-full'>
+                    <Div className='w-full'>
                         <Spacer className='w-full h-10' />
                         <Div className='w-full rounded-sm shadow-sm border border-grey-400 p-10'>
                             <FlexRow className='w-full items-center justify-start'>

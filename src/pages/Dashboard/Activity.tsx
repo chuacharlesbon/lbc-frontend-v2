@@ -46,10 +46,10 @@ export const Activity: FC<any> = () => {
                 />
 
                 {/* Body */}
-                <Div className='w-full h-full p-10 bg-white'>
-                    <FlexRow className='w-full h-full'>
+                <Div className='w-full h-full overflow-y-auto p-10 bg-white'>
+                    <FlexRow className='w-full'>
                         <Tab.Group selectedIndex={selectedIndex} onChange={setSelectedIndex}>
-                            <FlexColumn className='w-full h-full'>
+                            <FlexColumn className='w-full'>
                                 <Tab.List className="tabletWide:space-x-4">
                                     {tabs.map((tab: any) => (
                                         <Tab
@@ -68,14 +68,14 @@ export const Activity: FC<any> = () => {
                                     ))}
                                 </Tab.List>
                                 <Divider className="text-grey-400" />
-                                <Tab.Panels className="w-full h-full">
-                                    <Tab.Panel className={`w-full h-full`}>
+                                <Tab.Panels className="w-full">
+                                    <Tab.Panel className={`w-full`}>
                                         <ActiveTab />
                                     </Tab.Panel>
-                                    <Tab.Panel className={`w-full h-full`}>
+                                    <Tab.Panel className={`w-full`}>
                                         <PastTab />
                                     </Tab.Panel>
-                                    <Tab.Panel className={`w-full h-full`}>
+                                    <Tab.Panel className={`w-full`}>
                                         <DraftTab />
                                     </Tab.Panel>
                                 </Tab.Panels>
