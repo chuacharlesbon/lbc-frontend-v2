@@ -829,3 +829,102 @@ export const tempWeeklyPerformancePercent = [
         title: 'WTD % Return w/in SLA'
     },
 ];
+
+export const tempDeliveryTableData = [
+    {
+        tracking: "#NCR8372846246",
+        encodedDate: "03/02/2023",
+        deliveryReq: 'NDO',
+        status: "Refused to accept",
+        statusDate: "03/03/2023",
+        acceptanceDate: "03/04/2023",
+        consigneeName: "John Doe",
+        consigneeContact: "0987654321",
+        consigneeAddress: "321 Edge Street, Region X, Philippines",
+        reason: 'Incorrect Address'
+    },
+    {
+        tracking: "#NCR83728462464",
+        encodedDate: "02/01/2023",
+        deliveryReq: 'NDO',
+        status: "Incorrect Address",
+        statusDate: "02/02/2023",
+        acceptanceDate: "02/03/2023",
+        consigneeName: "Black Jack",
+        consigneeContact: "0987654322",
+        consigneeAddress: "123 Chrome Street, Region X, Philippines",
+        reason: 'Refused to accept'
+    },
+    {
+        tracking: "#NCR837284624642",
+        encodedDate: "01/04/2023",
+        deliveryReq: 'NDO',
+        status: "House closed",
+        statusDate: "01/05/2023",
+        acceptanceDate: "01/06/2023",
+        consigneeName: "Anne May",
+        consigneeContact: "0987654323",
+        consigneeAddress: "Unit 1 Mozilla Street, Region X, Philippines",
+        reason: 'Consignee unknown'
+    },
+    {
+        tracking: "#NCR8372846246426",
+        encodedDate: "04/05/2023",
+        deliveryReq: 'NDO',
+        status: "Consignee unknown",
+        statusDate: "04/06/2023",
+        acceptanceDate: "04/07/2023",
+        consigneeName: "Mary Jane",
+        consigneeContact: "0987654324",
+        consigneeAddress: "Block A Safari Street, Region X, Philippines",
+        reason: 'House closed'
+    },
+    {
+        tracking: "#NCR83728462469",
+        encodedDate: "03/12/2023",
+        deliveryReq: 'NDO',
+        status: "Refused to accept",
+        statusDate: "03/13/2023",
+        acceptanceDate: "03/14/2023",
+        consigneeName: "John Doe",
+        consigneeContact: "0987654321",
+        consigneeAddress: "321 Edge Street, Region X, Philippines",
+        reason: 'Incorrect Address'
+    },
+    {
+        tracking: "#NCR837284624648",
+        encodedDate: "02/11/2023",
+        deliveryReq: 'NDO',
+        status: "Incorrect Address",
+        statusDate: "02/12/2023",
+        acceptanceDate: "02/13/2023",
+        consigneeName: "Black Jack",
+        consigneeContact: "0987654322",
+        consigneeAddress: "123 Chrome Street, Region X, Philippines",
+        reason: 'Refused to accept'
+    },
+    {
+        tracking: "#NCR8372846246427",
+        encodedDate: "01/14/2023",
+        deliveryReq: 'NDO',
+        status: "House closed",
+        statusDate: "01/15/2023",
+        acceptanceDate: "01/16/2023",
+        consigneeName: "Anne May",
+        consigneeContact: "0987654323",
+        consigneeAddress: "Unit 1 Mozilla Street, Region X, Philippines",
+        reason: 'Consignee unknown'
+    },
+    {
+        tracking: "#NCR83728462464266",
+        encodedDate: "04/15/2023",
+        deliveryReq: 'NDO',
+        status: "Consignee unknown",
+        statusDate: "04/16/2023",
+        acceptanceDate: "04/17/2023",
+        consigneeName: "Mary Jane",
+        consigneeContact: "0987654324",
+        consigneeAddress: "Block A Safari Street, Region X, Philippines",
+        reason: 'House closed'
+    },
+]

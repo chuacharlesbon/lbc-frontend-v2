@@ -76,3 +76,58 @@ export const DeliveryDataRow: FC<DataProps> = ({
 	</FlexRow>
 </>
 )
+
+export const DeliveryDataTableRow: FC<any> = ({
+	data
+}) => (
+<>
+	<FlexRow className='items-center justify-between w-2800px py-2 hover:bg-grey-400'>
+        <Text className='text-secondary-100 text-sm w-200px px-4'>
+            {data.tracking}
+        </Text>
+        <Text className='text-secondary-100 text-sm text-center w-200px px-4'>
+            {data.encodedDate}
+        </Text>
+        <Text className='text-secondary-100 text-sm text-center w-200px px-4'>
+            {data.deliveryReq}
+        </Text>
+        <Text className='text-secondary-100 text-sm text-center w-200px px-4'>
+            {data.consigneeName}
+        </Text>
+        <Text className='text-secondary-100 text-sm text-center w-200px px-4'>
+            {data.consigneeContact}
+        </Text>
+        <Text className='text-secondary-100 text-sm text-center w-400px px-4'>
+            {data.consigneeAddress}
+        </Text>
+        <Text className='text-secondary-100 text-sm text-center w-200px px-4'>
+            {data.consigneeContact}
+        </Text>
+        <Text className='text-secondary-100 text-sm text-center w-200px px-4'>
+            {data.acceptanceDate}
+        </Text>
+        <Text className='text-secondary-100 text-sm text-center w-200px px-4'>
+            {data.status}
+        </Text>
+        <Text className='text-secondary-100 text-sm text-center w-200px px-4'>
+            {data.statusDate}
+        </Text>
+        <Text className='text-secondary-100 text-sm text-center w-200px px-4'>
+            {data.reason}
+        </Text>
+        <RawInput
+            className='phone:border-grey-400'
+            containerClass='w-200px'
+            name='disposition'
+            placeholder=''
+            onChange={() => {}}
+            type='disposition'
+            value=''
+        />
+        <FlexRow className='items-center justify-center w-200px'>
+            <ImUpload3 className='text-red-100 text-xl mr-2' />
+            <FaRegEdit className='text-red-100 text-xl ml-2' />
+        </FlexRow>
+	</FlexRow>
+</>
+)
