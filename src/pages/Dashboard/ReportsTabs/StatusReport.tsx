@@ -35,9 +35,9 @@ export const StatusReport: FC<any> = () => {
 
     return (
         <>
-            <Div className='w-full h-full'>
+            <Div className='w-full'>
                 <Spacer className='w-10 h-10' />
-                <Div className='w-full h-4/5 desktop:h-full border border-grey-400 rounded-lg shadow-lg overflow-y-scroll scrollbar-hide'>
+                <Div className='w-full border border-grey-400 rounded-lg shadow-lg'>
                     <FlexRow className='w-full items-center justify-between py-5'>
                         <Div className='w-96'>
                             <RawDropdown
@@ -70,7 +70,7 @@ export const StatusReport: FC<any> = () => {
                     {/* Bar Graph */}
                     {
                         loading ?
-                            <Text className='text-red-400 text-center flex flex-row justify-center items-center my-24'>
+                            <Text className='text-red-400 text-center flex flex-row justify-center items-center my-20'>
                                 <ImSpinner2 className="animate-spin mr-2 text-2xl desktop:text-3xl" />
                                 Loading data ...
                             </Text>

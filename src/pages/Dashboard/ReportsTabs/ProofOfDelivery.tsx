@@ -72,7 +72,7 @@ export const ProofOfDelivery: FC<any> = () => {
 
     return (
         <>
-            <Div className='w-full h-full'>
+            <Div className='w-full'>
                 <FlexRow className='w-full items-center justify-end py-5'>
                     <Div className='w-48'>
                         <RawDropdown
@@ -90,7 +90,7 @@ export const ProofOfDelivery: FC<any> = () => {
                         </Div>
                     </CSVLink>
                 </FlexRow>
-                <Div className='w-full border border-grey-400 rounded-lg shadow-lg overflow-y-scroll scrollbar-hide'>
+                <Div className='w-full border border-grey-400 rounded-lg shadow-lg'>
                     <FlexRow className='w-full items-center justify-between py-2 border border-grey-400'>
                         <Spacer />
                         <ColumnHeader
@@ -132,7 +132,7 @@ export const ProofOfDelivery: FC<any> = () => {
                     </FlexRow>
                     {
                         loading ?
-                            <Text className='text-red-400 text-center flex flex-row justify-center items-center my-40'>
+                            <Text className='text-red-400 text-center flex flex-row justify-center items-center my-20'>
                                 <ImSpinner2 className="animate-spin mr-2 text-2xl desktop:text-3xl" />
                                 Loading data ...
                             </Text>

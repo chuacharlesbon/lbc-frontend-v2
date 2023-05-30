@@ -39,8 +39,8 @@ export const SuppliesMonitoring: FC<any> = () => {
 
     return (
         <>
-            <Div className='w-full h-4/5 desktop:h-full overflow-y-scroll scrollbar-hide'>
-                <FlexRow className='w-full items-center justify-between py-5'>
+            <Div className='w-full'>
+                <FlexRow className='w-full items-center justify-between py-10'>
                     <Div className='w-3/5 h-80 pr-5'>
                         <Div className='shadow-lg rounded-lg border border-grey-400 p-5 w-full h-full'>
 
@@ -223,7 +223,7 @@ export const SuppliesMonitoring: FC<any> = () => {
                         </Div>
                     </Div>
                 </FlexRow>
-                <Div className='w-full border border-grey-400 rounded-lg shadow-lg overflow-y-scroll scrollbar-hide'>
+                <Div className='w-full border border-grey-400 rounded-lg shadow-lg'>
                     <FlexRow className='w-full items-center justify-around py-2 border border-grey-400'>
                         <Text className="text-secondary-100 text-xs text-center font-semibold w-1/8 px-4 py-2">
                             Reference No.
