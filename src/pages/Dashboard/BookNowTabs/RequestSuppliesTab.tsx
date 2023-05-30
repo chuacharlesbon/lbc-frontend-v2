@@ -49,9 +49,9 @@ export const RequestSuppliesTab: FC<any> = () => {
         <>
             {
                 requestSubmitted ?
-                    <FlexColumn className='items-center justify-start w-full h-full'>
+                    <FlexColumn className='items-center justify-start w-full'>
 
-                        <Div className='w-500px border border-grey-400 rounded-lg shadow-lg my-5'>
+                        <Div className='w-500px border border-grey-400 rounded-lg shadow-lg my-10'>
                             <Div
                                 className='flex flex-col items-center justify-between p-4 w-full bg-white border-l-8 rounded-lg shadow-lg border-green-100'
                             >
@@ -153,10 +153,10 @@ export const RequestSuppliesTab: FC<any> = () => {
 
                     </FlexColumn>
                     :
-                    <FlexRow className='justify-between w-full h-full'>
+                    <FlexRow className='justify-between w-full'>
 
                         {/* First Body */}
-                        <Div className='border-r border-grey-400 w-2/3 h-full p-5'>
+                        <Div className='border-r border-grey-400 w-2/3 h-600px pr-10 py-10'>
                             {
                                 loading ?
                                     <Text className='text-red-400 text-center flex flex-row justify-center items-center my-20'>
@@ -254,7 +254,7 @@ export const RequestSuppliesTab: FC<any> = () => {
                         </Div>
 
                         {/* Second Body */}
-                        <Div className='border-l border-grey-400 w-1/3 h-full p-5'>
+                        <Div className='border-l border-grey-400 w-1/3 h-600px p-5'>
                             <FlexColumn className='p-5 w-full h-full items-center justify-between'>
                                 <Div className='w-full'>
                                     <SuppliesReceiverInfo

@@ -55,7 +55,7 @@ export const SchedulePickUpTab: FC<any> = () => {
             {
                 isSingleView ?
                     /* Pick Up Schedule Single View */
-                    <FlexColumn className='items-center justify-start w-full h-3/4 desktop:h-full overflow-y-scroll'>
+                    <FlexColumn className='items-center justify-start w-full'>
 
                         <Div className='w-500px border border-grey-400 rounded-lg shadow-lg my-5'>
                             <Div
@@ -165,9 +165,9 @@ export const SchedulePickUpTab: FC<any> = () => {
                     :
                     /* Pick Up Schedule Summary */
 
-                    <FlexRow className='justify-between w-full h-full'>
-                        <Div className='w-1/3 h-4/5 p-5'>
-                            <Div className='shadow-lg rounded-lg border border-grey-400 p-5 w-full h-full overflow-y-scroll scrollbar-hide'>
+                    <FlexRow className='justify-between w-full'>
+                        <Div className='w-1/3 h-750px px-5 py-10'>
+                            <Div className='shadow-lg rounded-lg border border-grey-400 p-5 w-full h-full'>
                                 <FlexRow className='items-center w-full'>
                                     <Div>
                                         <Text className='text-secondary-100 text-2xl font-bold'>
@@ -193,7 +193,7 @@ export const SchedulePickUpTab: FC<any> = () => {
                                             Loading data ...
                                         </Text>
                                         :
-                                        <Div className='overflow-y-scroll h-1/4 desktop:h-2/5 my-2'>
+                                        <Div className='overflow-y-scroll h-200px my-5'>
                                             {
                                                 tempPickupScheduleData.map((item: any, index: number) => (
                                                     <PickupScheduleItemSummary
@@ -211,7 +211,9 @@ export const SchedulePickUpTab: FC<any> = () => {
                                         </Div>
                                 }
 
-                                <Div className='w-250px h-250px mx-auto my-5'>
+                                <Spacer className='w-5 h-5' />
+
+                                <Div className='w-250px h-250px mx-auto'>
                                     <Calendar
                                         className={`rounded-lg mx-auto`}
                                         tileClassName={({ activeStartDate, date, view }) => view === 'month' && scheduledPickups.includes((new Date(date)).toString()) ? 'text-blue-100 font-bold' : 'text-grey-200'}
@@ -221,7 +223,7 @@ export const SchedulePickUpTab: FC<any> = () => {
                                 </Div>
                             </Div>
                         </Div>
-                        <Div className='w-2/3 h-4/5 p-5'>
+                        <Div className='w-2/3 h-750px px-5 py-10'>
                             <Div className='shadow-lg rounded-lg border border-grey-400 p-5 w-full h-full'>
                                 <Text className='text-secondary-200 font-bold'>
                                     PICK UP SCHEDULES
@@ -234,7 +236,7 @@ export const SchedulePickUpTab: FC<any> = () => {
                                             Loading data ...
                                         </Text>
                                         :
-                                        <Div className='overflow-y-scroll h-3/5'>
+                                        <Div className='overflow-y-scroll h-400px'>
                                             {
                                                 tempPickupScheduleData.map((item: any, index: number) => (
                                                     <PickupScheduleItem
@@ -251,8 +253,8 @@ export const SchedulePickUpTab: FC<any> = () => {
                                             }
                                         </Div>
                                 }
-                                <FlexRow className='justify-center w-full my-2'>
-                                    <RawButton className='bg-grey-500 hover:bg-grey-400 rounded-lg p-2' onClick={() => setToastOpenA(true)}>
+                                <FlexRow className='justify-center w-full my-5'>
+                                    <RawButton className='bg-grey-500 hover:bg-grey-400 rounded-lg shadow-lg p-2' onClick={() => setToastOpenA(true)}>
                                         <Text className='text-secondary-200 text-sm font-bold'>
                                             + Add Schedule
                                         </Text>

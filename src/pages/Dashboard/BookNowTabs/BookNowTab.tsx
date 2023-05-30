@@ -76,7 +76,7 @@ export const BookNowTab: FC<any> = () => {
             />
             {
                 bookType === 'summary' && !loading ?
-                    <FlexColumn className='w-full h-4/5 desktop:h-full overflow-y-scroll scrollbar-hide'>
+                    <FlexColumn className='w-full'>
                         <Spacer className='p-5' />
                         <Text className='text-secondary-200 font-bold'>
                             SUMMARY
@@ -145,7 +145,7 @@ export const BookNowTab: FC<any> = () => {
                     <>
                         {
                             bookType === 'summary' && loading ?
-                                <Text className='text-red-400 text-center flex flex-row justify-center items-center my-40'>
+                                <Text className='text-red-400 text-center flex flex-row justify-center items-center my-20'>
                                     <ImSpinner2 className="animate-spin mr-2 text-2xl desktop:text-3xl" />
                                     Loading data ...
                                 </Text>
@@ -156,7 +156,7 @@ export const BookNowTab: FC<any> = () => {
             }
             {
                 bookType === 'booked' && !loading ?
-                    <FlexColumn className='w-full h-4/5 desktop:h-full items-center overflow-y-scroll scrollbar-hide'>
+                    <FlexColumn className='w-full items-center'>
                         <Div className='w-500px border border-grey-400 rounded-lg shadow-lg my-5'>
                             <Div
                                 className='flex flex-col items-center justify-between p-4 w-full bg-white border-l-8 rounded-lg shadow-lg border-green-100'
@@ -227,7 +227,7 @@ export const BookNowTab: FC<any> = () => {
                     <>
                         {
                             bookType === 'booked' && loading ?
-                                <Text className='text-red-400 text-center flex flex-row justify-center items-center my-40'>
+                                <Text className='text-red-400 text-center flex flex-row justify-center items-center my-20'>
                                     <ImSpinner2 className="animate-spin mr-2 text-2xl desktop:text-3xl" />
                                     Loading data ...
                                 </Text>
@@ -238,7 +238,7 @@ export const BookNowTab: FC<any> = () => {
             }
             {
                 bookType === 'default' && !loading ?
-                    <Div className='w-full h-4/5 desktop:h-full overflow-y-scroll scrollbar-hide'>
+                    <Div className='w-full'>
                         <Spacer className='h-5' />
                         <FlexRow className='items-center justify-between'>
                             <Text className='text-secondary-200 font-bold'>
@@ -248,7 +248,7 @@ export const BookNowTab: FC<any> = () => {
                         </FlexRow>
                         <Spacer className='h-5' />
 
-                        <Div className='w-full h-200px border border-grey-400 rounded-lg shadow-lg overflow-scroll  my-5'>
+                        <Div className='w-full border border-grey-400 rounded-lg shadow-lg overflow-x-scroll my-5'>
                             <FlexRow className='items-center justify-between w-3000px'>
                                 <ColumnHeader
                                     icon={false}
@@ -366,7 +366,7 @@ export const BookNowTab: FC<any> = () => {
                                         <BookNowDataRow deliveryId='1' />
                                     </Div>
                                     :
-                                    <Text className='text-secondary-200 text-sm text-center p-5'>
+                                    <Text className='text-secondary-200 text-sm text-center py-10'>
                                         No data to be displayed
                                     </Text>
                             }
@@ -501,7 +501,7 @@ export const BookNowTab: FC<any> = () => {
                     <>
                         {
                             bookType === 'default' && loading ?
-                                <Text className='text-red-400 text-center flex flex-row justify-center items-center my-40'>
+                                <Text className='text-red-400 text-center flex flex-row justify-center items-center my-20'>
                                     <ImSpinner2 className="animate-spin mr-2 text-2xl desktop:text-3xl" />
                                     Loading data ...
                                 </Text>
