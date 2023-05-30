@@ -67,31 +67,31 @@ export const Pagination = ({
                     <Text className='mx-4 text-grey-200'>
                         {`${currentPage} of ${lastPage}`}
                     </Text>
-                    <div className={classNames("fas fa-chevron-left text-2xl text-primary-100 hover:text-blue-100 cursor-pointer",
+                    <div className={classNames("fas fa-chevron-left text-2xl",
                         currentPage !== 1 ?
-                            "text-primary-100" :
-                            "text-grey-400  hover:text-grey-200 pointer-events-none"
+                            "text-red-400 hover:text-red-100 cursor-pointer" :
+                            "text-grey-400 hover:text-grey-200 pointer-events-none"
                     )}
                         onClick={() => {
                             setPageNumber(currentPage - 1)
                             paginate(currentPage - 1)
                         }}
                     >
-                        <BsChevronLeft className='text-red-400' />
+                        <BsChevronLeft />
                     </div>
                     <Spacer className='w-4' />
                     <div
-                        className={classNames("fas fa-chevron-right text-2xl text-primary-100 hover:text-blue-100 cursor-pointer",
+                        className={classNames("fas fa-chevron-right text-2xl",
                             currentPage !== lastPage ?
-                                "text-primary-100" :
-                                "text-grey-400  hover:text-grey-200 pointer-events-none"
+                                "text-red-400 hover:text-red-100 cursor-pointer" :
+                                "text-grey-400 hover:text-grey-200 pointer-events-none"
                         )}
                         onClick={() => {
                             setPageNumber(currentPage + 1)
                             paginate(currentPage + 1)
                         }}
                     >
-                        <BsChevronRight className='text-red-400' />
+                        <BsChevronRight />
                     </div>
                 </div>
 
@@ -164,31 +164,31 @@ export const PaginationCustom = ({
                 <div className='flex flex-row justify-center items-center'>
                     {element1 ?? <ImHome className='text-lg text-red-400' />}
                     {element2 ?? <Text className='mx-4 text-grey-200'>{`${currentPage} of ${lastPage}`}</Text>}
-                    <div className={classNames("fas fa-chevron-left text-2xl text-primary-100 hover:text-blue-100 cursor-pointer",
+                    <div className={classNames("fas fa-chevron-left text-2xl",
                         currentPage !== 1 ?
-                            "text-primary-100" :
-                            "text-grey-400  hover:text-grey-200 pointer-events-none"
+                            "text-red-400 hover:text-red-100 cursor-pointer" :
+                            "text-grey-400 hover:text-grey-200 pointer-events-none"
                     )}
                         onClick={() => {
                             setPageNumber(currentPage - 1)
                             paginate(currentPage - 1)
                         }}
                     >
-                        <BsChevronLeft className='text-red-400' />
+                        <BsChevronLeft />
                     </div>
                     <Spacer className='w-4' />
                     <div
-                        className={classNames("fas fa-chevron-right text-2xl text-primary-100 hover:text-blue-100 cursor-pointer",
+                        className={classNames("fas fa-chevron-right text-2xl cursor-pointer",
                             currentPage !== lastPage ?
-                                "text-primary-100" :
-                                "text-grey-400  hover:text-grey-200 pointer-events-none"
+                                "text-red-400 hover:text-red-100 cursor-pointer" :
+                                "text-grey-400 hover:text-grey-200 pointer-events-none"
                         )}
                         onClick={() => {
                             setPageNumber(currentPage + 1)
                             paginate(currentPage + 1)
                         }}
                     >
-                        <BsChevronRight className='text-red-400' />
+                        <BsChevronRight />
                     </div>
                 </div>
 
