@@ -955,4 +955,79 @@ export const tempDeliveryTableData = [
         consigneeAddress: "Block A Safari Street, Region X, Philippines",
         reason: 'House closed'
     },
-]
+];
+
+export const tempRemittanceTableData = [
+    {
+        tracking: "#NCR8372846246",
+        paymentDetails: "BDO - NCR8372846246",
+        depositedDate: "03/02/2023",
+        deliveryDate: "03/02/2023",
+        paymentTracking: "0987654321",
+        amount: 580.00,
+        serviceMode: 'Cash on Delivery'
+    },
+    {
+        tracking: "#NCR83728462464",
+        paymentDetails: "BDO - NCR8372846246",
+        depositedDate: "02/01/2023",
+        deliveryDate: "03/02/2023",
+        paymentTracking: "0987654322",
+        amount: 6580.00,
+        serviceMode: 'Cash on Delivery'
+    },
+    {
+        tracking: "#NCR837284624642",
+        paymentDetails: "BDO - NCR8372846246",
+        depositedDate: "01/04/2023",
+        deliveryDate: "03/02/2023",
+        paymentTracking: "0987654323",
+        amount: 7580.00,
+        serviceMode: 'Cash on Delivery'
+    },
+    {
+        tracking: "#NCR8372846246426",
+        paymentDetails: "BDO - NCR8372846246",
+        depositedDate: "04/05/2023",
+        deliveryDate: "03/02/2023",
+        paymentTracking: "0987654324",
+        amount: 4580.00,
+        serviceMode: 'Cash on Delivery'
+    },
+    {
+        tracking: "#NCR83728462469",
+        paymentDetails: "BDO - NCR8372846246",
+        depositedDate: "03/12/2023",
+        deliveryDate: "03/02/2023",
+        paymentTracking: "0987654321",
+        amount: 5580.00,
+        serviceMode: 'Cash on Delivery'
+    },
+    {
+        tracking: "#NCR837284624648",
+        paymentDetails: "BDO - NCR8372846246",
+        depositedDate: "02/11/2023",
+        deliveryDate: "03/02/2023",
+        paymentTracking: "0987654322",
+        amount: 2580.00,
+        serviceMode: 'Cash on Delivery'
+    },
+    {
+        tracking: "#NCR8372846246427",
+        paymentDetails: "BDO - NCR8372846246",
+        depositedDate: "01/14/2023",
+        deliveryDate: "03/02/2023",
+        paymentTracking: "0987654323",
+        amount: 3580.00,
+        serviceMode: 'Cash on Delivery'
+    },
+    {
+        tracking: "#NCR83728462464266",
+        paymentDetails: "BDO - NCR8372846246",
+        depositedDate: "04/15/2023",
+        deliveryDate: "03/02/2023",
+        paymentTracking: "0987654324",
+        amount: 1580.00,
+        serviceMode: 'Cash on Delivery'
+    },
+];

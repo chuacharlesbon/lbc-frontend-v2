@@ -35,3 +35,33 @@ export const RemittanceHistorySummary: FC<DataProps> = ({
 	<Divider className="text-grey-400 my-5" />
 </>
 )
+
+export const RemittanceDataTableRow: FC<any> = ({
+	data
+}) => (
+<>
+	<FlexRow className='items-center justify-between w-full py-2 hover:bg-grey-400'>
+        <Text className='text-secondary-100 text-sm w-1/7 px-4'>
+            {data.depositedDate}
+        </Text>
+        <Text className='text-secondary-100 text-sm text-center w-1/7 px-4'>
+            {data.paymentDetails}
+        </Text>
+        <Text className='text-secondary-100 text-sm text-center w-1/7 px-4'>
+            {data.tracking}
+        </Text>
+        <Text className='text-secondary-100 text-sm text-center w-1/7 px-4'>
+            {data.paymentTracking}
+        </Text>
+        <Text className='text-secondary-100 text-sm text-center w-1/7 px-4'>
+            {data.deliveryDate}
+        </Text>
+        <Text className='text-secondary-100 text-sm text-center w-1/7 px-4'>
+            {data.serviceMode}
+        </Text>
+        <Text className='text-secondary-100 text-sm text-center w-1/7 px-4'>
+            {data.amount}
+        </Text>
+	</FlexRow>
+</>
+)
