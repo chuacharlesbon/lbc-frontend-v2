@@ -30,9 +30,9 @@ function App() {
   React.useEffect(() => {
     if (dimension.width < 1024) {
       //navigate('/incompatible');
-    }else if(location.pathname === '/incompatible'){
+    } else if (location.pathname === '/incompatible') {
       //navigate(cookie);
-    }else{
+    } else {
       updateCookie(location.pathname, 0.5);
     }
   }, [dimension])
@@ -40,11 +40,11 @@ function App() {
   React.useEffect(() => {
     if (token !== '' && (location.pathname === '/' || location.pathname === '/forgot-password')) {
       navigate('/dashboard-home');
-    }else if (token !== '' && location.pathname === '*') {
+    } else if (token !== '' && location.pathname === '*') {
       navigate('/dashboard-home');
-    }else if(token === '' && location.pathname !== '/' && location.pathname != '/forgot-password'){
+    } else if (token === '' && location.pathname !== '/' && location.pathname != '/forgot-password') {
       navigate('/');
-    }else{
+    } else {
       //
     }
   }, [location])
@@ -52,7 +52,7 @@ function App() {
   return (
     //<div className="phone:h-780px phone:w-1440px tabletWide:h-full tabletWide:w-full relative">
     <div className="h-full w-full relative">
-      
+
       <Routes>
 
         {/* Authentication Pages */}
@@ -92,26 +92,24 @@ function App() {
 
       {
         location.pathname === '/' ||
-        location.pathname === '/forgot-password' ||
-        location.pathname === '/incompatible' ||
-        location.pathname === '/load' ||
-        location.pathname === '/*' ||
-        location.pathname === '/no-auth' ||
-        location.pathname === '/logout'?
+          location.pathname === '/forgot-password' ||
+          location.pathname === '/incompatible' ||
+          location.pathname === '/load' ||
+          location.pathname === '/*' ||
+          location.pathname === '/no-auth' ||
+          location.pathname === '/logout' ?
           <></>
           :
-          <FlexRow className='absolute items-center justify-end w-full z-10 bottom-0'>
-            <div className=' h-12 w-36 bg-white mr-20 rounded-tr-xl rounded-tl-xl'>
-              <FlexRow className='items-center justify-center h-full w-full bg-grey-200 rounded-tr-xl rounded-tl-xl'>
-                <BsFillChatRightDotsFill className='text-red-400 mr-2' />
-                <Text className='text-red-400 font-semibold'>
-                  Chat with us!
-                </Text>
-              </FlexRow>
-            </div>
-          </FlexRow>
+          <div className='absolute z-10 bottom-0 right-24 h-12 w-36 bg-white rounded-tr-xl rounded-tl-xl'>
+            <FlexRow className='items-center justify-center h-full w-full bg-grey-200 hover:bg-grey-300 rounded-tr-xl rounded-tl-xl cursor-pointer'>
+              <BsFillChatRightDotsFill className='text-red-400 mr-2' />
+              <Text className='text-red-400 font-semibold'>
+                Chat with us!
+              </Text>
+            </FlexRow>
+          </div>
       }
-      
+
     </div>
   );
 }
