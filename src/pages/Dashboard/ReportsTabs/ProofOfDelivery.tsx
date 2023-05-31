@@ -19,6 +19,8 @@ export const ProofOfDelivery: FC<any> = () => {
     const actionQuery = query.get('active');
 
     const [loading, setLoading] = React.useState(true);
+    const [isAscending, setAscending] = React.useState(true);
+    const [sortList, setSortList] = React.useState<any>(tempProofDeliveryData);
 
     const [singleView, setSingleView] = React.useState('default');
     const [selected, setSelected] = React.useState('default');
@@ -29,7 +31,7 @@ export const ProofOfDelivery: FC<any> = () => {
     const indexOfLastArticle = currentPage * articlesPerPage;
     const indexOfFirstArticle = indexOfLastArticle - articlesPerPage;
 
-    const newList = tempProofDeliveryData.slice(indexOfFirstArticle, indexOfLastArticle);
+    const newList = sortList.slice(indexOfFirstArticle, indexOfLastArticle);
 
     const paginate = (pageNumber: React.SetStateAction<number>) => setCurrentPage(pageNumber);
 
@@ -54,6 +56,107 @@ export const ProofOfDelivery: FC<any> = () => {
             const tempList = [...selectedList];
             tempList.push(id);
             setSelectedList(tempList);
+        }
+    }
+
+    const onSort = async (column: number) => {
+        setLoading(true);
+        if (isAscending) {
+            if(column == 0){
+                const tempList = await sortList.sort((a: any, b: any) => {
+                    if (a.tracking < b.tracking) { return -1; }
+                    if (a.tracking > b.tracking) { return 1; }
+                    return 0;
+                });
+                setSortList(tempList);
+            }else if(column == 1){
+                const tempList = await sortList.sort((a: any, b: any) => {
+                    if (a.bookDate < b.bookDate) { return -1; }
+                    if (a.bookDate > b.bookDate) { return 1; }
+                    return 0;
+                });
+                setSortList(tempList);
+            }else if(column == 2){
+                const tempList = await sortList.sort((a: any, b: any) => {
+                    if (a.tracking < b.tracking) { return -1; }
+                    if (a.tracking > b.tracking) { return 1; }
+                    return 0;
+                });
+                setSortList(tempList);
+            }else if(column == 3){
+                const tempList = await sortList.sort((a: any, b: any) => {
+                    if (a.sender < b.sender) { return -1; }
+                    if (a.sender > b.sender) { return 1; }
+                    return 0;
+                });
+                setSortList(tempList);
+            }else if(column == 4){
+                const tempList = await sortList.sort((a: any, b: any) => {
+                    if (a.receiver < b.receiver) { return -1; }
+                    if (a.receiver > b.receiver) { return 1; }
+                    return 0;
+                });
+                setSortList(tempList);
+            }else if(column == 5){
+                const tempList = await sortList.sort((a: any, b: any) => {
+                    if (a.bookDate < b.bookDate) { return -1; }
+                    if (a.bookDate > b.bookDate) { return 1; }
+                    return 0;
+                });
+                setSortList(tempList);
+            }
+            setTimeout(() => {
+                setLoading(false);
+                setAscending(!isAscending);
+            }, 1000)
+        } else {
+            if(column == 0){
+                const tempList = await sortList.sort((a: any, b: any) => {
+                    if (a.tracking > b.tracking) { return -1; }
+                    if (a.tracking < b.tracking) { return 1; }
+                    return 0;
+                });
+                setSortList(tempList);
+            }else if(column == 1){
+                const tempList = await sortList.sort((a: any, b: any) => {
+                    if (a.bookDate > b.bookDate) { return -1; }
+                    if (a.bookDate < b.bookDate) { return 1; }
+                    return 0;
+                });
+                setSortList(tempList);
+            }else if(column == 2){
+                const tempList = await sortList.sort((a: any, b: any) => {
+                    if (a.tracking > b.tracking) { return -1; }
+                    if (a.tracking < b.tracking) { return 1; }
+                    return 0;
+                });
+                setSortList(tempList);
+            }else if(column == 3){
+                const tempList = await sortList.sort((a: any, b: any) => {
+                    if (a.sender > b.sender) { return -1; }
+                    if (a.sender < b.sender) { return 1; }
+                    return 0;
+                });
+                setSortList(tempList);
+            }else if(column == 4){
+                const tempList = await sortList.sort((a: any, b: any) => {
+                    if (a.receiver > b.receiver) { return -1; }
+                    if (a.receiver < b.receiver) { return 1; }
+                    return 0;
+                });
+                setSortList(tempList);
+            }else if(column == 5){
+                const tempList = await sortList.sort((a: any, b: any) => {
+                    if (a.bookDate > b.bookDate) { return -1; }
+                    if (a.bookDate < b.bookDate) { return 1; }
+                    return 0;
+                });
+                setSortList(tempList);
+            }
+            setTimeout(() => {
+                setLoading(false);
+                setAscending(!isAscending);
+            }, 1000)
         }
     }
 
@@ -95,37 +198,37 @@ export const ProofOfDelivery: FC<any> = () => {
                         <Spacer />
                         <ColumnHeader
                             title="Booking Ref No."
-                            onClick={() => { }}
+                            onClick={() => onSort(0)}
                             containerClass="hover:bg-grey-400 rounded-full w-15p px-4 py-2"
                             titleClassName=""
                         />
                         <ColumnHeader
                             title="Booking Date"
-                            onClick={() => { }}
+                            onClick={() => onSort(1)}
                             containerClass="hover:bg-grey-400 rounded-full w-15p px-4 py-2"
                             titleClassName=""
                         />
                         <ColumnHeader
                             title="Tracking No."
-                            onClick={() => { }}
+                            onClick={() => onSort(2)}
                             containerClass="hover:bg-grey-400 rounded-full w-15p px-4 py-2"
                             titleClassName=""
                         />
                         <ColumnHeader
                             title="Sender"
-                            onClick={() => { }}
+                            onClick={() => onSort(3)}
                             containerClass="hover:bg-grey-400 rounded-full w-15p px-4 py-2"
                             titleClassName=""
                         />
                         <ColumnHeader
                             title="Receiver"
-                            onClick={() => { }}
+                            onClick={() => onSort(4)}
                             containerClass="hover:bg-grey-400 rounded-full w-15p px-4 py-2"
                             titleClassName=""
                         />
                         <ColumnHeader
                             title="Delivery Date"
-                            onClick={() => { }}
+                            onClick={() => onSort(5)}
                             containerClass="hover:bg-grey-400 rounded-full w-15p px-4 py-2"
                             titleClassName=""
                         />
