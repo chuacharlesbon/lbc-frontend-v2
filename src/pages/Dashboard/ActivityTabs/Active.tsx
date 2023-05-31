@@ -18,6 +18,8 @@ export const ActiveTab: FC<any> = () => {
     const actionQuery = query.get('active');
 
     const [loading, setLoading] = React.useState(true);
+    const [isAscending, setAscending] = React.useState(true);
+    const [sortList, setSortList] = React.useState<any>(tempActivityData);
 
     const [singleView, setSingleView] = React.useState('default');
     const [selected, setSelected] = React.useState('default');
@@ -28,7 +30,7 @@ export const ActiveTab: FC<any> = () => {
     const indexOfLastArticle = currentPage * articlesPerPage;
     const indexOfFirstArticle = indexOfLastArticle - articlesPerPage;
 
-    const newList = tempActivityData.slice(indexOfFirstArticle, indexOfLastArticle);
+    const newItems = sortList.slice(indexOfFirstArticle, indexOfLastArticle);
 
     const paginate = (pageNumber: React.SetStateAction<number>) => setCurrentPage(pageNumber);
 
@@ -56,6 +58,65 @@ export const ActiveTab: FC<any> = () => {
         }
     }
 
+    const onSort = async (column: number) => {
+        setLoading(true);
+        if (isAscending) {
+            if(column == 0){
+                const tempList = await sortList.sort((a: any, b: any) => {
+                    if (a.createdBy < b.createdBy) { return -1; }
+                    if (a.createdBy > b.createdBy) { return 1; }
+                    return 0;
+                });
+                setSortList(tempList);
+            }else if(column == 1){
+                const tempList = await sortList.sort((a: any, b: any) => {
+                    if (a.bookType < b.bookType) { return -1; }
+                    if (a.bookType > b.bookType) { return 1; }
+                    return 0;
+                });
+                setSortList(tempList);
+            }else if(column == 2){
+                const tempList = await sortList.sort((a: any, b: any) => {
+                    if (a.bookDate < b.bookDate) { return -1; }
+                    if (a.bookDate > b.bookDate) { return 1; }
+                    return 0;
+                });
+                setSortList(tempList);
+            }
+            setTimeout(() => {
+                setLoading(false);
+                setAscending(!isAscending);
+            }, 1000)
+        } else {
+            if(column == 0){
+                const tempList = await sortList.sort((a: any, b: any) => {
+                    if (a.createdBy > b.createdBy) { return -1; }
+                    if (a.createdBy < b.createdBy) { return 1; }
+                    return 0;
+                });
+                setSortList(tempList);
+            }else if(column == 1){
+                const tempList = await sortList.sort((a: any, b: any) => {
+                    if (a.bookType > b.bookType) { return -1; }
+                    if (a.bookType < b.bookType) { return 1; }
+                    return 0;
+                });
+                setSortList(tempList);
+            }else if(column == 2){
+                const tempList = await sortList.sort((a: any, b: any) => {
+                    if (a.bookDate > b.bookDate) { return -1; }
+                    if (a.bookDate < b.bookDate) { return 1; }
+                    return 0;
+                });
+                setSortList(tempList);
+            }
+            setTimeout(() => {
+                setLoading(false);
+                setAscending(!isAscending);
+            }, 1000)
+        }
+    }
+
     return (
         <>
             {
@@ -69,19 +130,19 @@ export const ActiveTab: FC<any> = () => {
                                 </Text>
                                 <ColumnHeader
                                     title="Created by"
-                                    onClick={() => { }}
+                                    onClick={() => onSort(0)}
                                     containerClass="hover:bg-grey-400 rounded-full w-1/6 px-4 py-2"
                                     titleClassName=""
                                 />
                                 <ColumnHeader
                                     title="Book Type"
-                                    onClick={() => { }}
+                                    onClick={() => onSort(1)}
                                     containerClass="hover:bg-grey-400 rounded-full w-1/6 px-4 py-2"
                                     titleClassName=""
                                 />
                                 <ColumnHeader
                                     title="Book Date"
-                                    onClick={() => { }}
+                                    onClick={() => onSort(2)}
                                     containerClass="hover:bg-grey-400 rounded-full w-1/6 px-4 py-2"
                                     titleClassName=""
                                 />
@@ -101,7 +162,7 @@ export const ActiveTab: FC<any> = () => {
                                     :
                                     <Div className='w-full'>
                                         {
-                                            newList.map((item: any) => (
+                                            newItems.map((item: any) => (
                                                 <ActivityDataRow
                                                     tracking={item.tracking}
                                                     createdBy={item.createdBy}

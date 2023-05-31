@@ -18,6 +18,8 @@ export const DraftTab: FC<any> = () => {
     const actionQuery = query.get('active');
 
     const [loading, setLoading] = React.useState(true);
+    const [isAscending, setAscending] = React.useState(true);
+    const [sortList, setSortList] = React.useState<any>(tempActivityData);
 
     const [singleView, setSingleView] = React.useState('default');
     const [selected, setSelected] = React.useState('default');
@@ -28,7 +30,7 @@ export const DraftTab: FC<any> = () => {
     const indexOfLastArticle = currentPage * articlesPerPage;
     const indexOfFirstArticle = indexOfLastArticle - articlesPerPage;
 
-    const newList = tempActivityData.slice(indexOfFirstArticle, indexOfLastArticle);
+    const newItems = sortList.slice(indexOfFirstArticle, indexOfLastArticle);
 
     const paginate = (pageNumber: React.SetStateAction<number>) => setCurrentPage(pageNumber);
 
@@ -56,6 +58,37 @@ export const DraftTab: FC<any> = () => {
         }
     }
 
+    const onSort = async (column: number) => {
+        setLoading(true);
+        if (isAscending) {
+            if(column == 0){
+                const tempList = await sortList.sort((a: any, b: any) => {
+                    if (a.createdBy < b.createdBy) { return -1; }
+                    if (a.createdBy > b.createdBy) { return 1; }
+                    return 0;
+                });
+                setSortList(tempList);
+            }
+            setTimeout(() => {
+                setLoading(false);
+                setAscending(!isAscending);
+            }, 1000)
+        } else {
+            if(column == 0){
+                const tempList = await sortList.sort((a: any, b: any) => {
+                    if (a.createdBy > b.createdBy) { return -1; }
+                    if (a.createdBy < b.createdBy) { return 1; }
+                    return 0;
+                });
+                setSortList(tempList);
+            }
+            setTimeout(() => {
+                setLoading(false);
+                setAscending(!isAscending);
+            }, 1000)
+        }
+    }
+
     return (
         <>
             {
@@ -66,7 +99,7 @@ export const DraftTab: FC<any> = () => {
                             <FlexRow className='items-center justify-between py-2 border border-grey-400'>
                                 <ColumnHeader
                                     title="Created by"
-                                    onClick={() => { }}
+                                    onClick={() => onSort(0)}
                                     containerClass="hover:bg-grey-400 rounded-full w-1/7 px-4 py-2"
                                     titleClassName=""
                                 />
@@ -98,7 +131,7 @@ export const DraftTab: FC<any> = () => {
                                     :
                                     <Div className='w-full'>
                                         {
-                                            newList.map((item: any) => (
+                                            newItems.map((item: any) => (
                                                 <DraftDataRow
                                                     data={item}
                                                     onSelect={() => { }}
