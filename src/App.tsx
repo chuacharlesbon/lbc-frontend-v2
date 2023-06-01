@@ -17,6 +17,8 @@ import { RemittanceReportsPage } from './pages/Dashboard/DashboardHome/Remittanc
 import { Notifications } from './pages/Notifications';
 import { Logout } from './pages/Auth/Logout';
 import { getCookie, useCookie, useWindowSize } from './hooks';
+import { RawButton } from './core/Buttons';
+import { ChatBotUI } from './components/Feature/ChatBot';
 
 function App() {
 
@@ -26,6 +28,8 @@ function App() {
   const location = useLocation();
 
   const [cookie, updateCookie] = useCookie('location', '/');
+
+  const [isChatOpen, setChatOpen] = React.useState(false);
 
   React.useEffect(() => {
     if (dimension.width < 1024) {
@@ -52,6 +56,11 @@ function App() {
   return (
     //<div className="phone:h-780px phone:w-1440px tabletWide:h-full tabletWide:w-full relative">
     <div className="h-full w-full relative">
+
+      <ChatBotUI
+        isOpen={isChatOpen}
+        onClose={() => setChatOpen(false)}
+      />
 
       <Routes>
 
@@ -101,12 +110,16 @@ function App() {
           <></>
           :
           <div className='absolute z-10 bottom-0 right-24 h-12 w-36 bg-white rounded-tr-xl rounded-tl-xl'>
-            <FlexRow className='items-center justify-center h-full w-full bg-grey-200 hover:bg-grey-300 rounded-tr-xl rounded-tl-xl cursor-pointer'>
-              <BsFillChatRightDotsFill className='text-red-400 mr-2' />
-              <Text className='text-red-400 font-semibold'>
-                Chat with us!
-              </Text>
-            </FlexRow>
+            <RawButton
+              className='w-full h-full'
+              onClick={() => setChatOpen(true)}>
+              <FlexRow className='items-center justify-center h-full w-full bg-grey-200 hover:bg-grey-300 rounded-tr-xl rounded-tl-xl cursor-pointer'>
+                <BsFillChatRightDotsFill className='text-red-400 mr-2' />
+                <Text className='text-red-400 font-semibold'>
+                  Chat with us!
+                </Text>
+              </FlexRow>
+            </RawButton>
           </div>
       }
 
